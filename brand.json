@@ -1,0 +1,836 @@
+{
+  "brand": {
+    "name": "ClimaTales AR",
+    "tagline": "Where Stories Come Alive to Save Our Planet",
+    "description": "An augmented reality storybook experience that transforms climate change education into an interactive adventure for young learners",
+    "targetAudience": {
+      "primary": "Children ages 8-14",
+      "secondary": "Educators, parents, environmental advocates",
+      "context": "Classroom learning, home education, science museums"
+    },
+    "personality": {
+      "traits": ["Playful", "Educational", "Hopeful", "Adventurous", "Empowering"],
+      "voice": "Friendly guide who makes complex topics feel like exciting discoveries",
+      "tone": "Encouraging, curious, wonder-filled, never preachy or scary"
+    }
+  },
+
+  "designDirection": {
+    "aesthetic": "Eco-Futurism meets Storybook Whimsy",
+    "concept": "A living storybook that bridges the natural world with technology - organic shapes meet clean digital interfaces, creating a sense of magic and possibility",
+    "keywords": ["Organic Tech", "Hopeful Future", "Nature's Magic", "Discovery", "Growth"],
+    "differentiation": "Unlike typical educational apps with generic cartoon aesthetics, ClimaTales feels like a premium picture book that came to life - tactile, warm, yet technologically impressive"
+  },
+
+  "colors": {
+    "core": {
+      "primary": {
+        "name": "Canopy Green",
+        "hex": "#22A652",
+        "rgb": "34, 166, 82",
+        "hsl": "142, 66%, 39%",
+        "usage": "Primary actions, navigation, positive states, growth themes",
+        "variants": {
+          "light": "#4ACD78",
+          "dark": "#1A8040",
+          "muted": "#88CCA0"
+        }
+      },
+      "secondary": {
+        "name": "Ocean Deep",
+        "hex": "#1E6B8C",
+        "rgb": "30, 107, 140",
+        "hsl": "198, 65%, 33%",
+        "usage": "Secondary actions, water themes, depth and trust",
+        "variants": {
+          "light": "#3A9BC4",
+          "dark": "#14485E",
+          "muted": "#7EB3C9"
+        }
+      },
+      "accent": {
+        "name": "Sunset Coral",
+        "hex": "#FF6B4A",
+        "rgb": "255, 107, 74",
+        "hsl": "11, 100%, 65%",
+        "usage": "Highlights, energy, warmth, call-to-actions that need attention",
+        "variants": {
+          "light": "#FF9A85",
+          "dark": "#D94A2D",
+          "muted": "#FFAB9A"
+        }
+      }
+    },
+    "semantic": {
+      "success": {
+        "name": "Sprout",
+        "hex": "#4ADE80",
+        "rgb": "74, 222, 128",
+        "usage": "Correct answers, achievements, positive feedback"
+      },
+      "warning": {
+        "name": "Sunbeam",
+        "hex": "#FBBF24",
+        "rgb": "251, 191, 36",
+        "usage": "Hints, caution, attention needed"
+      },
+      "error": {
+        "name": "Autumn",
+        "hex": "#EF6B6B",
+        "rgb": "239, 107, 107",
+        "usage": "Incorrect answers, errors - never harsh, always encouraging retry"
+      },
+      "info": {
+        "name": "Sky",
+        "hex": "#60A5FA",
+        "rgb": "96, 165, 250",
+        "usage": "Tips, information, neutral guidance"
+      }
+    },
+    "surfaces": {
+      "background": {
+        "primary": {
+          "name": "Mist",
+          "hex": "#F0F7F4",
+          "usage": "Main app background - soft, natural white"
+        },
+        "secondary": {
+          "name": "Cloud",
+          "hex": "#FFFFFF",
+          "usage": "Cards, elevated surfaces"
+        },
+        "tertiary": {
+          "name": "Meadow",
+          "hex": "#E8F5EC",
+          "usage": "Subtle section backgrounds, input fields"
+        }
+      },
+      "dark": {
+        "primary": {
+          "name": "Forest Night",
+          "hex": "#1A2E1F",
+          "usage": "AR mode overlay, immersive contexts"
+        },
+        "secondary": {
+          "name": "Deep Earth",
+          "hex": "#2D3B31",
+          "usage": "Cards in dark mode"
+        },
+        "tertiary": {
+          "name": "Twilight",
+          "hex": "#3D4F42",
+          "usage": "Elevated surfaces in dark contexts"
+        }
+      }
+    },
+    "text": {
+      "primary": {
+        "hex": "#1A2E1F",
+        "usage": "Headlines, important content"
+      },
+      "secondary": {
+        "hex": "#4A5D4F",
+        "usage": "Body text, descriptions"
+      },
+      "muted": {
+        "hex": "#7A8D7F",
+        "usage": "Captions, hints, disabled states"
+      },
+      "inverse": {
+        "hex": "#FFFFFF",
+        "usage": "Text on dark/colored backgrounds"
+      }
+    },
+    "gradients": {
+      "nature": {
+        "name": "Forest Canopy",
+        "css": "linear-gradient(135deg, #22A652 0%, #1E6B8C 100%)",
+        "usage": "Primary CTAs, hero sections"
+      },
+      "sunrise": {
+        "name": "New Day",
+        "css": "linear-gradient(135deg, #FBBF24 0%, #FF6B4A 100%)",
+        "usage": "Achievement celebrations, energy moments"
+      },
+      "sky": {
+        "name": "Clear Skies",
+        "css": "linear-gradient(180deg, #87CEEB 0%, #E0F4FF 100%)",
+        "usage": "Hopeful backgrounds, success states"
+      },
+      "earth": {
+        "name": "Living Planet",
+        "css": "radial-gradient(ellipse at 30% 30%, #4ADE80 0%, #22A652 40%, #1E6B8C 100%)",
+        "usage": "Globe imagery, earth-themed elements"
+      },
+      "quiz": {
+        "name": "Discovery",
+        "css": "linear-gradient(135deg, #4A5568 0%, #2D3748 50%, #1A202C 100%)",
+        "usage": "Quiz mode background - focused, immersive"
+      },
+      "video": {
+        "name": "Deep Dive",
+        "css": "linear-gradient(135deg, #5B4B8A 0%, #2D2A4A 100%)",
+        "usage": "Video mode - cinematic, focused viewing"
+      }
+    }
+  },
+
+  "typography": {
+    "fontFamilies": {
+      "display": {
+        "name": "Fredoka",
+        "fallback": "'Comic Neue', 'Nunito', sans-serif",
+        "weights": [400, 500, 600, 700],
+        "source": "https://fonts.google.com/specimen/Fredoka",
+        "usage": "Headlines, quiz questions, celebratory text - rounded, friendly, childlike without being childish",
+        "note": "Fredoka has beautiful rounded terminals that feel organic and approachable"
+      },
+      "body": {
+        "name": "Nunito",
+        "fallback": "'Quicksand', 'Poppins', sans-serif",
+        "weights": [400, 500, 600, 700],
+        "source": "https://fonts.google.com/specimen/Nunito",
+        "usage": "Body text, explanations, UI elements - highly readable with friendly rounded forms"
+      },
+      "accent": {
+        "name": "Baloo 2",
+        "fallback": "'Fredoka', 'Comic Neue', sans-serif",
+        "weights": [400, 500, 600, 700, 800],
+        "source": "https://fonts.google.com/specimen/Baloo+2",
+        "usage": "Buttons, labels, badges - extra playful for interactive elements"
+      },
+      "mono": {
+        "name": "JetBrains Mono",
+        "fallback": "'Fira Code', monospace",
+        "weights": [400, 500],
+        "usage": "Data displays, scores, timers - if needed"
+      }
+    },
+    "scale": {
+      "hero": {
+        "size": "3rem",
+        "lineHeight": 1.1,
+        "letterSpacing": "-0.02em",
+        "weight": 700,
+        "font": "display"
+      },
+      "h1": {
+        "size": "2.25rem",
+        "lineHeight": 1.2,
+        "letterSpacing": "-0.01em",
+        "weight": 700,
+        "font": "display"
+      },
+      "h2": {
+        "size": "1.75rem",
+        "lineHeight": 1.25,
+        "letterSpacing": "-0.01em",
+        "weight": 600,
+        "font": "display"
+      },
+      "h3": {
+        "size": "1.375rem",
+        "lineHeight": 1.3,
+        "letterSpacing": "0",
+        "weight": 600,
+        "font": "display"
+      },
+      "h4": {
+        "size": "1.125rem",
+        "lineHeight": 1.4,
+        "letterSpacing": "0",
+        "weight": 600,
+        "font": "body"
+      },
+      "body": {
+        "size": "1rem",
+        "lineHeight": 1.6,
+        "letterSpacing": "0",
+        "weight": 400,
+        "font": "body"
+      },
+      "bodyLarge": {
+        "size": "1.125rem",
+        "lineHeight": 1.6,
+        "letterSpacing": "0",
+        "weight": 400,
+        "font": "body"
+      },
+      "small": {
+        "size": "0.875rem",
+        "lineHeight": 1.5,
+        "letterSpacing": "0.01em",
+        "weight": 400,
+        "font": "body"
+      },
+      "caption": {
+        "size": "0.75rem",
+        "lineHeight": 1.4,
+        "letterSpacing": "0.02em",
+        "weight": 500,
+        "font": "body"
+      },
+      "button": {
+        "size": "1rem",
+        "lineHeight": 1,
+        "letterSpacing": "0.02em",
+        "weight": 600,
+        "font": "accent",
+        "textTransform": "none"
+      },
+      "label": {
+        "size": "0.875rem",
+        "lineHeight": 1,
+        "letterSpacing": "0.02em",
+        "weight": 600,
+        "font": "accent"
+      }
+    }
+  },
+
+  "spacing": {
+    "unit": 4,
+    "scale": {
+      "0": "0px",
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "5": "20px",
+      "6": "24px",
+      "8": "32px",
+      "10": "40px",
+      "12": "48px",
+      "16": "64px",
+      "20": "80px",
+      "24": "96px"
+    },
+    "semantic": {
+      "componentPadding": {
+        "sm": "12px",
+        "md": "16px",
+        "lg": "24px"
+      },
+      "sectionGap": "48px",
+      "cardPadding": "20px",
+      "inputPadding": "12px 16px",
+      "buttonPadding": "12px 24px"
+    }
+  },
+
+  "borderRadius": {
+    "none": "0px",
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "xl": "24px",
+    "2xl": "32px",
+    "full": "9999px",
+    "semantic": {
+      "button": "12px",
+      "card": "20px",
+      "input": "12px",
+      "badge": "8px",
+      "avatar": "9999px",
+      "modal": "24px",
+      "tooltip": "8px",
+      "navItem": "12px"
+    },
+    "note": "Rounded corners are essential - they reinforce the organic, friendly, approachable feel. Nothing should have sharp corners except intentional geometric accents."
+  },
+
+  "shadows": {
+    "sm": {
+      "css": "0 2px 8px rgba(26, 46, 31, 0.08)",
+      "usage": "Subtle elevation, input focus"
+    },
+    "md": {
+      "css": "0 4px 16px rgba(26, 46, 31, 0.12)",
+      "usage": "Cards, dropdowns"
+    },
+    "lg": {
+      "css": "0 8px 32px rgba(26, 46, 31, 0.16)",
+      "usage": "Modals, popovers"
+    },
+    "xl": {
+      "css": "0 16px 48px rgba(26, 46, 31, 0.20)",
+      "usage": "Hero elements, floating action buttons"
+    },
+    "glow": {
+      "success": "0 0 24px rgba(74, 222, 128, 0.4)",
+      "primary": "0 0 24px rgba(34, 166, 82, 0.4)",
+      "accent": "0 0 24px rgba(255, 107, 74, 0.4)",
+      "usage": "Celebration states, active/selected items"
+    },
+    "inner": {
+      "css": "inset 0 2px 4px rgba(26, 46, 31, 0.06)",
+      "usage": "Pressed buttons, input fields"
+    }
+  },
+
+  "animations": {
+    "durations": {
+      "instant": "100ms",
+      "fast": "200ms",
+      "normal": "300ms",
+      "slow": "500ms",
+      "dramatic": "800ms"
+    },
+    "easings": {
+      "default": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "bounce": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      "smooth": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      "spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+      "snappy": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "keyframes": {
+      "fadeIn": {
+        "from": { "opacity": 0 },
+        "to": { "opacity": 1 }
+      },
+      "slideUp": {
+        "from": { "opacity": 0, "transform": "translateY(20px)" },
+        "to": { "opacity": 1, "transform": "translateY(0)" }
+      },
+      "scaleIn": {
+        "from": { "opacity": 0, "transform": "scale(0.9)" },
+        "to": { "opacity": 1, "transform": "scale(1)" }
+      },
+      "bounce": {
+        "0%, 100%": { "transform": "translateY(0)" },
+        "50%": { "transform": "translateY(-10px)" }
+      },
+      "wiggle": {
+        "0%, 100%": { "transform": "rotate(0deg)" },
+        "25%": { "transform": "rotate(-5deg)" },
+        "75%": { "transform": "rotate(5deg)" }
+      },
+      "pulse": {
+        "0%, 100%": { "opacity": 1 },
+        "50%": { "opacity": 0.7 }
+      },
+      "celebrate": {
+        "0%": { "transform": "scale(0) rotate(-180deg)", "opacity": 0 },
+        "50%": { "transform": "scale(1.2) rotate(10deg)" },
+        "100%": { "transform": "scale(1) rotate(0deg)", "opacity": 1 }
+      },
+      "float": {
+        "0%, 100%": { "transform": "translateY(0)" },
+        "50%": { "transform": "translateY(-8px)" }
+      },
+      "shimmer": {
+        "0%": { "backgroundPosition": "-200% 0" },
+        "100%": { "backgroundPosition": "200% 0" }
+      }
+    },
+    "presets": {
+      "buttonHover": {
+        "transform": "translateY(-2px)",
+        "shadow": "shadows.lg",
+        "duration": "fast",
+        "easing": "spring"
+      },
+      "buttonPress": {
+        "transform": "translateY(1px) scale(0.98)",
+        "duration": "instant"
+      },
+      "cardHover": {
+        "transform": "translateY(-4px)",
+        "shadow": "shadows.lg",
+        "duration": "normal",
+        "easing": "smooth"
+      },
+      "pageTransition": {
+        "enter": "slideUp 300ms smooth",
+        "exit": "fadeOut 200ms smooth"
+      },
+      "correctAnswer": {
+        "animation": "celebrate 600ms spring",
+        "glow": "shadows.glow.success"
+      },
+      "incorrectAnswer": {
+        "animation": "wiggle 400ms bounce",
+        "note": "Gentle wiggle, not harsh - we want to encourage retry"
+      }
+    }
+  },
+
+  "components": {
+    "button": {
+      "variants": {
+        "primary": {
+          "background": "gradients.nature",
+          "color": "text.inverse",
+          "shadow": "shadows.md",
+          "hoverShadow": "shadows.lg",
+          "borderRadius": "borderRadius.semantic.button",
+          "padding": "spacing.semantic.buttonPadding",
+          "font": "typography.scale.button"
+        },
+        "secondary": {
+          "background": "colors.surfaces.background.primary",
+          "color": "colors.core.primary.hex",
+          "border": "2px solid colors.core.primary.hex",
+          "borderRadius": "borderRadius.semantic.button"
+        },
+        "ghost": {
+          "background": "transparent",
+          "color": "colors.text.primary",
+          "hoverBackground": "colors.surfaces.background.tertiary"
+        },
+        "danger": {
+          "background": "colors.semantic.error.hex",
+          "color": "text.inverse"
+        }
+      },
+      "sizes": {
+        "sm": { "padding": "8px 16px", "fontSize": "0.875rem" },
+        "md": { "padding": "12px 24px", "fontSize": "1rem" },
+        "lg": { "padding": "16px 32px", "fontSize": "1.125rem" }
+      }
+    },
+    "card": {
+      "background": "colors.surfaces.background.secondary",
+      "borderRadius": "borderRadius.semantic.card",
+      "padding": "spacing.semantic.cardPadding",
+      "shadow": "shadows.md",
+      "hoverShadow": "shadows.lg"
+    },
+    "input": {
+      "background": "colors.surfaces.background.tertiary",
+      "border": "2px solid transparent",
+      "borderRadius": "borderRadius.semantic.input",
+      "padding": "spacing.semantic.inputPadding",
+      "focusBorder": "colors.core.primary.hex",
+      "focusShadow": "shadows.sm"
+    },
+    "badge": {
+      "borderRadius": "borderRadius.semantic.badge",
+      "padding": "4px 12px",
+      "fontSize": "typography.scale.caption.size",
+      "fontWeight": 600
+    },
+    "tooltip": {
+      "background": "colors.surfaces.dark.primary",
+      "color": "colors.text.inverse",
+      "borderRadius": "borderRadius.semantic.tooltip",
+      "padding": "8px 12px",
+      "fontSize": "typography.scale.small.size"
+    },
+    "modal": {
+      "background": "colors.surfaces.background.secondary",
+      "borderRadius": "borderRadius.semantic.modal",
+      "shadow": "shadows.xl",
+      "overlayColor": "rgba(26, 46, 31, 0.6)"
+    },
+    "navigation": {
+      "bottom": {
+        "background": "colors.core.primary.hex",
+        "height": "72px",
+        "itemPadding": "8px 16px",
+        "activeIndicator": "colors.surfaces.background.secondary",
+        "inactiveColor": "rgba(255, 255, 255, 0.7)",
+        "activeColor": "colors.core.primary.hex"
+      }
+    },
+    "quiz": {
+      "questionCard": {
+        "background": "linear-gradient(135deg, #A8E6CF 0%, #88D8A8 100%)",
+        "borderRadius": "20px",
+        "padding": "24px",
+        "shadow": "shadows.md"
+      },
+      "answerOption": {
+        "background": "rgba(255, 255, 255, 0.95)",
+        "borderRadius": "16px",
+        "padding": "16px 20px",
+        "shadow": "shadows.sm",
+        "selectedBorder": "3px solid colors.core.primary.hex"
+      },
+      "feedback": {
+        "correct": {
+          "background": "#FFD93D",
+          "shape": "organic-blob",
+          "icon": "thumbs-up-kid",
+          "text": "YOU GOT IT RIGHT!",
+          "animation": "celebrate"
+        },
+        "incorrect": {
+          "background": "#FF6B6B",
+          "shape": "organic-blob",
+          "icon": "thinking-kid",
+          "text": "TRY AGAIN",
+          "animation": "wiggle"
+        }
+      }
+    },
+    "ar": {
+      "overlay": {
+        "explanationBox": {
+          "background": "linear-gradient(135deg, #C6F6D5 0%, #9AE6B4 100%)",
+          "borderRadius": "16px",
+          "padding": "20px",
+          "maxWidth": "280px",
+          "shadow": "shadows.lg"
+        },
+        "mascot": {
+          "position": "bottom-left",
+          "size": "120px"
+        },
+        "nextButton": {
+          "background": "colors.core.primary.hex",
+          "borderRadius": "8px",
+          "padding": "8px 16px"
+        }
+      }
+    },
+    "video": {
+      "categoryCard": {
+        "background": "rgba(255, 255, 255, 0.15)",
+        "backdropFilter": "blur(10px)",
+        "borderRadius": "16px",
+        "padding": "16px 24px",
+        "border": "1px solid rgba(255, 255, 255, 0.2)"
+      },
+      "downloadIcon": {
+        "background": "colors.surfaces.background.secondary",
+        "borderRadius": "12px",
+        "size": "48px"
+      }
+    }
+  },
+
+  "mascot": {
+    "name": "Terra",
+    "description": "A friendly, enthusiastic guide character - a young explorer/scientist who makes learning about climate feel like an adventure",
+    "appearance": {
+      "style": "3D cartoon character with warm, approachable design",
+      "hairColor": "Warm blonde",
+      "outfit": "Pink/coral explorer jacket, teal pants - representing both land (warm) and sea (cool)",
+      "accessories": "Round glasses (symbolizing clarity/knowledge), curious expression",
+      "poses": [
+        "pointing/explaining",
+        "celebrating (for correct answers)",
+        "thinking/encouraging (for incorrect answers)",
+        "waving (welcome)",
+        "looking through magnifying glass (discovery)"
+      ]
+    },
+    "usage": {
+      "arMode": "Appears in corner, gestures toward content",
+      "quizMode": "Reacts to answers with appropriate emotion",
+      "videoMode": "Introduces video categories",
+      "transitions": "Guides user between modes"
+    }
+  },
+
+  "iconography": {
+    "style": "Rounded, filled icons with consistent 2px stroke weight where applicable",
+    "library": "Phosphor Icons (rounded variant) or custom matching style",
+    "sizes": {
+      "xs": "16px",
+      "sm": "20px",
+      "md": "24px",
+      "lg": "32px",
+      "xl": "48px"
+    },
+    "customIcons": {
+      "arMode": "Stylized AR viewfinder with leaf accent",
+      "quizMode": "Clipboard with checkmark, organic shape",
+      "videoMode": "Play button with nature-inspired frame",
+      "carbonCycle": "Circular arrows with CO2 molecule",
+      "humanActions": "Hand with plant growing",
+      "climateChange": "Globe with temperature indicator"
+    }
+  },
+
+  "illustrations": {
+    "style": "Hand-painted storybook aesthetic with digital polish",
+    "characteristics": [
+      "Warm, rich color palette",
+      "Visible brushwork texture",
+      "Whimsical but scientifically accurate",
+      "Hopeful tone - showing both problems AND solutions",
+      "Characters have expressive, friendly faces"
+    ],
+    "themes": {
+      "carbonCycle": "Forest canopy, ocean absorption, animal life",
+      "humanImpact": "Factories transitioning to clean energy, cities becoming green",
+      "solutions": "Renewable energy, reforestation, community action"
+    }
+  },
+
+  "accessibility": {
+    "contrast": {
+      "minimum": "4.5:1 for normal text",
+      "large": "3:1 for large text and icons",
+      "note": "All color combinations have been selected to meet WCAG AA standards"
+    },
+    "motion": {
+      "respectReducedMotion": true,
+      "fallbacks": "Static states for all animated elements"
+    },
+    "focus": {
+      "style": "3px solid colors.core.accent.hex with 2px offset",
+      "visible": "Always visible on keyboard navigation"
+    },
+    "touch": {
+      "minimumTarget": "44px x 44px",
+      "spacing": "8px minimum between interactive elements"
+    },
+    "text": {
+      "scalable": "All text uses rem units",
+      "minimumSize": "14px (0.875rem)"
+    }
+  },
+
+  "darkMode": {
+    "enabled": false,
+    "note": "For this educational children's app, we maintain a single light theme to ensure consistency and reduce complexity. The AR mode naturally provides contrast with camera feed backgrounds."
+  },
+
+  "cssVariables": {
+    "colors": {
+      "--color-primary": "#22A652",
+      "--color-primary-light": "#4ACD78",
+      "--color-primary-dark": "#1A8040",
+      "--color-secondary": "#1E6B8C",
+      "--color-secondary-light": "#3A9BC4",
+      "--color-accent": "#FF6B4A",
+      "--color-accent-light": "#FF9A85",
+      "--color-success": "#4ADE80",
+      "--color-warning": "#FBBF24",
+      "--color-error": "#EF6B6B",
+      "--color-info": "#60A5FA",
+      "--color-bg-primary": "#F0F7F4",
+      "--color-bg-secondary": "#FFFFFF",
+      "--color-bg-tertiary": "#E8F5EC",
+      "--color-text-primary": "#1A2E1F",
+      "--color-text-secondary": "#4A5D4F",
+      "--color-text-muted": "#7A8D7F",
+      "--color-text-inverse": "#FFFFFF"
+    },
+    "typography": {
+      "--font-display": "'Fredoka', 'Comic Neue', 'Nunito', sans-serif",
+      "--font-body": "'Nunito', 'Quicksand', 'Poppins', sans-serif",
+      "--font-accent": "'Baloo 2', 'Fredoka', 'Comic Neue', sans-serif"
+    },
+    "spacing": {
+      "--space-1": "4px",
+      "--space-2": "8px",
+      "--space-3": "12px",
+      "--space-4": "16px",
+      "--space-6": "24px",
+      "--space-8": "32px",
+      "--space-12": "48px"
+    },
+    "radii": {
+      "--radius-sm": "8px",
+      "--radius-md": "12px",
+      "--radius-lg": "16px",
+      "--radius-xl": "24px",
+      "--radius-full": "9999px"
+    },
+    "shadows": {
+      "--shadow-sm": "0 2px 8px rgba(26, 46, 31, 0.08)",
+      "--shadow-md": "0 4px 16px rgba(26, 46, 31, 0.12)",
+      "--shadow-lg": "0 8px 32px rgba(26, 46, 31, 0.16)",
+      "--shadow-xl": "0 16px 48px rgba(26, 46, 31, 0.20)"
+    },
+    "animations": {
+      "--ease-default": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "--ease-bounce": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      "--ease-spring": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+      "--duration-fast": "200ms",
+      "--duration-normal": "300ms",
+      "--duration-slow": "500ms"
+    }
+  },
+
+  "tailwindExtensions": {
+    "colors": {
+      "canopy": {
+        "50": "#E8F5EC",
+        "100": "#C6F6D5",
+        "200": "#9AE6B4",
+        "300": "#68D391",
+        "400": "#4ACD78",
+        "500": "#22A652",
+        "600": "#1A8040",
+        "700": "#166534",
+        "800": "#14532D",
+        "900": "#1A2E1F"
+      },
+      "ocean": {
+        "50": "#E0F4FF",
+        "100": "#B3E0F2",
+        "200": "#7EB3C9",
+        "300": "#3A9BC4",
+        "400": "#2A85AD",
+        "500": "#1E6B8C",
+        "600": "#14485E",
+        "700": "#0D3A4D",
+        "800": "#082B3A",
+        "900": "#041D28"
+      },
+      "coral": {
+        "50": "#FFF5F3",
+        "100": "#FFE4DE",
+        "200": "#FFAB9A",
+        "300": "#FF9A85",
+        "400": "#FF6B4A",
+        "500": "#E85A3C",
+        "600": "#D94A2D",
+        "700": "#B33D24",
+        "800": "#8C301C",
+        "900": "#662314"
+      }
+    },
+    "fontFamily": {
+      "display": ["Fredoka", "Comic Neue", "Nunito", "sans-serif"],
+      "body": ["Nunito", "Quicksand", "Poppins", "sans-serif"],
+      "accent": ["Baloo 2", "Fredoka", "Comic Neue", "sans-serif"]
+    },
+    "borderRadius": {
+      "card": "20px",
+      "button": "12px"
+    },
+    "animation": {
+      "float": "float 3s ease-in-out infinite",
+      "bounce-gentle": "bounce 2s ease-in-out infinite",
+      "wiggle": "wiggle 0.4s ease-in-out",
+      "celebrate": "celebrate 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+    }
+  },
+
+  "modeSpecificDesign": {
+    "arMode": {
+      "theme": "Transparent overlays on camera feed",
+      "uiColor": "White/light with shadows for visibility against any background",
+      "explanationBox": "Frosted glass effect with green tint",
+      "navigation": "Semi-transparent bottom bar"
+    },
+    "quizMode": {
+      "theme": "Focused, immersive learning environment",
+      "background": "Subtle pattern with educational motifs (globes, leaves, molecules)",
+      "contrast": "High contrast for readability",
+      "feedback": "Full-screen celebratory/encouraging animations"
+    },
+    "videoMode": {
+      "theme": "Cinematic, focused viewing",
+      "background": "Deep purple gradient (as in mockup)",
+      "cards": "Glassmorphism effect for video categories",
+      "emphasis": "Content discovery and easy access"
+    }
+  },
+
+  "printAssets": {
+    "note": "The physical storybook should use these guidelines to ensure good AR tracking",
+    "requirements": {
+      "contrast": "High contrast images for reliable tracking",
+      "uniqueness": "Each page should have distinct visual features",
+      "margins": "Allow space around tracked areas",
+      "colors": "Match digital color palette for cohesive experience"
+    }
+  }
+}
