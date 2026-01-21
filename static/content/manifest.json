@@ -1,0 +1,300 @@
+{
+  "pages": [
+    {
+      "id": 1,
+      "title": "The Carbon Cycle",
+      "description": "Learn about how carbon moves through our planet in a continuous cycle.",
+      "explanation": "<strong>Carbon</strong> is one of the most important elements on Earth! Plants absorb <strong>carbon dioxide</strong> from the air through photosynthesis, storing carbon in their leaves, stems, and roots. When animals eat plants and breathe out, they release carbon dioxide back into the atmosphere. This natural exchange is called the <strong>carbon cycle</strong> - it keeps our planet balanced and healthy!",
+      "audioUrl": "/audio/page-1-narration.mp3",
+      "imageUrl": "/images/pages/carbon-cycle.png",
+      "quiz": [
+        {
+          "question": "What do plants absorb from the air during photosynthesis?",
+          "options": [
+            { "id": "a", "text": "Oxygen only" },
+            { "id": "b", "text": "Carbon dioxide" },
+            { "id": "c", "text": "Nitrogen and water" }
+          ],
+          "correctOptionId": "b",
+          "hint": "Think about what plants need to make their food!"
+        },
+        {
+          "question": "What is the carbon cycle?",
+          "options": [
+            { "id": "a", "text": "A type of bicycle made from carbon fiber" },
+            { "id": "b", "text": "The natural exchange of carbon between living things and the atmosphere" },
+            { "id": "c", "text": "A recycling program for carbon materials" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Factories and Pollution",
+      "description": "Discover how human activities affect our atmosphere and the carbon cycle.",
+      "explanation": "<strong>Factories</strong> disrupt the carbon cycle by releasing large amounts of <strong>carbon dioxide</strong> from <strong>burning fossil fuels</strong> like coal, oil, and gas. This increases the amount of carbon in the atmosphere and <strong>reduces the balance</strong> between carbon storage and uptake by plants and oceans. When there's too much carbon dioxide, it traps heat in our atmosphere like a blanket!",
+      "audioUrl": "/audio/page-2-narration.mp3",
+      "imageUrl": "/images/pages/factories.png",
+      "quiz": [
+        {
+          "question": "How do factories disrupt the carbon cycle?",
+          "options": [
+            { "id": "a", "text": "By increasing oxygen production" },
+            { "id": "b", "text": "By releasing large amounts of carbon dioxide from burning fossil fuels" },
+            { "id": "c", "text": "By absorbing carbon dioxide during manufacturing" }
+          ],
+          "correctOptionId": "b"
+        },
+        {
+          "question": "What are fossil fuels?",
+          "options": [
+            { "id": "a", "text": "Fuels made from dinosaur bones" },
+            { "id": "b", "text": "Coal, oil, and gas formed from ancient plants and animals" },
+            { "id": "c", "text": "Modern renewable energy sources" }
+          ],
+          "correctOptionId": "b",
+          "hint": "They're called 'fossil' fuels because they come from very old organic matter!"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Oceans and Carbon",
+      "description": "Explore how our oceans help absorb carbon from the atmosphere.",
+      "explanation": "Our <strong>oceans</strong> are like giant carbon sponges! They absorb about <strong>25% of the carbon dioxide</strong> we produce. Tiny ocean plants called <strong>phytoplankton</strong> use carbon dioxide just like land plants do. However, when oceans absorb too much CO2, they become more acidic, which can harm <strong>coral reefs</strong> and marine life.",
+      "audioUrl": "/audio/page-3-narration.mp3",
+      "imageUrl": "/images/pages/ocean-carbon.png",
+      "quiz": [
+        {
+          "question": "What percentage of carbon dioxide do oceans absorb?",
+          "options": [
+            { "id": "a", "text": "About 5%" },
+            { "id": "b", "text": "About 25%" },
+            { "id": "c", "text": "About 75%" }
+          ],
+          "correctOptionId": "b"
+        },
+        {
+          "question": "What happens when oceans absorb too much CO2?",
+          "options": [
+            { "id": "a", "text": "They become cleaner" },
+            { "id": "b", "text": "They become more acidic, harming marine life" },
+            { "id": "c", "text": "They produce more oxygen" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Forests: Earth's Lungs",
+      "description": "Learn why forests are so important for fighting climate change.",
+      "explanation": "<strong>Forests</strong> are often called the '<strong>lungs of the Earth</strong>' because they breathe in carbon dioxide and breathe out oxygen. A single large tree can absorb up to <strong>48 pounds of carbon dioxide</strong> per year! That's why protecting forests and planting new trees is so important for our planet's health.",
+      "audioUrl": "/audio/page-4-narration.mp3",
+      "imageUrl": "/images/pages/forests.png",
+      "quiz": [
+        {
+          "question": "Why are forests called the 'lungs of the Earth'?",
+          "options": [
+            { "id": "a", "text": "Because they are shaped like lungs" },
+            { "id": "b", "text": "Because they absorb CO2 and release oxygen, like breathing" },
+            { "id": "c", "text": "Because animals use them to breathe" }
+          ],
+          "correctOptionId": "b"
+        },
+        {
+          "question": "How much CO2 can a large tree absorb per year?",
+          "options": [
+            { "id": "a", "text": "About 5 pounds" },
+            { "id": "b", "text": "About 48 pounds" },
+            { "id": "c", "text": "About 200 pounds" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "The Greenhouse Effect",
+      "description": "Understand how certain gases trap heat in our atmosphere.",
+      "explanation": "The <strong>greenhouse effect</strong> is like a blanket around Earth. Some gases in our atmosphere, called <strong>greenhouse gases</strong>, trap heat from the sun and keep our planet warm. This is natural and necessary for life! But when we add too many greenhouse gases by burning fossil fuels, the blanket gets too thick and Earth gets too warm.",
+      "audioUrl": "/audio/page-5-narration.mp3",
+      "imageUrl": "/images/pages/greenhouse-effect.png",
+      "quiz": [
+        {
+          "question": "What do greenhouse gases do?",
+          "options": [
+            { "id": "a", "text": "They cool down the Earth" },
+            { "id": "b", "text": "They trap heat in the atmosphere" },
+            { "id": "c", "text": "They create rain clouds" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Melting Ice",
+      "description": "See how rising temperatures are affecting polar regions.",
+      "explanation": "As Earth gets warmer, the <strong>ice at the North and South Poles</strong> is melting faster than ever before. This is dangerous because ice reflects sunlight back into space, helping keep Earth cool. When ice melts, it also raises <strong>sea levels</strong>, which can flood coastal cities and change habitats for polar animals like <strong>polar bears</strong> and <strong>penguins</strong>.",
+      "audioUrl": "/audio/page-6-narration.mp3",
+      "imageUrl": "/images/pages/melting-ice.png",
+      "quiz": [
+        {
+          "question": "What happens when polar ice melts?",
+          "options": [
+            { "id": "a", "text": "Sea levels rise" },
+            { "id": "b", "text": "The ocean gets colder" },
+            { "id": "c", "text": "More ice forms elsewhere" }
+          ],
+          "correctOptionId": "a"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Extreme Weather",
+      "description": "Learn how climate change is making weather more unpredictable.",
+      "explanation": "Climate change is making our weather more <strong>extreme</strong>. This means stronger <strong>hurricanes</strong>, longer <strong>droughts</strong>, more intense <strong>heat waves</strong>, and heavier <strong>flooding</strong>. These extreme weather events can damage homes, affect food supplies, and harm ecosystems.",
+      "audioUrl": "/audio/page-7-narration.mp3",
+      "imageUrl": "/images/pages/extreme-weather.png",
+      "quiz": [
+        {
+          "question": "How does climate change affect weather?",
+          "options": [
+            { "id": "a", "text": "It makes weather more mild and predictable" },
+            { "id": "b", "text": "It makes weather more extreme and unpredictable" },
+            { "id": "c", "text": "It has no effect on weather" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Renewable Energy",
+      "description": "Discover clean energy sources that can help save our planet.",
+      "explanation": "<strong>Renewable energy</strong> comes from sources that won't run out and don't pollute! <strong>Solar power</strong> uses energy from the sun, <strong>wind power</strong> uses moving air, and <strong>hydropower</strong> uses flowing water. By switching from fossil fuels to renewable energy, we can significantly reduce carbon emissions.",
+      "audioUrl": "/audio/page-8-narration.mp3",
+      "imageUrl": "/images/pages/renewable-energy.png",
+      "quiz": [
+        {
+          "question": "Which of these is a renewable energy source?",
+          "options": [
+            { "id": "a", "text": "Coal" },
+            { "id": "b", "text": "Natural gas" },
+            { "id": "c", "text": "Solar power" }
+          ],
+          "correctOptionId": "c"
+        },
+        {
+          "question": "Why is renewable energy better for the environment?",
+          "options": [
+            { "id": "a", "text": "It's cheaper" },
+            { "id": "b", "text": "It doesn't produce carbon emissions" },
+            { "id": "c", "text": "It's easier to transport" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "What You Can Do",
+      "description": "Simple actions that make a big difference for our planet.",
+      "explanation": "Everyone can help fight climate change! You can <strong>reduce, reuse, and recycle</strong>. Walk or bike instead of driving. Turn off lights when you leave a room. Plant trees and take care of plants. Eat less meat and more vegetables. Every small action adds up to make a big difference!",
+      "audioUrl": "/audio/page-9-narration.mp3",
+      "imageUrl": "/images/pages/take-action.png",
+      "quiz": [
+        {
+          "question": "Which action helps reduce carbon emissions?",
+          "options": [
+            { "id": "a", "text": "Leaving lights on all day" },
+            { "id": "b", "text": "Walking instead of driving" },
+            { "id": "c", "text": "Using more plastic bags" }
+          ],
+          "correctOptionId": "b"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Our Future",
+      "description": "Imagine a world where we live in harmony with nature.",
+      "explanation": "The future of our planet is in our hands! By working together, we can create a world with <strong>clean air</strong>, <strong>healthy oceans</strong>, and <strong>thriving forests</strong>. Scientists, inventors, and young people like YOU are finding new ways to protect our planet every day. Together, we can make a difference!",
+      "audioUrl": "/audio/page-10-narration.mp3",
+      "imageUrl": "/images/pages/future.png",
+      "quiz": [
+        {
+          "question": "Who can help fight climate change?",
+          "options": [
+            { "id": "a", "text": "Only scientists" },
+            { "id": "b", "text": "Only governments" },
+            { "id": "c", "text": "Everyone, including you!" }
+          ],
+          "correctOptionId": "c"
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "category": "carbon-cycle",
+      "name": "Carbon Cycle",
+      "description": "Learn about how carbon moves through Earth's systems",
+      "items": [
+        {
+          "id": "cc1",
+          "title": "The Carbon Cycle for Kids",
+          "description": "A fun animated explanation of how carbon moves around our planet",
+          "youtubeUrl": "https://www.youtube.com/watch?v=fQCrrPohyTs"
+        },
+        {
+          "id": "cc2",
+          "title": "Photosynthesis Explained",
+          "description": "How plants use sunlight to absorb carbon dioxide",
+          "youtubeUrl": "https://www.youtube.com/watch?v=UPBMG5EYydo"
+        }
+      ]
+    },
+    {
+      "category": "human-actions",
+      "name": "Human Actions",
+      "description": "How our daily choices affect the environment",
+      "items": [
+        {
+          "id": "ha1",
+          "title": "How Factories Cause Pollution",
+          "description": "Understanding industrial emissions and their effects",
+          "youtubeUrl": "https://www.youtube.com/watch?v=ipVxxxqwBQw"
+        },
+        {
+          "id": "ha2",
+          "title": "Reduce, Reuse, Recycle",
+          "description": "Simple ways to help the environment",
+          "youtubeUrl": "https://www.youtube.com/watch?v=OasbYWF4_S8"
+        }
+      ]
+    },
+    {
+      "category": "climate-change",
+      "name": "Climate Change",
+      "description": "Understanding climate change and what we can do",
+      "items": [
+        {
+          "id": "cl1",
+          "title": "Climate Change for Kids",
+          "description": "A simple explanation of climate change",
+          "youtubeUrl": "https://www.youtube.com/watch?v=Sv7OHfpIRfU"
+        },
+        {
+          "id": "cl2",
+          "title": "Renewable Energy Sources",
+          "description": "Learn about solar, wind, and water power",
+          "youtubeUrl": "https://www.youtube.com/watch?v=1kUE0BZtTRc"
+        }
+      ]
+    }
+  ]
+}
