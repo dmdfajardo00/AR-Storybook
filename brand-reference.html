@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClimaTales AR - Brand Reference</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables */
+    :root {
+      /* Colors - Core */
+      --color-primary: #22A652;
+      --color-primary-light: #4ACD78;
+      --color-primary-dark: #1A8040;
+      --color-primary-muted: #88CCA0;
+      
+      --color-secondary: #1E6B8C;
+      --color-secondary-light: #3A9BC4;
+      --color-secondary-dark: #14485E;
+      
+      --color-accent: #FF6B4A;
+      --color-accent-light: #FF9A85;
+      --color-accent-dark: #D94A2D;
+      
+      /* Colors - Semantic */
+      --color-success: #4ADE80;
+      --color-warning: #FBBF24;
+      --color-error: #EF6B6B;
+      --color-info: #60A5FA;
+      
+      /* Colors - Surfaces */
+      --color-bg-primary: #F0F7F4;
+      --color-bg-secondary: #FFFFFF;
+      --color-bg-tertiary: #E8F5EC;
+      --color-bg-dark: #1A2E1F;
+      --color-bg-dark-secondary: #2D3B31;
+      
+      /* Colors - Text */
+      --color-text-primary: #1A2E1F;
+      --color-text-secondary: #4A5D4F;
+      --color-text-muted: #7A8D7F;
+      --color-text-inverse: #FFFFFF;
+      
+      /* Gradients */
+      --gradient-nature: linear-gradient(135deg, #22A652 0%, #1E6B8C 100%);
+      --gradient-sunrise: linear-gradient(135deg, #FBBF24 0%, #FF6B4A 100%);
+      --gradient-sky: linear-gradient(180deg, #87CEEB 0%, #E0F4FF 100%);
+      --gradient-earth: radial-gradient(ellipse at 30% 30%, #4ADE80 0%, #22A652 40%, #1E6B8C 100%);
+      --gradient-quiz: linear-gradient(135deg, #4A5568 0%, #2D3748 50%, #1A202C 100%);
+      --gradient-video: linear-gradient(135deg, #5B4B8A 0%, #2D2A4A 100%);
+      --gradient-explanation: linear-gradient(135deg, #C6F6D5 0%, #9AE6B4 100%);
+      --gradient-question: linear-gradient(135deg, #A8E6CF 0%, #88D8A8 100%);
+      
+      /* Typography */
+      --font-display: 'Fredoka', 'Comic Neue', 'Nunito', sans-serif;
+      --font-body: 'Nunito', 'Quicksand', 'Poppins', sans-serif;
+      --font-accent: 'Baloo 2', 'Fredoka', 'Comic Neue', sans-serif;
+      
+      /* Spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      
+      /* Border Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-2xl: 32px;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(26, 46, 31, 0.08);
+      --shadow-md: 0 4px 16px rgba(26, 46, 31, 0.12);
+      --shadow-lg: 0 8px 32px rgba(26, 46, 31, 0.16);
+      --shadow-xl: 0 16px 48px rgba(26, 46, 31, 0.20);
+      --shadow-glow-success: 0 0 24px rgba(74, 222, 128, 0.4);
+      --shadow-glow-primary: 0 0 24px rgba(34, 166, 82, 0.4);
+      
+      /* Animations */
+      --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --duration-fast: 200ms;
+      --duration-normal: 300ms;
+      --duration-slow: 500ms;
+    }
+    
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-8);
+    }
+    
+    .section {
+      margin-bottom: var(--space-12);
+    }
+    
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 3px solid var(--color-primary);
+      display: inline-block;
+    }
+    
+    .grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4, .grid-5 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* Header */
+    .header {
+      background: var(--gradient-nature);
+      color: var(--color-text-inverse);
+      padding: var(--space-12) var(--space-8);
+      text-align: center;
+      margin-bottom: var(--space-8);
+      border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+    }
+    
+    .header h1 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: var(--space-3);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .header p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+    }
+    
+    .tagline {
+      font-family: var(--font-accent);
+      font-size: 1.5rem;
+      margin-top: var(--space-2);
+    }
+    
+    /* Color Swatches */
+    .color-swatch {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--duration-fast) var(--ease-spring), 
+                  box-shadow var(--duration-fast) var(--ease-default);
+    }
+    
+    .color-swatch:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .color-preview {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-accent);
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .color-info {
+      padding: var(--space-4);
+    }
+    
+    .color-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+    
+    .color-hex {
+      font-family: monospace;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+    
+    /* Gradient Swatches */
+    .gradient-swatch {
+      height: 80px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-accent);
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      box-shadow: var(--shadow-md);
+    }
+    
+    /* Typography Samples */
+    .type-sample {
+      background: var(--color-bg-secondary);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-4);
+    }
+    
+    .type-label {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-2);
+    }
+    
+    .font-display { font-family: var(--font-display); }
+    .font-body { font-family: var(--font-body); }
+    .font-accent { font-family: var(--font-accent); }
+    
+    /* Buttons */
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      align-items: center;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      border: none;
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-spring);
+      text-decoration: none;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+    
+    .btn-primary {
+      background: var(--gradient-nature);
+      color: var(--color-text-inverse);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .btn-primary:hover {
+      box-shadow: var(--shadow-lg), var(--shadow-glow-primary);
+    }
+    
+    .btn-secondary {
+      background: var(--color-bg-secondary);
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--color-bg-tertiary);
+    }
+    
+    .btn-accent {
+      background: var(--gradient-sunrise);
+      color: var(--color-text-inverse);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text-primary);
+    }
+    
+    .btn-ghost:hover {
+      background: var(--color-bg-tertiary);
+    }
+    
+    .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
+    .btn-lg { padding: 16px 32px; font-size: 1.125rem; }
+    
+    /* Cards */
+    .card {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-md);
+      transition: all var(--duration-normal) var(--ease-default);
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+    
+    .card-text {
+      color: var(--color-text-secondary);
+      font-size: 0.9375rem;
+    }
+    
+    /* Form Elements */
+    .input-group {
+      margin-bottom: var(--space-4);
+    }
+    
+    .input-label {
+      display: block;
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: var(--space-2);
+      color: var(--color-text-secondary);
+    }
+    
+    .input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid transparent;
+      border-radius: var(--radius-md);
+      background: var(--color-bg-tertiary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text-primary);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+    
+    .input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+      background: var(--color-bg-secondary);
+    }
+    
+    .input::placeholder {
+      color: var(--color-text-muted);
+    }
+    
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+    
+    .badge-success { background: var(--color-success); color: var(--color-bg-dark); }
+    .badge-warning { background: var(--color-warning); color: var(--color-bg-dark); }
+    .badge-error { background: var(--color-error); color: white; }
+    .badge-info { background: var(--color-info); color: white; }
+    .badge-primary { background: var(--color-primary); color: white; }
+    
+    /* Quiz Components */
+    .quiz-question-card {
+      background: var(--gradient-question);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+    
+    .quiz-question-label {
+      font-family: var(--font-accent);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-3);
+    }
+    
+    .quiz-question-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    
+    .quiz-option {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-fast) var(--ease-default);
+      border: 3px solid transparent;
+    }
+    
+    .quiz-option:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .quiz-option.selected {
+      border-color: var(--color-primary);
+      background: white;
+    }
+    
+    .quiz-option-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--color-primary-muted);
+      color: var(--color-primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .quiz-option.selected .quiz-option-letter {
+      background: var(--color-primary);
+      color: white;
+    }
+    
+    .quiz-option-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text-primary);
+    }
+    
+    /* Feedback States */
+    .feedback-correct {
+      background: #FFD93D;
+      border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+      padding: var(--space-8);
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: celebrate 0.6s var(--ease-spring);
+    }
+    
+    .feedback-incorrect {
+      background: #FF6B6B;
+      border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
+      padding: var(--space-8);
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: wiggle 0.4s var(--ease-bounce);
+    }
+    
+    .feedback-text {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-shadow: 0 2px 0 rgba(255,255,255,0.3);
+    }
+    
+    /* AR Explanation Box */
+    .ar-explanation {
+      background: var(--gradient-explanation);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      max-width: 300px;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .ar-explanation p {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+    }
+    
+    .ar-explanation strong {
+      color: var(--color-primary-dark);
+    }
+    
+    .ar-audio-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: var(--space-3);
+    }
+    
+    /* Video Mode Card */
+    .video-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      color: white;
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+    
+    .video-card:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateX(8px);
+    }
+    
+    .video-icon {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    
+    .video-title {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+    
+    /* Navigation */
+    .bottom-nav {
+      background: var(--color-primary);
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      padding: var(--space-3) var(--space-6);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      max-width: 400px;
+      margin: var(--space-8) auto 0;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+    
+    .nav-item:hover {
+      color: white;
+    }
+    
+    .nav-item.active {
+      background: white;
+      color: var(--color-primary);
+    }
+    
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .nav-label {
+      font-family: var(--font-accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    /* Animations */
+    @keyframes celebrate {
+      0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+      50% { transform: scale(1.2) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-pulse { animation: pulse 2s ease-in-out infinite; }
+    
+    /* Spacing Demo */
+    .spacing-demo {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    
+    .spacing-block {
+      background: var(--color-primary);
+      border-radius: var(--radius-sm);
+    }
+    
+    .spacing-label {
+      text-align: center;
+      margin-top: var(--space-2);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-family: monospace;
+    }
+    
+    /* Shadow Demo */
+    .shadow-demo {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+    
+    .shadow-box {
+      width: 100px;
+      height: 100px;
+      background: white;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+    
+    /* Phone Mockup */
+    .phone-mockup {
+      width: 280px;
+      height: 560px;
+      background: #1a1a1a;
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow: var(--shadow-xl);
+      margin: 0 auto;
+    }
+    
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg-primary);
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .phone-notch {
+      width: 100px;
+      height: 28px;
+      background: #1a1a1a;
+      border-radius: 0 0 14px 14px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .phone-content {
+      padding: 40px 16px 16px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Video Mode Background */
+    .video-mode-demo {
+      background: var(--gradient-video);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+    }
+    
+    /* Subsection */
+    .subsection {
+      margin-bottom: var(--space-8);
+    }
+    
+    .subsection-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+    
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: var(--space-4); }
+    .mt-6 { margin-top: var(--space-6); }
+    .mb-4 { margin-bottom: var(--space-4); }
+    .flex { display: flex; }
+    .flex-wrap { flex-wrap: wrap; }
+    .gap-4 { gap: var(--space-4); }
+    .gap-6 { gap: var(--space-6); }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1>🌍 ClimaTales AR</h1>
+    <p class="tagline">Where Stories Come Alive to Save Our Planet</p>
+    <p style="margin-top: 16px; opacity: 0.8;">Brand Reference Guide</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Colors Section -->
+    <section class="section">
+      <h2 class="section-title">🎨 Color Palette</h2>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">Core Colors</h3>
+        <div class="grid grid-3">
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-primary);">Primary</div>
+            <div class="color-info">
+              <div class="color-name">Canopy Green</div>
+              <div class="color-hex">#22A652</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-secondary);">Secondary</div>
+            <div class="color-info">
+              <div class="color-name">Ocean Deep</div>
+              <div class="color-hex">#1E6B8C</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-accent);">Accent</div>
+            <div class="color-info">
+              <div class="color-name">Sunset Coral</div>
+              <div class="color-hex">#FF6B4A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">Semantic Colors</h3>
+        <div class="grid grid-4">
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-success);">Success</div>
+            <div class="color-info">
+              <div class="color-name">Sprout</div>
+              <div class="color-hex">#4ADE80</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-warning); color: #1A2E1F;">Warning</div>
+            <div class="color-info">
+              <div class="color-name">Sunbeam</div>
+              <div class="color-hex">#FBBF24</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-error);">Error</div>
+            <div class="color-info">
+              <div class="color-name">Autumn</div>
+              <div class="color-hex">#EF6B6B</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background: var(--color-info);">Info</div>
+            <div class="color-info">
+              <div class="color-name">Sky</div>
+              <div class="color-hex">#60A5FA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">Gradients</h3>
+        <div class="grid grid-3">
+          <div class="gradient-swatch" style="background: var(--gradient-nature);">Forest Canopy</div>
+          <div class="gradient-swatch" style="background: var(--gradient-sunrise);">New Day</div>
+          <div class="gradient-swatch" style="background: var(--gradient-sky); color: var(--color-text-primary);">Clear Skies</div>
+          <div class="gradient-swatch" style="background: var(--gradient-quiz);">Discovery</div>
+          <div class="gradient-swatch" style="background: var(--gradient-video);">Deep Dive</div>
+          <div class="gradient-swatch" style="background: var(--gradient-explanation); color: var(--color-text-primary);">Explanation</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Typography Section -->
+    <section class="section">
+      <h2 class="section-title">✍️ Typography</h2>
+      
+      <div class="type-sample">
+        <div class="type-label">Display Font — Fredoka</div>
+        <p class="font-display" style="font-size: 2.5rem; font-weight: 700; line-height: 1.2;">
+          The Earth is Our Home
+        </p>
+        <p class="font-display" style="font-size: 1.5rem; font-weight: 500; margin-top: 8px;">
+          Let's learn how to protect it together!
+        </p>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-label">Body Font — Nunito</div>
+        <p class="font-body" style="font-size: 1.125rem;">
+          Factories disrupt the <strong>carbon cycle</strong> by releasing large amounts of <strong>carbon dioxide</strong> from <strong>burning fossil fuels</strong>, increasing atmospheric carbon and <strong>reducing the balance</strong> between carbon storage and uptake by plants and oceans.
+        </p>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-label">Accent Font — Baloo 2</div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px;">
+          <span class="btn btn-primary font-accent">Start Learning</span>
+          <span class="badge badge-success font-accent">Completed</span>
+          <span class="font-accent" style="font-size: 1.25rem; font-weight: 700; color: var(--color-primary);">Quiz Mode</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Buttons Section -->
+    <section class="section">
+      <h2 class="section-title">🔘 Buttons</h2>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">Variants</h3>
+        <div class="button-row">
+          <button class="btn btn-primary">Primary Button</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-accent">Accent</button>
+          <button class="btn btn-ghost">Ghost</button>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">Sizes</h3>
+        <div class="button-row">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Medium</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Components Section -->
+    <section class="section">
+      <h2 class="section-title">🧩 Components</h2>
+      
+      <div class="grid grid-2" style="gap: 32px;">
+        <div>
+          <h3 class="subsection-title">Cards</h3>
+          <div class="card">
+            <div class="card-title">Carbon Cycle</div>
+            <div class="card-text">Learn how carbon moves through our atmosphere, oceans, and living things in this interactive lesson.</div>
+            <button class="btn btn-primary btn-sm" style="margin-top: 16px;">Start Lesson</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="subsection-title">Form Inputs</h3>
+          <div class="input-group">
+            <label class="input-label">What's your name?</label>
+            <input type="text" class="input" placeholder="Enter your name...">
+          </div>
+        </div>
+      </div>
+      
+      <div class="subsection mt-6">
+        <h3 class="subsection-title">Badges</h3>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <span class="badge badge-primary">New</span>
+          <span class="badge badge-success">Correct!</span>
+          <span class="badge badge-warning">Hint</span>
+          <span class="badge badge-error">Try Again</span>
+          <span class="badge badge-info">Tip</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Quiz Mode Section -->
+    <section class="section">
+      <h2 class="section-title">❓ Quiz Mode Components</h2>
+      
+      <div class="grid grid-2" style="gap: 32px;">
+        <div>
+          <h3 class="subsection-title">Question Card</h3>
+          <div class="quiz-question-card">
+            <div class="quiz-question-label">Question #1</div>
+            <div class="quiz-question-text">How do factories disrupt the carbon cycle?</div>
+          </div>
+          
+          <div class="quiz-option">
+            <span class="quiz-option-letter">a</span>
+            <span class="quiz-option-text">By increasing oxygen production.</span>
+          </div>
+          <div class="quiz-option selected">
+            <span class="quiz-option-letter">b</span>
+            <span class="quiz-option-text">By releasing large amounts of carbon dioxide from burning fossil fuels</span>
+          </div>
+          <div class="quiz-option">
+            <span class="quiz-option-letter">c</span>
+            <span class="quiz-option-text">By absorbing carbon dioxide during manufacturing</span>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="subsection-title">Feedback States</h3>
+          <div class="feedback-correct" style="margin-bottom: 24px;">
+            <div style="font-size: 48px; margin-bottom: 8px;">😊👍</div>
+            <div class="feedback-text">YOU GOT IT RIGHT!</div>
+          </div>
+          
+          <div class="feedback-incorrect">
+            <div style="font-size: 48px; margin-bottom: 8px;">🤔</div>
+            <div class="feedback-text">TRY AGAIN</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- AR Mode Section -->
+    <section class="section">
+      <h2 class="section-title">📱 AR Mode Components</h2>
+      
+      <div class="grid grid-2" style="gap: 32px;">
+        <div>
+          <h3 class="subsection-title">Explanation Overlay</h3>
+          <div class="ar-explanation">
+            <p><strong>Factories</strong> disrupt the <strong>carbon cycle</strong> by releasing large amounts of <strong>carbon dioxide</strong> from <strong>burning fossil fuels</strong>, increasing atmospheric carbon and <strong>reducing the balance</strong> between carbon storage and uptake by plants and oceans.</p>
+            <button class="ar-audio-btn">🔊</button>
+            <button class="btn btn-primary btn-sm" style="margin-left: 8px; margin-top: 12px;">NEXT →</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="subsection-title">Navigation Bar</h3>
+          <div class="bottom-nav">
+            <div class="nav-item active">
+              <span class="nav-icon">📷</span>
+              <span class="nav-label">AR Mode</span>
+            </div>
+            <div class="nav-item">
+              <span class="nav-icon">📝</span>
+              <span class="nav-label">Quiz Mode</span>
+            </div>
+            <div class="nav-item">
+              <span class="nav-icon">🎬</span>
+              <span class="nav-label">Video</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Video Mode Section -->
+    <section class="section">
+      <h2 class="section-title">🎬 Video Mode Components</h2>
+      
+      <div class="video-mode-demo">
+        <h3 style="color: white; font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 24px; text-align: center;">Choose a Topic</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 320px; margin: 0 auto;">
+          <div class="video-card">
+            <div class="video-icon">⬇️</div>
+            <div class="video-title">CARBON CYCLE</div>
+          </div>
+          <div class="video-card">
+            <div class="video-icon">⬇️</div>
+            <div class="video-title">HUMAN ACTIONS</div>
+          </div>
+          <div class="video-card">
+            <div class="video-icon">⬇️</div>
+            <div class="video-title">CLIMATE CHANGE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Spacing Section -->
+    <section class="section">
+      <h2 class="section-title">📐 Spacing Scale</h2>
+      
+      <div class="spacing-demo">
+        <div>
+          <div class="spacing-block" style="width: 16px; height: 16px;"></div>
+          <div class="spacing-label">4px</div>
+        </div>
+        <div>
+          <div class="spacing-block" style="width: 24px; height: 24px;"></div>
+          <div class="spacing-label">8px</div>
+        </div>
+        <div>
+          <div class="spacing-block" style="width: 32px; height: 32px;"></div>
+          <div class="spacing-label">12px</div>
+        </div>
+        <div>
+          <div class="spacing-block" style="width: 40px; height: 40px;"></div>
+          <div class="spacing-label">16px</div>
+        </div>
+        <div>
+          <div class="spacing-block" style="width: 48px; height: 48px;"></div>
+          <div class="spacing-label">24px</div>
+        </div>
+        <div>
+          <div class="spacing-block" style="width: 56px; height: 56px;"></div>
+          <div class="spacing-label">32px</div>
+        </div>
+        <div>
+          <div class="spacing-block" style="width: 64px; height: 64px;"></div>
+          <div class="spacing-label">48px</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Shadows Section -->
+    <section class="section">
+      <h2 class="section-title">🌫️ Shadows</h2>
+      
+      <div class="shadow-demo">
+        <div class="shadow-box" style="box-shadow: var(--shadow-sm);">sm</div>
+        <div class="shadow-box" style="box-shadow: var(--shadow-md);">md</div>
+        <div class="shadow-box" style="box-shadow: var(--shadow-lg);">lg</div>
+        <div class="shadow-box" style="box-shadow: var(--shadow-xl);">xl</div>
+        <div class="shadow-box" style="box-shadow: var(--shadow-glow-success);">glow</div>
+      </div>
+    </section>
+    
+    <!-- Border Radius Section -->
+    <section class="section">
+      <h2 class="section-title">⭕ Border Radius</h2>
+      
+      <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+        <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">8px</div>
+        <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">12px</div>
+        <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">16px</div>
+        <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">24px</div>
+        <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">full</div>
+      </div>
+    </section>
+    
+    <!-- Animation Section -->
+    <section class="section">
+      <h2 class="section-title">✨ Animations</h2>
+      
+      <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <div class="animate-float" style="width: 60px; height: 60px; background: var(--gradient-nature); border-radius: var(--radius-lg); margin: 0 auto;"></div>
+          <p style="margin-top: 12px; font-size: 0.875rem; color: var(--color-text-muted);">Float</p>
+        </div>
+        <div style="text-align: center;">
+          <div class="animate-pulse" style="width: 60px; height: 60px; background: var(--color-accent); border-radius: var(--radius-full); margin: 0 auto;"></div>
+          <p style="margin-top: 12px; font-size: 0.875rem; color: var(--color-text-muted);">Pulse</p>
+        </div>
+        <div style="text-align: center;">
+          <button class="btn btn-primary" style="margin: 0 auto;">Hover Me!</button>
+          <p style="margin-top: 12px; font-size: 0.875rem; color: var(--color-text-muted);">Button Hover</p>
+        </div>
+      </div>
+    </section>
+    
+  </div>
+  
+  <footer style="background: var(--color-bg-dark); color: var(--color-text-inverse); padding: 48px; text-align: center; margin-top: 48px;">
+    <p style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 8px;">ClimaTales AR</p>
+    <p style="opacity: 0.7;">Brand Reference Guide — January 2026</p>
+  </footer>
+</body>
+</html>
