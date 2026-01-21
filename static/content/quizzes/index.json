@@ -1,0 +1,44 @@
+{
+  "quizzes": [
+    {
+      "id": 1,
+      "folder": "the-carbon-cycle"
+    },
+    {
+      "id": 2,
+      "folder": "factories-and-pollution"
+    },
+    {
+      "id": 3,
+      "folder": "oceans-and-carbon"
+    },
+    {
+      "id": 4,
+      "folder": "forests-earths-lungs"
+    },
+    {
+      "id": 5,
+      "folder": "the-greenhouse-effect"
+    },
+    {
+      "id": 6,
+      "folder": "melting-ice"
+    },
+    {
+      "id": 7,
+      "folder": "extreme-weather"
+    },
+    {
+      "id": 8,
+      "folder": "renewable-energy"
+    },
+    {
+      "id": 9,
+      "folder": "what-you-can-do"
+    },
+    {
+      "id": 10,
+      "folder": "our-future"
+    }
+  ]
+}
