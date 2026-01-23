@@ -1,0 +1,136 @@
+================================================================================
+CLIMATALES AR - APP ICON & FAVICON PROMPTS
+================================================================================
+Brand: ClimaTales AR
+Tagline: "Where Stories Come Alive to Save Our Planet"
+Target: Children ages 8-14
+Aesthetic: Eco-Futurism meets Storybook Whimsy
+
+Primary Colors:
+- Canopy Green: #22A652
+- Ocean Deep: #1E6B8C
+- Sunset Coral: #FF6B4A
+- Background: #F0F7F4
+
+================================================================================
+PROMPT 1: THE LIVING BOOK (Recommended)
+================================================================================
+
+A modern app icon design featuring an open storybook with a miniature stylized Earth globe emerging magically from its pages. The book has soft, rounded corners with cream-colored pages that curl gently upward. From the center of the open book, a small vibrant Earth rises with a gentle glow, showing simplified green continents and blue oceans. Tiny sparkles and AR-style geometric light particles float around the globe suggesting augmented reality magic. The book cover is a rich forest green (#22A652) transitioning to ocean blue (#1E6B8C). A single small leaf or sprout grows from the top of the globe. The style is modern, child-friendly, with soft gradients and rounded organic shapes. Clean vector-style illustration with subtle depth and shadows. White or very light mint background. No text. Square format, suitable for app icon at 512x512 pixels. Whimsical yet polished, like a premium children's educational app.
+
+---
+
+VARIATION 1A - Simplified/Favicon version:
+
+A minimal app icon showing an open book silhouette in forest green (#22A652) with a small circle (representing Earth) rising from its center in ocean blue (#1E6B8C). A tiny leaf sprouts from the top of the circle. Clean, flat design with subtle gradient. Rounded corners. No text. Must be recognizable at 64x64 pixels. Modern, friendly, child-appropriate aesthetic.
+
+---
+
+VARIATION 1B - With magical elements:
+
+An enchanting app icon featuring an open storybook with pages that transform into swirling leaves and nature elements. A glowing Earth emerges from the book's center, surrounded by orbiting icons of trees, water droplets, and sun rays in a magical spiral. The color palette uses forest green (#22A652), ocean teal (#1E6B8C), and warm coral accents (#FF6B4A). Storybook illustration style meets modern app design. Soft lighting, gentle glow effects, rounded friendly shapes. Premium quality children's educational app aesthetic. Square format, 512x512 pixels. No text.
+
+
+================================================================================
+PROMPT 2: THE GROWING GLOBE
+================================================================================
+
+A modern app icon featuring a stylized Earth globe with a single iconic tree growing from its top. The Earth shows simplified, friendly continents in vibrant green (#22A652) against ocean blue (#1E6B8C). The tree is small but distinctive, with a rounded canopy suggesting hope and growth. Behind the globe, a subtle sunrise glow in warm coral and golden tones (#FF6B4A, #FBBF24) creates a sense of optimism and new beginnings. The globe sits within a subtle curved frame suggesting an open book page or AR viewfinder corners. Clean vector illustration style with soft gradients and gentle shadows. Rounded, organic shapes throughout. Child-friendly, hopeful, educational aesthetic. No text. Square format suitable for app icon at 512x512 pixels. Premium quality design for a children's climate education app.
+
+---
+
+VARIATION 2A - Simplified/Favicon version:
+
+A minimal app icon showing a circle divided into blue ocean (#1E6B8C) and green land (#22A652) sections, with a simple tree silhouette growing from the top. Clean geometric design with subtle gradient. The tree has a rounded, friendly canopy. Designed to be recognizable at very small sizes (16x16 to 64x64 pixels). Modern flat design with slight depth. No text. Warm, hopeful, eco-friendly aesthetic.
+
+---
+
+VARIATION 2B - With book frame:
+
+An app icon featuring a vibrant Earth globe with a growing tree, elegantly framed by the curved edges of an open book's pages. The book pages are cream/white and curl softly around the bottom half of the globe like a nurturing cradle. The Earth displays simplified green continents and blue oceans with the tree sprouting joyfully from the top. Subtle AR corner brackets appear at the four corners in a light, non-intrusive way. Colors: forest green (#22A652), ocean blue (#1E6B8C), coral sunrise glow (#FF6B4A). Storybook whimsy meets modern tech aesthetic. Soft shadows, rounded shapes, child-friendly. No text. 512x512 pixels.
+
+
+================================================================================
+PROMPT 3: THE AR LEAF
+================================================================================
+
+A modern minimalist app icon featuring an organic leaf shape that incorporates subtle AR (augmented reality) viewfinder corner brackets into its design. The leaf is a vibrant forest green (#22A652) with a gradient flowing to ocean teal (#1E6B8C) at the tip. The AR corner brackets are integrated elegantly - either as the leaf's stem and veins, or as subtle geometric accents at the corners of the leaf silhouette. Inside the leaf, there's a tiny simplified Earth or a small glowing dot suggesting technology meeting nature. The design balances organic, natural curves with clean technological geometry. Modern eco-futurism aesthetic. Clean vector style with subtle gradient and soft shadow. No text. Square format, 512x512 pixels. Perfect for a children's AR educational app about climate and nature.
+
+---
+
+VARIATION 3A - Simplified/Favicon version:
+
+A minimal app icon showing a single leaf silhouette in forest green (#22A652) with small AR viewfinder corner brackets in ocean blue (#1E6B8C) at two opposite corners. Ultra-clean, flat design that reads clearly at 16x16 pixels. The leaf has a friendly, rounded shape. Modern, tech-meets-nature aesthetic. No text. Simple but memorable.
+
+---
+
+VARIATION 3B - With globe inside:
+
+An app icon featuring a large, rounded leaf shape in forest green (#22A652) that frames a small stylized Earth globe in its center. The leaf has subtle vein patterns that look like circuit lines, suggesting the fusion of nature and technology. AR viewfinder corners appear at the edges of the square icon in a subtle ocean blue (#1E6B8C). The Earth inside the leaf shows simplified blue oceans and green land. A gentle glow emanates from where the leaf and globe meet. Modern, child-friendly, educational app aesthetic. Clean vector illustration with soft gradients. No text. 512x512 pixels.
+
+
+================================================================================
+STYLE NOTES FOR ALL PROMPTS
+================================================================================
+
+General Style Guidelines:
+- Modern, clean vector illustration style
+- Child-friendly but not childish (ages 8-14)
+- Rounded corners and organic shapes throughout
+- Soft gradients rather than flat colors
+- Subtle shadows for depth (not harsh drop shadows)
+- No text or letters in the icon
+- Must work on both light and dark backgrounds
+- Should be recognizable at small sizes (favicon)
+
+Color Application:
+- Primary: Canopy Green #22A652 (main element)
+- Secondary: Ocean Deep #1E6B8C (accents, water elements)
+- Accent: Sunset Coral #FF6B4A (highlights, glows)
+- Background: Transparent or very light mint #F0F7F4
+
+Avoid:
+- Sharp corners or harsh geometric shapes
+- Dark, scary, or apocalyptic imagery
+- Overly complex details that won't scale down
+- Generic "eco" cliches (no recycling symbols)
+- Realistic photography style
+- Text or wordmarks
+
+Inspiration References:
+- Duolingo app icon (friendly, character-driven)
+- Headspace app icon (clean, rounded, calming)
+- Modern children's book illustrations
+- Studio Ghibli nature aesthetics
+- Apple's SF Symbols design language
+
+
+================================================================================
+TECHNICAL REQUIREMENTS
+================================================================================
+
+Output Specifications:
+- Square aspect ratio (1:1)
+- Recommended generation size: 1024x1024 pixels
+- File format: PNG with transparency
+- Color space: sRGB
+
+Required Sizes for Final Icons:
+- 512x512 (App Store)
+- 192x192 (Android)
+- 180x180 (Apple Touch)
+- 144x144 (PWA)
+- 96x96
+- 72x72
+- 64x64
+- 48x48
+- 32x32 (Favicon)
+- 16x16 (Favicon)
+
+Note: Generate at highest quality, then resize down. The icon should
+maintain its recognizability and appeal at all sizes.
+
+
+================================================================================
+END OF PROMPTS
+================================================================================
