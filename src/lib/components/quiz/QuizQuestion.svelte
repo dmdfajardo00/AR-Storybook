@@ -30,6 +30,8 @@
 
   const isCorrect = $derived(selectedOptionId === question.correctOptionId);
   const canSubmit = $derived(selectedOptionId !== null && !showResult);
+  const selectedOption = $derived(question.options.find(o => o.id === selectedOptionId));
+  const correctOption = $derived(question.options.find(o => o.id === question.correctOptionId));
 </script>
 
 <div class="flex flex-col h-full">
@@ -79,17 +81,21 @@
 
   <!-- Result feedback -->
   {#if showResult}
-    <div class="mb-6">
+    <div class="mb-6 space-y-4">
       {#if isCorrect}
         <div class="relative overflow-hidden bg-gradient-to-br from-canopy-100 via-canopy-50 to-ocean-50 rounded-2xl p-5 border-2 border-canopy-300 animate-celebrate">
           <div class="absolute top-0 right-0 w-24 h-24 bg-canopy-200 rounded-full blur-2xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
           <div class="relative flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-canopy-400 to-canopy-600 flex items-center justify-center shadow-lg">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-canopy-400 to-canopy-600 flex items-center justify-center shadow-lg shrink-0">
               <Icon icon="solar:star-bold" class="w-8 h-8 text-white" />
             </div>
-            <div>
+            <div class="flex-1">
               <h3 class="font-display text-xl font-bold text-canopy-800">You Got It Right!</h3>
-              <p class="font-body text-sm text-canopy-600">Great job, explorer!</p>
+              {#if selectedOption?.rationale}
+                <p class="font-body text-sm text-canopy-700 mt-1">{selectedOption.rationale}</p>
+              {:else}
+                <p class="font-body text-sm text-canopy-600">Great job, explorer!</p>
+              {/if}
             </div>
           </div>
         </div>
@@ -97,12 +103,16 @@
         <div class="relative overflow-hidden bg-gradient-to-br from-coral-100 via-coral-50 to-orange-50 rounded-2xl p-5 border-2 border-coral-300 animate-wiggle">
           <div class="absolute top-0 right-0 w-24 h-24 bg-coral-200 rounded-full blur-2xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
           <div class="relative flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-coral-400 to-coral-600 flex items-center justify-center shadow-lg">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-coral-400 to-coral-600 flex items-center justify-center shadow-lg shrink-0">
               <Icon icon="solar:refresh-bold" class="w-8 h-8 text-white" />
             </div>
-            <div>
+            <div class="flex-1">
               <h3 class="font-display text-xl font-bold text-coral-800">Not Quite!</h3>
-              <p class="font-body text-sm text-coral-600">The correct answer is highlighted above</p>
+              {#if selectedOption?.rationale}
+                <p class="font-body text-sm text-coral-700 mt-1">{selectedOption.rationale}</p>
+              {:else}
+                <p class="font-body text-sm text-coral-600">Try again to find the correct answer!</p>
+              {/if}
             </div>
           </div>
         </div>
@@ -132,25 +142,14 @@
         <Icon icon="solar:arrow-right-bold" class="w-5 h-5" />
       </Button>
     {:else}
-      <div class="flex gap-3">
-        <Button
-          onclick={onRetry}
-          variant="secondary"
-          class="flex-1"
-          size="lg"
-        >
-          <Icon icon="solar:refresh-bold" class="w-5 h-5" />
-          Try Again
-        </Button>
-        <Button
-          onclick={onNext}
-          class="flex-1"
-          size="lg"
-        >
-          Continue
-          <Icon icon="solar:arrow-right-bold" class="w-5 h-5" />
-        </Button>
-      </div>
+      <Button
+        onclick={onRetry}
+        class="w-full"
+        size="lg"
+      >
+        <Icon icon="solar:refresh-bold" class="w-5 h-5" />
+        Try Again
+      </Button>
     {/if}
   </div>
 </div>

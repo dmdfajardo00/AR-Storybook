@@ -20,6 +20,7 @@ export interface StoryPage {
 export interface QuizOption {
   id: string;
   text: string;
+  rationale?: string;
 }
 
 export interface QuizQuestion {
