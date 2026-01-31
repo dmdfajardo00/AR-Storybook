@@ -255,7 +255,7 @@
                 <!-- Thumbnail Image -->
                 <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-canopy-800/50 to-ocean-800/50 ring-1 ring-white/10 group-hover:ring-canopy-400/30 transition-all">
                   <img
-                    src="/pages/Page {page.id}.png"
+                    src="/pages/Page {page.id}.webp"
                     alt={page.title}
                     class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                   />

@@ -67,7 +67,7 @@
 
   // Get comic image URL for a page
   function getComicImageUrl(pageNumber: number): string {
-    return `/pages/Page ${pageNumber}.png`;
+    return `/pages/Page ${pageNumber}.webp`;
   }
 
   function handlePageDetected(page: StoryPage) {
