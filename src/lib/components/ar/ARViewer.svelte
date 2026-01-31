@@ -239,22 +239,51 @@
 
       <!-- Page Grid -->
       <div class="flex-1 overflow-y-auto px-4 pb-24">
-        <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+        <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
           {#each pages as page, index}
-            <button
-              onclick={() => handleDemoPageSelect(index)}
-              class="group relative bg-white/10 backdrop-blur-sm rounded-xl p-4 text-left transition-all duration-300 hover:bg-white/20 hover:scale-102 active:scale-98 border border-white/10 hover:border-white/20"
-            >
-              <div class="aspect-square rounded-lg bg-gradient-to-br from-canopy-500/30 to-ocean-500/30 mb-3 flex items-center justify-center overflow-hidden">
-                {#if page.imageUrl}
-                  <img src={page.imageUrl} alt={page.title} class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                {:else}
-                  <Icon icon="solar:book-bold-duotone" class="w-12 h-12 text-white/50" />
-                {/if}
+            {#if page.id <= 4}
+              <!-- Available Pages (1-4) with thumbnails -->
+              <button
+                onclick={() => handleDemoPageSelect(index)}
+                class="group relative bg-white/10 backdrop-blur-md rounded-[20px] p-3 text-left transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] border border-white/10 hover:border-canopy-400/40 shadow-lg hover:shadow-xl hover:shadow-canopy-500/20"
+              >
+                <!-- Page Number Badge -->
+                <div class="absolute top-2 right-2 z-10 bg-gradient-to-br from-canopy-500 to-canopy-600 text-white text-xs font-accent font-bold w-7 h-7 rounded-full flex items-center justify-center shadow-md">
+                  {page.id}
+                </div>
+
+                <!-- Thumbnail Image -->
+                <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-canopy-800/50 to-ocean-800/50 ring-1 ring-white/10 group-hover:ring-canopy-400/30 transition-all">
+                  <img
+                    src="/pages/Page {page.id}.png"
+                    alt={page.title}
+                    class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                  />
+                </div>
+
+                <!-- Page Title -->
+                <h3 class="font-accent font-semibold text-white text-sm leading-tight line-clamp-2 group-hover:text-canopy-200 transition-colors">{page.title}</h3>
+              </button>
+            {:else}
+              <!-- Coming Soon Pages (5+) -->
+              <div
+                class="relative bg-white/5 backdrop-blur-sm rounded-[20px] p-3 text-left border border-white/5 opacity-60"
+              >
+                <!-- Page Number Badge (muted) -->
+                <div class="absolute top-2 right-2 z-10 bg-white/10 text-white/50 text-xs font-accent font-bold w-7 h-7 rounded-full flex items-center justify-center">
+                  {page.id}
+                </div>
+
+                <!-- Placeholder -->
+                <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-white/5 to-white/10 ring-1 ring-white/5 flex flex-col items-center justify-center">
+                  <Icon icon="solar:clock-circle-bold-duotone" class="w-10 h-10 text-white/30 mb-2" />
+                  <span class="text-xs font-accent text-white/40">Coming Soon</span>
+                </div>
+
+                <!-- Page Title (muted) -->
+                <h3 class="font-accent font-semibold text-white/40 text-sm leading-tight line-clamp-2">{page.title}</h3>
               </div>
-              <span class="inline-block bg-canopy-500/30 text-canopy-200 text-xs font-accent px-2 py-0.5 rounded-full mb-1">Page {page.id}</span>
-              <h3 class="font-accent font-semibold text-white text-sm leading-tight line-clamp-2">{page.title}</h3>
-            </button>
+            {/if}
           {/each}
         </div>
       </div>
