@@ -21,3 +21,9 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Build artifacts
+dev-dist/
+
+# Test artifacts
+test-screenshots/
