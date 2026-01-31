@@ -4,16 +4,16 @@ name: Carbon Cycle
 description: Learn about how carbon moves through Earth's systems
 ---
 
-## The Carbon Cycle for Kids
+## Carbon Cycle for Kids
 
-https://www.youtube.com/watch?v=fQCrrPohyTs
+https://www.youtube.com/watch?v=p3R-dB9K4ss
 
-A fun animated explanation of how carbon moves around our planet
+Learn how carbon moves through our planet
 
 ---
 
-## Photosynthesis Explained
+## What is Carbon Dioxide?
 
-https://www.youtube.com/watch?v=UPBMG5EYydo
+https://youtu.be/mN4IorWygwk
 
-How plants use sunlight to absorb carbon dioxide
+Learn about carbon dioxide and its role in our environment

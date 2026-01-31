@@ -13,10 +13,12 @@
   }
 
   let categories = $state<VideoCategory[]>([]);
+  let allCategories = $state<VideoCategory[]>([]);
   let isLoading = $state(true);
   let activeCategory = $state<string | null>(null);
 
   const categoryIcons: Record<string, string> = {
+    'all': 'solar:video-library-bold-duotone',
     'carbon-basics': 'solar:atom-bold-duotone',
     'carbon-cycle': 'solar:leaf-bold-duotone',
     'human-actions': 'solar:buildings-bold-duotone',
@@ -24,10 +26,23 @@
   };
 
   onMount(async () => {
-    categories = await getVideos();
-    if (categories.length > 0) {
-      activeCategory = categories[0].category;
-    }
+    const loadedCategories = await getVideos();
+    allCategories = loadedCategories;
+
+    // Create "All" category with all videos from all categories
+    const allVideos = loadedCategories.flatMap(cat => cat.videos);
+    const allCategory: VideoCategory = {
+      category: 'all',
+      name: 'All',
+      description: 'Watch all educational videos',
+      videos: allVideos
+    };
+
+    // Add "All" category at the beginning
+    categories = [allCategory, ...loadedCategories];
+
+    // Set "All" as the default active category
+    activeCategory = 'all';
     isLoading = false;
   });
 
@@ -46,7 +61,9 @@
 
     if (isActive) {
       base += " text-white shadow-md";
-      if (cat.category === 'carbon-basics') {
+      if (cat.category === 'all') {
+        base += " bg-gradient-to-r from-purple-500 to-purple-600";
+      } else if (cat.category === 'carbon-basics') {
         base += " bg-gradient-to-r from-canopy-500 to-canopy-600";
       } else if (cat.category === 'carbon-cycle') {
         base += " bg-gradient-to-r from-canopy-500 to-canopy-600";
@@ -63,6 +80,7 @@
   }
 
   function getIconBgClass(category: string): string {
+    if (category === 'all') return "w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center";
     if (category === 'carbon-basics') return "w-10 h-10 rounded-xl bg-canopy-100 flex items-center justify-center";
     if (category === 'carbon-cycle') return "w-10 h-10 rounded-xl bg-canopy-100 flex items-center justify-center";
     if (category === 'human-actions') return "w-10 h-10 rounded-xl bg-ocean-100 flex items-center justify-center";
@@ -70,6 +88,7 @@
   }
 
   function getIconTextClass(category: string): string {
+    if (category === 'all') return "w-5 h-5 text-purple-600";
     if (category === 'carbon-basics') return "w-5 h-5 text-canopy-600";
     if (category === 'carbon-cycle') return "w-5 h-5 text-canopy-600";
     if (category === 'human-actions') return "w-5 h-5 text-ocean-600";
