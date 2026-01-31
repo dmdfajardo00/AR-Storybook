@@ -240,59 +240,21 @@
   ],
   "videos": [
     {
-      "category": "carbon-cycle",
-      "name": "Carbon Cycle",
-      "description": "Learn about how carbon moves through Earth's systems",
+      "category": "carbon-basics",
+      "name": "Carbon Basics",
+      "description": "Learn about carbon and carbon dioxide",
       "items": [
         {
-          "id": "cc1",
-          "title": "The Carbon Cycle for Kids",
-          "description": "A fun animated explanation of how carbon moves around our planet",
-          "youtubeUrl": "https://www.youtube.com/watch?v=fQCrrPohyTs"
+          "id": "cb1",
+          "title": "What is Carbon?",
+          "description": "Discover what carbon is and why it's important",
+          "youtubeUrl": "https://youtu.be/rCBb0U74K8Q"
         },
         {
-          "id": "cc2",
-          "title": "Photosynthesis Explained",
-          "description": "How plants use sunlight to absorb carbon dioxide",
-          "youtubeUrl": "https://www.youtube.com/watch?v=UPBMG5EYydo"
-        }
-      ]
-    },
-    {
-      "category": "human-actions",
-      "name": "Human Actions",
-      "description": "How our daily choices affect the environment",
-      "items": [
-        {
-          "id": "ha1",
-          "title": "How Factories Cause Pollution",
-          "description": "Understanding industrial emissions and their effects",
-          "youtubeUrl": "https://www.youtube.com/watch?v=ipVxxxqwBQw"
-        },
-        {
-          "id": "ha2",
-          "title": "Reduce, Reuse, Recycle",
-          "description": "Simple ways to help the environment",
-          "youtubeUrl": "https://www.youtube.com/watch?v=OasbYWF4_S8"
-        }
-      ]
-    },
-    {
-      "category": "climate-change",
-      "name": "Climate Change",
-      "description": "Understanding climate change and what we can do",
-      "items": [
-        {
-          "id": "cl1",
-          "title": "Climate Change for Kids",
-          "description": "A simple explanation of climate change",
-          "youtubeUrl": "https://www.youtube.com/watch?v=Sv7OHfpIRfU"
-        },
-        {
-          "id": "cl2",
-          "title": "Renewable Energy Sources",
-          "description": "Learn about solar, wind, and water power",
-          "youtubeUrl": "https://www.youtube.com/watch?v=1kUE0BZtTRc"
+          "id": "cb2",
+          "title": "What is Carbon Dioxide?",
+          "description": "Learn about carbon dioxide and its role in our environment",
+          "youtubeUrl": "https://youtu.be/mN4IorWygwk"
         }
       ]
     }

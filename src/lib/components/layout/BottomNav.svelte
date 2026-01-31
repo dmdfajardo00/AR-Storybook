@@ -39,14 +39,14 @@
 </script>
 
 <nav class="fixed bottom-0 left-0 right-0 z-50 safe-bottom">
-  <div class="bg-canopy-500 mx-auto max-w-lg shadow-xl rounded-t-2xl">
+  <div class="bg-canopy-500 mx-auto max-w-lg shadow-xl">
     <div class="flex justify-around items-center h-[72px] px-2">
       {#each navItems as item (item.id)}
         {@const isActive = currentPath.startsWith(item.path)}
         <a
           href={item.path}
           class={cn(
-            'flex flex-col items-center justify-center gap-0.5 min-w-[64px] min-h-[56px] px-3 py-2 rounded-xl transition-all duration-200 touch-manipulation active:scale-95',
+            'flex flex-col items-center justify-center gap-0.5 min-w-[64px] min-h-[56px] px-3 py-2 transition-all duration-200 touch-manipulation active:scale-95',
             isActive
               ? 'bg-white text-canopy-600 shadow-md scale-105'
               : 'text-white/80 hover:text-white hover:bg-white/10 active:bg-white/20'

@@ -17,6 +17,7 @@
   let activeCategory = $state<string | null>(null);
 
   const categoryIcons: Record<string, string> = {
+    'carbon-basics': 'solar:atom-bold-duotone',
     'carbon-cycle': 'solar:leaf-bold-duotone',
     'human-actions': 'solar:buildings-bold-duotone',
     'climate-change': 'solar:sun-fog-bold-duotone',
@@ -45,7 +46,9 @@
 
     if (isActive) {
       base += " text-white shadow-md";
-      if (cat.category === 'carbon-cycle') {
+      if (cat.category === 'carbon-basics') {
+        base += " bg-gradient-to-r from-canopy-500 to-canopy-600";
+      } else if (cat.category === 'carbon-cycle') {
         base += " bg-gradient-to-r from-canopy-500 to-canopy-600";
       } else if (cat.category === 'human-actions') {
         base += " bg-gradient-to-r from-ocean-500 to-ocean-600";
@@ -60,12 +63,14 @@
   }
 
   function getIconBgClass(category: string): string {
+    if (category === 'carbon-basics') return "w-10 h-10 rounded-xl bg-canopy-100 flex items-center justify-center";
     if (category === 'carbon-cycle') return "w-10 h-10 rounded-xl bg-canopy-100 flex items-center justify-center";
     if (category === 'human-actions') return "w-10 h-10 rounded-xl bg-ocean-100 flex items-center justify-center";
     return "w-10 h-10 rounded-xl bg-coral-100 flex items-center justify-center";
   }
 
   function getIconTextClass(category: string): string {
+    if (category === 'carbon-basics') return "w-5 h-5 text-canopy-600";
     if (category === 'carbon-cycle') return "w-5 h-5 text-canopy-600";
     if (category === 'human-actions') return "w-5 h-5 text-ocean-600";
     return "w-5 h-5 text-coral-600";
