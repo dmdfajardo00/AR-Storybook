@@ -269,7 +269,7 @@ async function loadQuizIndex(): Promise<{ id: number; folder: string }[]> {
 }
 
 /**
- * Load quiz questions from markdown file
+ * Load quiz questions from manifest.json
  */
 export async function getQuizQuestions(pageId: number): Promise<QuizQuestion[]> {
   // Check cache first
@@ -278,28 +278,35 @@ export async function getQuizQuestions(pageId: number): Promise<QuizQuestion[]> 
   }
 
   try {
-    // Load quiz index to find the folder name
-    const index = await loadQuizIndex();
-    const quizEntry = index.find(q => q.id === pageId);
+    // Load from manifest.json which contains full quiz data with rationales
+    const response = await fetch('/content/manifest.json');
+    if (!response.ok) {
+      console.warn(`Manifest not found`);
+      return [];
+    }
 
-    if (!quizEntry) {
+    const manifest = await response.json();
+    const page = manifest.pages.find((p: any) => p.id === pageId);
+
+    if (!page || !page.quiz) {
       console.warn(`Quiz not found for page ${pageId}`);
       return [];
     }
 
-    const response = await fetch(`/content/quizzes/${quizEntry.folder}/quiz.md`);
-    if (!response.ok) {
-      console.warn(`Quiz file not found for page ${pageId}`);
-      return [];
-    }
-
-    const content = await response.text();
-    const parsed = parseQuizMarkdown(content);
+    // Map manifest quiz format to QuizQuestion type
+    const questions: QuizQuestion[] = page.quiz.map((q: any, index: number) => ({
+      id: index + 1,
+      pageId: pageId,
+      question: q.question,
+      options: q.options,
+      correctOptionId: q.correctOptionId,
+      hint: q.hint,
+    }));
 
     // Cache the result
-    quizCache.set(pageId, parsed.questions);
+    quizCache.set(pageId, questions);
 
-    return parsed.questions;
+    return questions;
   } catch (error) {
     console.error(`Error loading quiz for page ${pageId}:`, error);
     return [];
