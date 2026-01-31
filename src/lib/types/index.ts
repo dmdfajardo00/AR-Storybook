@@ -79,6 +79,18 @@ export interface ARState {
   permissionDenied: boolean;
 }
 
+// Interactive Comic Hotspot Types
+export interface ComicHotspot {
+  id: string;
+  title: string;
+  modelUrl: string;
+  // Position as percentage of image dimensions (0-100)
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 // App State Types
 export type AppMode = 'home' | 'ar' | 'quiz' | 'videos';
 
