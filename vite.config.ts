@@ -76,7 +76,9 @@ export default defineConfig({
         categories: ['education', 'kids', 'entertainment']
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2,json,glb,gltf,mind,mp3,wav,ogg}'],
+        globPatterns: ['**/*.{js,css,html,ico,svg,woff,woff2}'],
+        globIgnores: ['**/pages/**', '**/models/**'],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB limit
         navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api/],
         cleanupOutdatedCaches: true,
