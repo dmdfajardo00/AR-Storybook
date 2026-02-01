@@ -63,17 +63,27 @@ interface ParsedQuiz {
 }
 
 /**
- * Parse quiz markdown format:
+ * Parse quiz markdown format with rationales:
  *
  * ## Question 1
  *
  * What is the question?
  *
  * - [ ] Wrong answer
+ *   > Rationale for wrong answer
+ *
  * - [x] Correct answer
+ *   > Rationale for correct answer
+ *
  * - [ ] Another wrong answer
+ *   > Rationale for another wrong answer
+ *
+ * - [ ] Fourth option
+ *   > Rationale for fourth option
  *
  * > Hint: Optional hint text
+ *
+ * ---
  */
 function parseQuizMarkdown(content: string): ParsedQuiz {
   const { data, body } = parseFrontmatter(content);
@@ -109,25 +119,35 @@ function parseQuizMarkdown(content: string): ParsedQuiz {
 
     if (!questionText) return;
 
-    // Parse options (lines starting with - [ ] or - [x])
-    const options: { id: string; text: string }[] = [];
+    // Parse options with rationales
+    const options: { id: string; text: string; rationale?: string }[] = [];
     let correctOptionId = '';
     let hint: string | undefined;
+    let currentOption: { id: string; text: string; rationale?: string } | null = null;
 
     const optionLetters = ['a', 'b', 'c', 'd', 'e', 'f'];
     let optionIndex = 0;
 
     for (let i = lineIndex; i < lines.length; i++) {
-      const line = lines[i].trim();
+      const line = lines[i];
+      const trimmedLine = line.trim();
+
+      // Skip separators and empty lines
+      if (trimmedLine === '---' || trimmedLine === '') continue;
 
       // Check for option (- [ ] or - [x])
-      const optionMatch = line.match(/^- \[([ x])\] (.+)$/);
+      const optionMatch = trimmedLine.match(/^- \[([ x])\] (.+)$/);
       if (optionMatch) {
+        // Save previous option if exists
+        if (currentOption) {
+          options.push(currentOption);
+        }
+
         const isCorrect = optionMatch[1] === 'x';
         const text = optionMatch[2].trim();
         const optId = optionLetters[optionIndex] || `opt${optionIndex}`;
 
-        options.push({ id: optId, text });
+        currentOption = { id: optId, text };
 
         if (isCorrect) {
           correctOptionId = optId;
@@ -137,11 +157,47 @@ function parseQuizMarkdown(content: string): ParsedQuiz {
         continue;
       }
 
-      // Check for hint (> Hint: ...)
-      const hintMatch = line.match(/^>\s*(?:Hint:\s*)?(.+)$/);
-      if (hintMatch) {
-        hint = hintMatch[1].trim();
+      // Check for indented rationale (2+ spaces before >) - belongs to current option
+      const indentedRationaleMatch = line.match(/^  +>\s*(.+)$/);
+      if (indentedRationaleMatch && currentOption) {
+        const rationaleText = indentedRationaleMatch[1].trim();
+        if (currentOption.rationale) {
+          currentOption.rationale += ' ' + rationaleText;
+        } else {
+          currentOption.rationale = rationaleText;
+        }
+        continue;
       }
+
+      // Check for hint (non-indented > Hint: at the end)
+      const hintMatch = trimmedLine.match(/^>\s*Hint:\s*(.+)$/i);
+      if (hintMatch) {
+        // Save current option before processing hint
+        if (currentOption) {
+          options.push(currentOption);
+          currentOption = null;
+        }
+        hint = hintMatch[1].trim();
+        continue;
+      }
+
+      // Check for non-indented blockquote that's NOT a hint (could be rationale without indent)
+      // This handles the case where rationale starts with just > without indent
+      const nonIndentedBlockquote = trimmedLine.match(/^>\s*(.+)$/);
+      if (nonIndentedBlockquote && currentOption && !trimmedLine.toLowerCase().includes('hint:')) {
+        const rationaleText = nonIndentedBlockquote[1].trim();
+        if (currentOption.rationale) {
+          currentOption.rationale += ' ' + rationaleText;
+        } else {
+          currentOption.rationale = rationaleText;
+        }
+        continue;
+      }
+    }
+
+    // Don't forget the last option
+    if (currentOption) {
+      options.push(currentOption);
     }
 
     if (options.length > 0 && correctOptionId) {
@@ -269,7 +325,7 @@ async function loadQuizIndex(): Promise<{ id: number; folder: string }[]> {
 }
 
 /**
- * Load quiz questions from manifest.json
+ * Load quiz questions from markdown files in /content/quizzes/
  */
 export async function getQuizQuestions(pageId: number): Promise<QuizQuestion[]> {
   // Check cache first
@@ -278,35 +334,29 @@ export async function getQuizQuestions(pageId: number): Promise<QuizQuestion[]> 
   }
 
   try {
-    // Load from manifest.json which contains full quiz data with rationales
-    const response = await fetch('/content/manifest.json');
+    // Load quiz index to find the folder name for this pageId
+    const quizIndex = await loadQuizIndex();
+    const quizEntry = quizIndex.find(q => q.id === pageId);
+
+    if (!quizEntry) {
+      console.warn(`Quiz index entry not found for page ${pageId}`);
+      return [];
+    }
+
+    // Load the markdown quiz file
+    const response = await fetch(`/content/quizzes/${quizEntry.folder}/quiz.md`);
     if (!response.ok) {
-      console.warn(`Manifest not found`);
+      console.warn(`Quiz file not found for page ${pageId} at /content/quizzes/${quizEntry.folder}/quiz.md`);
       return [];
     }
 
-    const manifest = await response.json();
-    const page = manifest.pages.find((p: any) => p.id === pageId);
-
-    if (!page || !page.quiz) {
-      console.warn(`Quiz not found for page ${pageId}`);
-      return [];
-    }
-
-    // Map manifest quiz format to QuizQuestion type
-    const questions: QuizQuestion[] = page.quiz.map((q: any, index: number) => ({
-      id: index + 1,
-      pageId: pageId,
-      question: q.question,
-      options: q.options,
-      correctOptionId: q.correctOptionId,
-      hint: q.hint,
-    }));
+    const content = await response.text();
+    const parsed = parseQuizMarkdown(content);
 
     // Cache the result
-    quizCache.set(pageId, questions);
+    quizCache.set(pageId, parsed.questions);
 
-    return questions;
+    return parsed.questions;
   } catch (error) {
     console.error(`Error loading quiz for page ${pageId}:`, error);
     return [];
