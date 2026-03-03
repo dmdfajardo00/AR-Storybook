@@ -1,44 +1,44 @@
 {
   "quizzes": [
     {
-      "id": 1,
-      "folder": "the-carbon-cycle"
-    },
-    {
       "id": 2,
-      "folder": "factories-and-pollution"
+      "folder": "what-is-carbon-cycle"
     },
     {
       "id": 3,
-      "folder": "oceans-and-carbon"
+      "folder": "what-is-carbon-cycle-2"
     },
     {
       "id": 4,
-      "folder": "forests-earths-lungs"
+      "folder": "human-activities"
     },
     {
       "id": 5,
-      "folder": "the-greenhouse-effect"
+      "folder": "human-activities-2"
     },
     {
       "id": 6,
-      "folder": "melting-ice"
+      "folder": "human-impacts"
     },
     {
       "id": 7,
-      "folder": "extreme-weather"
+      "folder": "human-impacts-2"
     },
     {
       "id": 8,
-      "folder": "renewable-energy"
+      "folder": "minimizing-human-impact"
     },
     {
       "id": 9,
-      "folder": "what-you-can-do"
+      "folder": "minimizing-human-impact-2"
     },
     {
       "id": 10,
-      "folder": "our-future"
+      "folder": "minimizing-human-impact-3"
+    },
+    {
+      "id": 11,
+      "folder": "goodbye-lumi"
     }
   ]
 }
