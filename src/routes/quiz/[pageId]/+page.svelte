@@ -189,7 +189,7 @@
     />
   {:else}
     <!-- Quiz header -->
-    <div class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-canopy-100">
+    <div class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-canopy-100 safe-top">
       <div class="px-4 py-3 flex items-center gap-3">
         <button
           onclick={handleBack}

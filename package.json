@@ -29,6 +29,7 @@
 		"@capacitor/browser": "^8.0.1",
 		"@capacitor/cli": "^8.1.0",
 		"@capacitor/core": "^8.1.0",
+		"@capacitor/status-bar": "^8.0.1",
 		"@iconify/svelte": "^5.2.1",
 		"@tailwindcss/vite": "^4.1.18",
 		"@types/canvas-confetti": "^1.9.0",

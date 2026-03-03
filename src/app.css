@@ -255,6 +255,15 @@ body {
   }
 }
 
+/* Native Android safe areas — env() doesn't work in Android WebView */
+.native-app .safe-top {
+  padding-top: 36px;
+}
+
+.native-app .safe-bottom {
+  padding-bottom: 24px;
+}
+
 /* PWA standalone */
 @media all and (display-mode: standalone) {
   body {
@@ -278,6 +287,10 @@ body {
 /* Bottom navigation padding */
 .pb-nav {
   padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+
+.native-app .pb-nav {
+  padding-bottom: calc(72px + 24px);
 }
 
 /* Hide scrollbar */

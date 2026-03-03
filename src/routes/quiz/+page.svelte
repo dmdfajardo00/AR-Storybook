@@ -51,7 +51,7 @@
 
 <div class="min-h-screen pb-nav bg-gradient-to-br from-ocean-50 via-mist to-canopy-50">
   <!-- Header -->
-  <div class="sticky top-0 z-20 bg-gradient-to-r from-ocean-500 to-canopy-500 text-white px-6 py-5 shadow-lg">
+  <div class="sticky top-0 z-20 bg-gradient-to-r from-ocean-500 to-canopy-500 text-white px-6 py-5 shadow-lg safe-top">
     <div class="max-w-lg mx-auto">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">

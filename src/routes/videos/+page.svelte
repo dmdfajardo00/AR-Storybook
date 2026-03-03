@@ -103,7 +103,7 @@
   <div class="relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-coral-400 via-ocean-400 to-canopy-500"></div>
 
-    <div class="relative px-6 py-8">
+    <div class="relative px-6 py-8 safe-top">
       <div class="max-w-lg mx-auto">
         <div class="flex items-center gap-4">
           <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">

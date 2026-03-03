@@ -38,8 +38,8 @@
   let currentPath = $derived($page.url.pathname);
 </script>
 
-<nav class="fixed bottom-0 left-0 right-0 z-50 safe-bottom">
-  <div class="bg-canopy-500 mx-auto max-w-lg shadow-xl">
+<nav class="fixed bottom-0 left-0 right-0 z-50">
+  <div class="bg-canopy-500 mx-auto max-w-lg shadow-xl safe-bottom">
     <div class="flex justify-around items-center h-[72px] px-2">
       {#each navItems as item (item.id)}
         {@const isActive = currentPath.startsWith(item.path)}

@@ -37,7 +37,7 @@
 
 <div class="fixed inset-0 bg-canopy-900 z-40 flex flex-col">
   <!-- Header with back button and page number -->
-  <header class="flex-shrink-0 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-canopy-900/90 to-transparent absolute top-0 left-0 right-0 z-50">
+  <header class="flex-shrink-0 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-canopy-900/90 to-transparent absolute top-0 left-0 right-0 z-50 safe-top">
     <Button
       variant="ghost"
       size="sm"
@@ -133,7 +133,7 @@
   </div>
 
   <!-- Help text at bottom -->
-  <div class="flex-shrink-0 px-4 py-3 text-center bg-gradient-to-t from-canopy-900/90 to-transparent">
+  <div class="flex-shrink-0 px-4 py-3 text-center bg-gradient-to-t from-canopy-900/90 to-transparent safe-bottom">
     <p class="font-body text-sm text-canopy-100/80">
       <Icon icon="solar:cursor-bold" class="w-4 h-4 inline-block mr-1 align-text-bottom" />
       Tap highlighted areas to view 3D models

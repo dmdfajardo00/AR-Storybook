@@ -7,6 +7,7 @@
   import { quizStore } from '$lib/stores/quiz.svelte';
   import type { Snippet } from 'svelte';
   import { browser } from '$app/environment';
+  import { Capacitor } from '@capacitor/core';
 
   interface Props {
     children: Snippet;
@@ -27,6 +28,18 @@
     // Load persisted data
     userStore.load();
     quizStore.load();
+
+    // Configure safe areas for native Android
+    if (Capacitor.isNativePlatform()) {
+      document.documentElement.classList.add('native-app');
+      try {
+        const { StatusBar, Style } = await import('@capacitor/status-bar');
+        await StatusBar.setStyle({ style: Style.Light });
+        await StatusBar.setOverlaysWebView({ overlay: true });
+      } catch (e) {
+        console.log('StatusBar plugin not available:', e);
+      }
+    }
 
     // PWA registration
     if (browser && 'serviceWorker' in navigator) {
