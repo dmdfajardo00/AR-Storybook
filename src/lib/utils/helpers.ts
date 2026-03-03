@@ -84,9 +84,15 @@ export async function hasCamera(): Promise<boolean> {
   }
 }
 
-// Open YouTube URL
-export function openYouTube(url: string): void {
-  window.open(url, '_blank', 'noopener,noreferrer');
+// Open YouTube URL (uses native browser on Capacitor, window.open on web)
+export async function openYouTube(url: string): Promise<void> {
+  const { Capacitor } = await import('@capacitor/core');
+  if (Capacitor.isNativePlatform()) {
+    const { Browser } = await import('@capacitor/browser');
+    await Browser.open({ url });
+  } else {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
 }
 
 // Extract YouTube video ID from URL
