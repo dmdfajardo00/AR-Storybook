@@ -1,19 +1,43 @@
 ---
 category: climate-change
 name: Climate Change
-description: Understanding climate change and what we can do
+description: Understanding climate change and its effects on ecosystems
 ---
 
-## Climate Change for Kids
+## What is Global Warming?
 
-https://www.youtube.com/watch?v=Sv7OHfpIRfU
+https://youtu.be/YJrKgBUDGYc
 
-A simple explanation of climate change
+BBC explains what global warming is and why it matters
 
 ---
 
-## Renewable Energy Sources
+## Ocean Acidification
 
-https://www.youtube.com/watch?v=1kUE0BZtTRc
+https://youtu.be/DLg2NMjzh2o
 
-Learn about solar, wind, and water power
+How carbon dioxide changes ocean chemistry and affects marine life
+
+---
+
+## Climate Change: Earth's Giant Game of Tetris
+
+https://youtu.be/ztWHqUFJRTs
+
+How climate change reshapes ecosystems around the world
+
+---
+
+## How Does Ocean Acidification Affect Coral Reefs?
+
+https://youtu.be/ccYvlbcBlTY
+
+The impact of acidification on coral reef ecosystems
+
+---
+
+## Glaciers in Peril: The Impact of Climate Change
+
+https://youtu.be/C8BhxvhUyiw
+
+How climate change is melting glaciers and reshaping polar regions

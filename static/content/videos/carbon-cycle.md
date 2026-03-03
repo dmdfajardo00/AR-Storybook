@@ -4,11 +4,11 @@ name: Carbon Cycle
 description: Learn about how carbon moves through Earth's systems
 ---
 
-## Carbon Cycle for Kids
+## Chemistry for Kids - The Element Carbon
 
-https://www.youtube.com/watch?v=p3R-dB9K4ss
+https://youtu.be/rCBb0U74K8Q
 
-Learn how carbon moves through our planet
+Learn about the element carbon and why it's so important
 
 ---
 
@@ -16,4 +16,12 @@ Learn how carbon moves through our planet
 
 https://youtu.be/mN4IorWygwk
 
-Learn about carbon dioxide and its role in our environment
+Fun science facts about carbon dioxide for kids
+
+---
+
+## The Carbon Cycle for Kids
+
+https://www.youtube.com/watch?v=p3R-dB9K4ss
+
+Learn how carbon moves through our planet in a continuous cycle

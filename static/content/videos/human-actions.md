@@ -1,19 +1,43 @@
 ---
 category: human-actions
 name: Human Actions
-description: How our daily choices affect the environment
+description: How human activities affect the carbon cycle
 ---
 
-## How Factories Cause Pollution
+## Carbon Emissions From Deforestation
 
-https://www.youtube.com/watch?v=ipVxxxqwBQw
+https://youtu.be/GsZClyoBrSo
 
-Understanding industrial emissions and their effects
+How cutting down forests releases stored carbon into the atmosphere
 
 ---
 
-## Reduce, Reuse, Recycle
+## Environmental Impact of Fossil Fuels
 
-https://www.youtube.com/watch?v=OasbYWF4_S8
+https://youtu.be/Yksmlt88Ds0
 
-Simple ways to help the environment
+Understanding the environmental impact of burning fossil fuels
+
+---
+
+## Open Pit vs Underground Mining
+
+https://youtu.be/oe4N7tu-VMQ
+
+Mining methods explained simply and their environmental effects
+
+---
+
+## How Human Activity Affects the Carbon Cycle
+
+https://youtu.be/glo6VnAHFvg
+
+Explain how human activity can affect the carbon cycle
+
+---
+
+## Landfill Methane and Climate Change
+
+https://youtu.be/OIr3BF6qMRs
+
+How waste in landfills produces methane and contributes to climate change
