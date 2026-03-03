@@ -12,23 +12,19 @@
   let { src, label = 'Listen', class: className }: Props = $props();
 
   let isPlaying = $state(false);
-  let isLoading = $state(false);
 
   async function handleClick() {
     if (isPlaying) {
       stopAudio();
       isPlaying = false;
     } else {
-      isLoading = true;
+      isPlaying = true;
       try {
-        isPlaying = true;
-        isLoading = false;
         await playAudio(src);
       } catch (error) {
         console.error('Failed to play narration:', error);
       } finally {
         isPlaying = false;
-        isLoading = false;
       }
     }
   }
@@ -36,25 +32,20 @@
 
 <button
   onclick={handleClick}
-  disabled={isLoading}
   class={cn(
     'inline-flex items-center gap-2 px-4 py-2 rounded-full font-accent font-semibold text-sm text-white',
     'transition-all duration-200 shadow-md',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
+    'active:scale-95',
     isPlaying
       ? 'bg-gradient-to-r from-coral-400 to-coral-500 hover:from-coral-500 hover:to-coral-600 focus-visible:ring-coral-400 shadow-[0_0_16px_rgba(255,107,74,0.4)]'
-      : 'bg-gradient-to-r from-canopy-500 to-ocean-500 hover:from-canopy-600 hover:to-ocean-600 hover:scale-105 active:scale-95 focus-visible:ring-canopy-400',
+      : 'bg-gradient-to-r from-canopy-500 to-ocean-500 hover:from-canopy-600 hover:to-ocean-600 hover:scale-105 focus-visible:ring-canopy-400',
     className
   )}
   aria-label={isPlaying ? 'Stop narration' : `Play narration: ${label}`}
   aria-pressed={isPlaying}
 >
-  {#if isLoading}
-    <!-- Spinner -->
-    <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-    <span>Loading…</span>
-  {:else if isPlaying}
+  {#if isPlaying}
     <!-- Waveform bars -->
     <span class="waveform" aria-hidden="true">
       <span class="bar"></span>
