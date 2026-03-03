@@ -1,0 +1,23 @@
+# ClimaTales AR — Android APK Next Steps
+
+## Prerequisites
+- [ ] Install Android Studio from https://developer.android.com/studio
+  - During install, check "Android SDK", "Android SDK Platform", "Android Virtual Device"
+  - Open Android Studio once after install to complete SDK setup and accept licenses
+  - Ensure ANDROID_HOME is set (typically C:\Users\dmfaj\AppData\Local\Android\Sdk)
+
+## Build the APK
+- [ ] Run: cd android && ./gradlew assembleDebug
+  - Output: android/app/build/outputs/apk/debug/app-debug.apk
+
+## Test on Device/Emulator
+- [ ] Install on device: adb install android/app/build/outputs/apk/debug/app-debug.apk
+- [ ] Verify home page loads
+- [ ] Navigate to /videos — local videos play, YouTube links open in system browser
+- [ ] Navigate to /ar — camera permission prompt appears, AR tracking works
+- [ ] Navigate to /quiz/2 — quiz loads, answers persist in localStorage
+
+## Future: Play Store Distribution
+- [ ] Move videos/models to a CDN or use Play Asset Delivery (APK currently ~292MB, Play Store limit is 150MB)
+- [ ] Generate signed release AAB: ./gradlew bundleRelease
+- [ ] Set up signing key and upload to Google Play Console
