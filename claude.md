@@ -371,6 +371,59 @@ const state = $state<ARState>({ ... });
 - If any requirement or prompt is unclear, immediately ask the user for clarification instead of assuming.
 - When diagnosing or fixing bugs, request additional context (logs, repro steps, recent changes) before proposing a solution.
 
+## Android APK Build & Release
+
+### Prerequisites
+- Android Studio installed at `C:\Program Files\Android\Android Studio`
+- JAVA_HOME = `C:\Program Files\Android\Android Studio\jbr`
+- ANDROID_HOME = `C:\Users\dmfaj\AppData\Local\Android\Sdk`
+
+### Build APK
+```bash
+npm run build && npx cap sync
+cd android && JAVA_HOME="/c/Program Files/Android/Android Studio/jbr" ANDROID_HOME="/c/Users/dmfaj/AppData/Local/Android/Sdk" ./gradlew assembleDebug
+```
+Output: `android/app/build/outputs/apk/debug/app-debug.apk`
+
+### Create GitHub Release
+```bash
+# Copy and rename APK
+cp android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/ClimaTales-AR.apk
+
+# Delete old release if exists
+gh release delete vX.Y.Z --yes --cleanup-tag
+
+# Create new release
+gh release create vX.Y.Z android/app/build/outputs/apk/debug/ClimaTales-AR.apk --title "ClimaTales AR vX.Y.Z" --notes "Release notes here"
+```
+
+### Generate QR Code for APK Download
+```bash
+npm install --no-save qrcode  # if not already installed
+node -e "
+const QRCode = require('qrcode');
+QRCode.toFile('static/download-qr-codes/MM-DD-YYYY-HHMMSS-APK.png',
+  'https://github.com/dmdfajardo00/AR-Storybook/releases/download/vX.Y.Z/ClimaTales-AR.apk',
+  { width: 400, margin: 2, errorCorrectionLevel: 'M' }, (err) => { if (err) throw err; });
+"
+```
+Naming convention: `MM-DD-YYYY-HHMMSS-APK.png`
+
+### Convenience Scripts
+- `npm run cap:build` — build web + sync to Android
+- `npm run cap:open` — open in Android Studio
+- `npm run cap:run` — build and run on connected device
+
+### Key Config Files
+- `capacitor.config.ts` — Capacitor settings (androidScheme: 'https' is critical for camera)
+- `android/app/src/main/AndroidManifest.xml` — CAMERA + INTERNET permissions
+- `android/app/src/main/res/mipmap-*/` — App icons (sourced from static/icons/icon-512x512.png)
+
+### Notes
+- APK size is ~291MB due to static assets (models + videos). Fine for sideloading, exceeds Play Store 150MB limit.
+- `env(safe-area-inset-*)` doesn't work in Android WebView. The `.native-app` CSS class (added by +layout.svelte on Capacitor) provides fixed padding instead.
+- YouTube links use `@capacitor/browser` on native to open in system browser instead of WebView.
+
 ## Common Tasks
 
 ### Adding a New Story Page
