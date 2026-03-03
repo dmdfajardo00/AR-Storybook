@@ -11,7 +11,7 @@ export interface StoryPage {
   description: string;
   explanation: string;
   audioUrl?: string;
-  modelUrl?: string;
+  modelUrls?: string[];
   imageUrl?: string;
   targetIndex: number;
 }
@@ -58,10 +58,11 @@ export interface Video {
   description?: string;
   youtubeUrl: string;
   thumbnailUrl?: string;
+  localVideoUrl?: string;
   category: VideoCategoryType;
 }
 
-export type VideoCategoryType = 'carbon-cycle' | 'human-actions' | 'climate-change';
+export type VideoCategoryType = 'carbon-cycle' | 'human-actions' | 'climate-change' | 'solutions';
 
 export interface VideoCategory {
   id: VideoCategoryType;

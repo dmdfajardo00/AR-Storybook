@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 export default defineConfig({
+  server: {
+    port: 6175
+  },
   plugins: [
     tailwindcss(),
     sveltekit(),
@@ -77,7 +80,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,svg,woff,woff2}'],
-        globIgnores: ['**/pages/**', '**/models/**'],
+        globIgnores: ['**/pages/**', '**/models/**', '**/youtube-videos/**'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB limit
         navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api/],
@@ -169,6 +172,18 @@ export default defineConfig({
                 maxEntries: 20,
                 maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
               }
+            }
+          },
+          {
+            urlPattern: /\.mp4$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'video-cache',
+              expiration: {
+                maxEntries: 25,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              },
+              rangeRequests: true
             }
           },
           {

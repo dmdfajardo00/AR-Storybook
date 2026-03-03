@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import Icon from '@iconify/svelte';
   import { getVideos } from '$lib/utils/content';
-  import { openYouTube, getYouTubeId } from '$lib/utils';
+  import { getYouTubeId, openYouTube } from '$lib/utils';
   import type { Video } from '$lib/types';
 
   interface VideoCategory {
@@ -16,20 +16,20 @@
   let allCategories = $state<VideoCategory[]>([]);
   let isLoading = $state(true);
   let activeCategory = $state<string | null>(null);
+  let playingVideoId = $state<string | null>(null);
 
   const categoryIcons: Record<string, string> = {
     'all': 'solar:video-library-bold-duotone',
-    'carbon-basics': 'solar:atom-bold-duotone',
     'carbon-cycle': 'solar:leaf-bold-duotone',
     'human-actions': 'solar:buildings-bold-duotone',
     'climate-change': 'solar:sun-fog-bold-duotone',
+    'solutions': 'solar:lightbulb-bolt-bold-duotone',
   };
 
   onMount(async () => {
     const loadedCategories = await getVideos();
     allCategories = loadedCategories;
 
-    // Create "All" category with all videos from all categories
     const allVideos = loadedCategories.flatMap(cat => cat.videos);
     const allCategory: VideoCategory = {
       category: 'all',
@@ -38,21 +38,18 @@
       videos: allVideos
     };
 
-    // Add "All" category at the beginning
     categories = [allCategory, ...loadedCategories];
-
-    // Set "All" as the default active category
     activeCategory = 'all';
     isLoading = false;
   });
 
-  function handleVideoClick(video: Video) {
-    openYouTube(video.youtubeUrl);
-  }
-
   function getYouTubeThumbnail(url: string): string {
     const videoId = getYouTubeId(url);
     return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
+  }
+
+  function handlePlay(videoId: string) {
+    playingVideoId = videoId;
   }
 
   function getCategoryButtonClass(cat: VideoCategory): string {
@@ -63,12 +60,12 @@
       base += " text-white shadow-md";
       if (cat.category === 'all') {
         base += " bg-gradient-to-r from-purple-500 to-purple-600";
-      } else if (cat.category === 'carbon-basics') {
-        base += " bg-gradient-to-r from-canopy-500 to-canopy-600";
       } else if (cat.category === 'carbon-cycle') {
         base += " bg-gradient-to-r from-canopy-500 to-canopy-600";
       } else if (cat.category === 'human-actions') {
         base += " bg-gradient-to-r from-ocean-500 to-ocean-600";
+      } else if (cat.category === 'solutions') {
+        base += " bg-gradient-to-r from-canopy-500 to-emerald-500";
       } else {
         base += " bg-gradient-to-r from-coral-500 to-orange-500";
       }
@@ -81,17 +78,17 @@
 
   function getIconBgClass(category: string): string {
     if (category === 'all') return "w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center";
-    if (category === 'carbon-basics') return "w-10 h-10 rounded-xl bg-canopy-100 flex items-center justify-center";
     if (category === 'carbon-cycle') return "w-10 h-10 rounded-xl bg-canopy-100 flex items-center justify-center";
     if (category === 'human-actions') return "w-10 h-10 rounded-xl bg-ocean-100 flex items-center justify-center";
+    if (category === 'solutions') return "w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center";
     return "w-10 h-10 rounded-xl bg-coral-100 flex items-center justify-center";
   }
 
   function getIconTextClass(category: string): string {
     if (category === 'all') return "w-5 h-5 text-purple-600";
-    if (category === 'carbon-basics') return "w-5 h-5 text-canopy-600";
     if (category === 'carbon-cycle') return "w-5 h-5 text-canopy-600";
     if (category === 'human-actions') return "w-5 h-5 text-ocean-600";
+    if (category === 'solutions') return "w-5 h-5 text-emerald-600";
     return "w-5 h-5 text-coral-600";
   }
 </script>
@@ -127,7 +124,7 @@
       <div class="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {#each categories as cat}
           <button
-            onclick={() => activeCategory = cat.category}
+            onclick={() => { activeCategory = cat.category; playingVideoId = null; }}
             class={getCategoryButtonClass(cat)}
           >
             <Icon icon={categoryIcons[cat.category] ?? 'solar:video-library-bold'} class="w-4 h-4" />
@@ -162,42 +159,56 @@
 
             <!-- Video cards -->
             <div class="space-y-4">
-              {#each cat.videos as video}
-                <button
-                  onclick={() => handleVideoClick(video)}
-                  class="w-full bg-white rounded-2xl shadow-md overflow-hidden border border-canopy-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.99] text-left group"
+              {#each cat.videos as video (video.id)}
+                <div
+                  class="w-full bg-white rounded-2xl shadow-md overflow-hidden border border-canopy-100 transition-all duration-300 hover:shadow-xl"
                 >
-                  <!-- Thumbnail -->
+                  <!-- Video player / Thumbnail -->
                   <div class="relative aspect-video bg-gradient-to-br from-canopy-100 to-ocean-100 overflow-hidden">
-                    {#if getYouTubeThumbnail(video.youtubeUrl)}
-                      <img
-                        src={getYouTubeThumbnail(video.youtubeUrl)}
-                        alt={video.title}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                    {#if video.localVideoUrl && playingVideoId === video.id}
+                      <!-- Local video player -->
+                      <!-- svelte-ignore a11y_media_has_caption -->
+                      <video
+                        class="w-full h-full object-contain bg-black"
+                        src={video.localVideoUrl}
+                        controls
+                        autoplay
+                        playsinline
+                        preload="metadata"
+                      >
+                        Your browser does not support the video tag.
+                      </video>
                     {:else}
-                      <div class="w-full h-full flex items-center justify-center">
-                        <Icon icon="solar:video-frame-bold-duotone" class="w-16 h-16 text-canopy-300" />
-                      </div>
+                      <!-- Thumbnail with play button -->
+                      <button
+                        class="w-full h-full group cursor-pointer"
+                        onclick={() => video.localVideoUrl ? handlePlay(video.id) : openYouTube(video.youtubeUrl)}
+                      >
+                        {#if getYouTubeThumbnail(video.youtubeUrl)}
+                          <img
+                            src={getYouTubeThumbnail(video.youtubeUrl)}
+                            alt={video.title}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        {:else}
+                          <div class="w-full h-full flex items-center justify-center">
+                            <Icon icon="solar:video-frame-bold-duotone" class="w-16 h-16 text-canopy-300" />
+                          </div>
+                        {/if}
+
+                        <!-- Play overlay -->
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                          <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                            <Icon icon="solar:play-bold" class="w-8 h-8 text-coral-500 ml-1" />
+                          </div>
+                        </div>
+                      </button>
                     {/if}
-
-                    <!-- Play overlay -->
-                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                        <Icon icon="solar:play-bold" class="w-8 h-8 text-coral-500 ml-1" />
-                      </div>
-                    </div>
-
-                    <!-- Duration badge (placeholder) -->
-                    <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-accent px-2 py-1 rounded">
-                      <Icon icon="solar:play-circle-linear" class="w-3 h-3 inline mr-1" />
-                      Video
-                    </div>
                   </div>
 
                   <!-- Info -->
                   <div class="p-4">
-                    <h3 class="font-accent font-semibold text-canopy-800 mb-1 group-hover:text-canopy-600 transition-colors">
+                    <h3 class="font-accent font-semibold text-canopy-800 mb-1">
                       {video.title}
                     </h3>
                     {#if video.description}
@@ -205,13 +216,52 @@
                         {video.description}
                       </p>
                     {/if}
-                    <div class="mt-3 flex items-center gap-2 text-coral-500 font-accent text-sm">
-                      <Icon icon="solar:play-circle-bold" class="w-4 h-4" />
-                      <span>Watch on YouTube</span>
-                      <Icon icon="solar:arrow-right-up-linear" class="w-4 h-4" />
+
+                    <div class="mt-3 flex items-center gap-3">
+                      {#if video.localVideoUrl}
+                        {#if playingVideoId === video.id}
+                          <button
+                            onclick={() => playingVideoId = null}
+                            class="flex items-center gap-1.5 text-canopy-500 hover:text-canopy-700 font-accent text-sm transition-colors"
+                          >
+                            <Icon icon="solar:stop-circle-bold" class="w-4 h-4" />
+                            <span>Close</span>
+                          </button>
+                        {:else}
+                          <button
+                            onclick={() => handlePlay(video.id)}
+                            class="flex items-center gap-1.5 text-coral-500 hover:text-coral-600 font-accent text-sm transition-colors"
+                          >
+                            <Icon icon="solar:play-circle-bold" class="w-4 h-4" />
+                            <span>Watch</span>
+                          </button>
+                        {/if}
+                        <span class="text-canopy-200">|</span>
+                        <a
+                          href={video.youtubeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="flex items-center gap-1.5 text-canopy-400 hover:text-canopy-600 font-accent text-sm transition-colors"
+                        >
+                          <Icon icon="mdi:youtube" class="w-4 h-4" />
+                          <span>YouTube</span>
+                          <Icon icon="solar:arrow-right-up-linear" class="w-3 h-3" />
+                        </a>
+                      {:else}
+                        <a
+                          href={video.youtubeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="flex items-center gap-1.5 text-coral-500 hover:text-coral-600 font-accent text-sm transition-colors"
+                        >
+                          <Icon icon="solar:play-circle-bold" class="w-4 h-4" />
+                          <span>Watch on YouTube</span>
+                          <Icon icon="solar:arrow-right-up-linear" class="w-4 h-4" />
+                        </a>
+                      {/if}
                     </div>
                   </div>
-                </button>
+                </div>
               {/each}
             </div>
           </div>
@@ -220,4 +270,3 @@
     {/if}
   </div>
 </div>
-

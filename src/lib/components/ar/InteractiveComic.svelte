@@ -1,17 +1,19 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
   import { Button } from '$lib/components/ui/button';
+  import { NarrationButton } from '$lib/components/shared';
   import type { ComicHotspot } from '$lib/types';
 
   interface Props {
     pageNumber: number;
     comicImageUrl: string;
     hotspots: ComicHotspot[];
+    audioUrl?: string;
     onHotspotClick: (hotspot: ComicHotspot) => void;
     onBack: () => void;
   }
 
-  let { pageNumber, comicImageUrl, hotspots, onHotspotClick, onBack }: Props = $props();
+  let { pageNumber, comicImageUrl, hotspots, audioUrl, onHotspotClick, onBack }: Props = $props();
 
   let hoveredHotspot = $state<string | null>(null);
   let imageLoaded = $state(false);
@@ -50,6 +52,9 @@
       <div class="px-3 py-1.5 rounded-full bg-canopy-500/90 backdrop-blur-sm">
         <span class="font-display text-sm font-bold text-white">Page {pageNumber}</span>
       </div>
+      {#if audioUrl}
+        <NarrationButton src={audioUrl} label="Listen" />
+      {/if}
     </div>
 
     <!-- Spacer for symmetry -->

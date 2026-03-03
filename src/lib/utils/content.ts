@@ -302,7 +302,7 @@ let videoCache: ParsedVideoCategory[] | null = null;
 let pagesCache: StoryPage[] | null = null;
 
 // List of video categories (matches folder names in static/content/videos/)
-const VIDEO_CATEGORIES = ['carbon-cycle', 'human-actions', 'climate-change'];
+const VIDEO_CATEGORIES = ['carbon-cycle', 'human-actions', 'climate-change', 'solutions'];
 
 /**
  * Load quiz index to map IDs to folder names
@@ -364,6 +364,32 @@ export async function getQuizQuestions(pageId: number): Promise<QuizQuestion[]> 
 }
 
 /**
+ * Extract YouTube video ID from various URL formats
+ */
+function extractYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|[?&]v=)([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
+}
+
+/**
+ * Load local video manifest mapping YouTube IDs to local MP4 paths
+ */
+async function loadLocalVideoMap(): Promise<Map<string, string>> {
+  const map = new Map<string, string>();
+  try {
+    const response = await fetch('/youtube-videos/manifest.json');
+    if (!response.ok) return map;
+    const data = await response.json();
+    for (const entry of data.videos) {
+      map.set(entry.video_id, `/youtube-videos/${entry.file}`);
+    }
+  } catch {
+    // Local videos not available — fall back to YouTube
+  }
+  return map;
+}
+
+/**
  * Load all videos from markdown files
  */
 export async function getVideos(): Promise<{ category: string; name: string; description: string; videos: Video[] }[]> {
@@ -371,6 +397,9 @@ export async function getVideos(): Promise<{ category: string; name: string; des
   if (videoCache) {
     return videoCache;
   }
+
+  // Load local video manifest in parallel with category fetches
+  const localVideoMap = await loadLocalVideoMap();
 
   const categories: ParsedVideoCategory[] = [];
 
@@ -384,6 +413,15 @@ export async function getVideos(): Promise<{ category: string; name: string; des
 
       const content = await response.text();
       const parsed = parseVideoMarkdown(content);
+
+      // Attach local video URLs where available
+      for (const video of parsed.videos) {
+        const ytId = extractYouTubeId(video.youtubeUrl);
+        if (ytId && localVideoMap.has(ytId)) {
+          video.localVideoUrl = localVideoMap.get(ytId);
+        }
+      }
+
       categories.push(parsed);
     } catch (error) {
       console.error(`Error loading videos for category ${categoryId}:`, error);
@@ -419,7 +457,7 @@ export async function getStoryPages(): Promise<StoryPage[]> {
       description: page.description,
       explanation: page.explanation,
       audioUrl: page.audioUrl,
-      modelUrl: page.modelUrl,
+      modelUrls: page.modelUrls,
       imageUrl: page.imageUrl,
       targetIndex: index,
     }));

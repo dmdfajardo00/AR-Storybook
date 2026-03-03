@@ -241,8 +241,8 @@
       <div class="flex-1 overflow-y-auto px-4 pb-24">
         <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
           {#each pages as page, index}
-            {#if page.id <= 4}
-              <!-- Available Pages (1-4) with thumbnails -->
+            {#if page.id <= 11}
+              <!-- Available Pages with thumbnails -->
               <button
                 onclick={() => handleDemoPageSelect(index)}
                 class="group relative bg-white/10 backdrop-blur-md rounded-[20px] p-3 text-left transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] border border-white/10 hover:border-canopy-400/40 shadow-lg hover:shadow-xl hover:shadow-canopy-500/20"
