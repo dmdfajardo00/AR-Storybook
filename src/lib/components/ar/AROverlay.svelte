@@ -111,8 +111,8 @@
           </button>
 
           <!-- Audio button -->
-          {#if currentPage.audioUrl}
-            <AudioButton src={currentPage.audioUrl} size="sm" />
+          {#if currentPage.audioUrls?.length}
+            <AudioButton src={currentPage.audioUrls} size="sm" />
           {/if}
 
           <!-- Spacer -->

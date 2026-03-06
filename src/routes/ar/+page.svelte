@@ -13,6 +13,8 @@
   let isModelViewerOpen = $state(false);
   let selectedModelUrl = $state('');
   let selectedModelTitle = $state('');
+  let currentHotspotIndex = $state(0);
+  let currentPageHotspots = $state<ComicHotspot[]>([]);
 
   // Models served from /static/models/ and cached by service worker for offline PWA
   // Hotspot positions define interactive regions on each page image
@@ -105,15 +107,31 @@
   }
 
   function handleHotspotClick(hotspot: ComicHotspot) {
+    // Track all hotspots for the current page so NEXT can cycle through them
+    if (selectedPageNumber !== null) {
+      currentPageHotspots = getHotspotsForPage(selectedPageNumber);
+      currentHotspotIndex = currentPageHotspots.findIndex(h => h.id === hotspot.id);
+    }
     selectedModelUrl = hotspot.modelUrl;
     selectedModelTitle = hotspot.title;
     isModelViewerOpen = true;
+  }
+
+  function handleNextHotspot() {
+    if (currentHotspotIndex < currentPageHotspots.length - 1) {
+      currentHotspotIndex += 1;
+      const next = currentPageHotspots[currentHotspotIndex];
+      selectedModelUrl = next.modelUrl;
+      selectedModelTitle = next.title;
+    }
   }
 
   function handleCloseModelViewer() {
     isModelViewerOpen = false;
     selectedModelUrl = '';
     selectedModelTitle = '';
+    currentHotspotIndex = 0;
+    currentPageHotspots = [];
   }
 
   function handleBackToGrid() {
@@ -146,7 +164,7 @@
       pageNumber={selectedPageNumber}
       comicImageUrl={getComicImageUrl(selectedPageNumber)}
       hotspots={getHotspotsForPage(selectedPageNumber)}
-      audioUrl={detectedPage?.audioUrl}
+      audioUrls={detectedPage?.audioUrls}
       onHotspotClick={handleHotspotClick}
       onBack={handleBackToGrid}
     />
@@ -157,6 +175,11 @@
     isOpen={isModelViewerOpen}
     modelUrl={selectedModelUrl}
     title={selectedModelTitle}
+    explanation={detectedPage?.explanation}
+    audioUrls={detectedPage?.audioUrls}
+    pageId={detectedPage?.id}
+    hasNext={currentHotspotIndex < currentPageHotspots.length - 1}
     onClose={handleCloseModelViewer}
+    onNext={handleNextHotspot}
   />
 </div>
