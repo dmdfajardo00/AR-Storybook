@@ -6,6 +6,7 @@
   import { sfx } from '$lib/utils';
   import { userStore } from '$lib/stores/user.svelte';
   import { quizStore } from '$lib/stores/quiz.svelte';
+  import { progressionStore } from '$lib/stores/progression.svelte';
   import type { Snippet } from 'svelte';
   import { browser } from '$app/environment';
   import { Capacitor } from '@capacitor/core';
@@ -31,6 +32,7 @@
     // Load persisted data
     userStore.load();
     quizStore.load();
+    progressionStore.load();
 
     // Configure safe areas for native Android
     if (Capacitor.isNativePlatform()) {

@@ -6,13 +6,15 @@
   import { Badge } from '$lib/components/ui/badge';
   import { getStoryPages, getQuizQuestions } from '$lib/utils/content';
   import { quizStore } from '$lib/stores/quiz.svelte';
-  import { calculateScorePercentage } from '$lib/utils';
+  import { progressionStore } from '$lib/stores/progression.svelte';
+  import { calculateScorePercentage, sfx } from '$lib/utils';
   import type { StoryPage } from '$lib/types';
 
   interface PageWithQuizInfo extends StoryPage {
     questionCount: number;
     bestScore: number | null;
     hasIncomplete: boolean;
+    isLocked: boolean;
   }
 
   let pages = $state<PageWithQuizInfo[]>([]);
@@ -31,7 +33,8 @@
         ...page,
         questionCount: questions.length,
         bestScore: questions.length > 0 && bestScore > 0 ? bestScore : null,
-        hasIncomplete: incompleteTake !== undefined
+        hasIncomplete: incompleteTake !== undefined,
+        isLocked: !progressionStore.isPageUnlocked(page.id),
       });
     }
 
@@ -40,7 +43,12 @@
   });
 
   function handleStartQuiz(pageId: number) {
+    sfx.tap();
     goto(`/quiz/${pageId}`);
+  }
+
+  function getRequiredPage(pageId: number): number {
+    return pageId - 1;
   }
 </script>
 
@@ -86,14 +94,14 @@
       </div>
     {:else}
       <!-- Incomplete quizzes section -->
-      {#if pages.some(p => p.hasIncomplete)}
+      {#if pages.some(p => p.hasIncomplete && !p.isLocked)}
         <div class="mb-6">
           <h2 class="font-accent font-semibold text-canopy-700 mb-3 flex items-center gap-2">
             <Icon icon="solar:play-circle-bold" class="w-5 h-5 text-ocean-500" />
             Continue Where You Left Off
           </h2>
           <div class="space-y-3">
-            {#each pages.filter(p => p.hasIncomplete) as page}
+            {#each pages.filter(p => p.hasIncomplete && !p.isLocked) as page}
               <button
                 onclick={() => handleStartQuiz(page.id)}
                 class="w-full bg-gradient-to-r from-ocean-50 to-canopy-50 border-2 border-ocean-200 rounded-xl p-4 text-left transition-all duration-300 hover:shadow-md hover:border-ocean-300 active:scale-[0.99] touch-manipulation"
@@ -125,45 +133,61 @@
         </h2>
         <div class="space-y-3">
           {#each pages as page}
-            <button
-              onclick={() => handleStartQuiz(page.id)}
-              class="w-full bg-white rounded-xl p-4 text-left shadow-sm border border-canopy-100 transition-all duration-300 hover:shadow-md hover:border-canopy-200 active:scale-[0.99] touch-manipulation"
-            >
-              <div class="flex items-center gap-4">
-                <!-- Page number -->
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-canopy-100 to-ocean-100 flex items-center justify-center text-canopy-700 font-display font-bold text-lg">
-                  {page.id}
+            {#if page.isLocked}
+              <!-- Locked page -->
+              <div
+                class="w-full bg-gray-50 rounded-xl p-4 text-left border border-gray-200 opacity-75"
+              >
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center text-gray-400 font-display font-bold text-lg">
+                    <Icon icon="solar:lock-bold" class="w-6 h-6" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-accent font-semibold text-gray-500 truncate mb-1">{page.title}</h3>
+                    <p class="font-body text-sm text-gray-400">
+                      Score {progressionStore.passingScore}+ on Page {getRequiredPage(page.id)} quiz to unlock
+                    </p>
+                  </div>
+                  <Icon icon="solar:lock-bold" class="w-5 h-5 text-gray-300 shrink-0" />
                 </div>
-
-                <!-- Info -->
-                <div class="flex-1 min-w-0">
-                  <h3 class="font-accent font-semibold text-canopy-800 truncate mb-1">{page.title}</h3>
-                  <div class="flex items-center gap-3">
-                    <span class="font-body text-sm text-canopy-500 flex items-center gap-1">
-                      <Icon icon="solar:question-circle-linear" class="w-4 h-4" />
-                      {page.questionCount} questions
-                    </span>
-                    {#if page.bestScore !== null}
-                      <span class="font-body text-sm flex items-center gap-1" class:text-canopy-500={calculateScorePercentage(page.bestScore, page.questionCount) >= 70} class:text-coral-500={calculateScorePercentage(page.bestScore, page.questionCount) < 70}>
-                        <Icon icon="solar:medal-star-bold" class="w-4 h-4" />
-                        Best: {page.bestScore}/{page.questionCount}
+              </div>
+            {:else}
+              <!-- Unlocked page -->
+              <button
+                onclick={() => handleStartQuiz(page.id)}
+                class="w-full bg-white rounded-xl p-4 text-left shadow-sm border border-canopy-100 transition-all duration-300 hover:shadow-md hover:border-canopy-200 active:scale-[0.99] touch-manipulation"
+              >
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-canopy-100 to-ocean-100 flex items-center justify-center text-canopy-700 font-display font-bold text-lg">
+                    {page.id}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-accent font-semibold text-canopy-800 truncate mb-1">{page.title}</h3>
+                    <div class="flex items-center gap-3">
+                      <span class="font-body text-sm text-canopy-500 flex items-center gap-1">
+                        <Icon icon="solar:question-circle-linear" class="w-4 h-4" />
+                        {page.questionCount} questions
                       </span>
+                      {#if page.bestScore !== null}
+                        <span class="font-body text-sm flex items-center gap-1" class:text-canopy-500={page.bestScore >= progressionStore.passingScore} class:text-coral-500={page.bestScore < progressionStore.passingScore}>
+                          <Icon icon="solar:medal-star-bold" class="w-4 h-4" />
+                          Best: {page.bestScore}/{page.questionCount}
+                        </span>
+                      {/if}
+                    </div>
+                  </div>
+                  <div class="shrink-0">
+                    {#if page.bestScore !== null && page.bestScore >= progressionStore.passingScore}
+                      <div class="w-8 h-8 rounded-full bg-canopy-100 flex items-center justify-center">
+                        <Icon icon="solar:check-circle-bold" class="w-5 h-5 text-canopy-500" />
+                      </div>
+                    {:else}
+                      <Icon icon="solar:alt-arrow-right-linear" class="w-5 h-5 text-canopy-400" />
                     {/if}
                   </div>
                 </div>
-
-                <!-- Status/Arrow -->
-                <div class="shrink-0">
-                  {#if page.bestScore !== null && page.bestScore === page.questionCount}
-                    <div class="w-8 h-8 rounded-full bg-canopy-100 flex items-center justify-center">
-                      <Icon icon="solar:check-circle-bold" class="w-5 h-5 text-canopy-500" />
-                    </div>
-                  {:else}
-                    <Icon icon="solar:alt-arrow-right-linear" class="w-5 h-5 text-canopy-400" />
-                  {/if}
-                </div>
-              </div>
-            </button>
+              </button>
+            {/if}
           {/each}
         </div>
       </div>

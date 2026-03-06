@@ -7,6 +7,7 @@
   import { Button } from '$lib/components/ui/button';
   import { getStoryPages, getQuizQuestions } from '$lib/utils/content';
   import { quizStore } from '$lib/stores/quiz.svelte';
+  import { progressionStore } from '$lib/stores/progression.svelte';
   import type { StoryPage, QuizQuestion as QuizQuestionType, QuizTake } from '$lib/types';
 
   // Get page ID from route
@@ -37,6 +38,12 @@
     questions = await getQuizQuestions(pageId);
 
     if (!storyPage || questions.length === 0) {
+      goto('/quiz');
+      return;
+    }
+
+    // Block access to locked pages
+    if (!progressionStore.isPageUnlocked(pageId)) {
       goto('/quiz');
       return;
     }
