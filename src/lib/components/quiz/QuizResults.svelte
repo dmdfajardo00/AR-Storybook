@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
   import Icon from '@iconify/svelte';
   import { Button } from '$lib/components/ui/button';
-  import { getScoreMessage, calculateScorePercentage } from '$lib/utils';
+  import { getScoreMessage, calculateScorePercentage, sfx } from '$lib/utils';
   import confetti from 'canvas-confetti';
   import { onMount } from 'svelte';
 
@@ -22,6 +22,7 @@
   const isPassing = $derived(percentage >= 70);
 
   onMount(() => {
+    sfx.celebrate();
     if (isPerfect || isPassing) {
       // Trigger confetti for good scores
       confetti({

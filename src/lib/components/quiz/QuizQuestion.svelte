@@ -3,6 +3,7 @@
   import QuizOption from './QuizOption.svelte';
   import { Button } from '$lib/components/ui/button';
   import Icon from '@iconify/svelte';
+  import { sfx } from '$lib/utils';
 
   interface Props {
     question: QuizQuestionType;
@@ -32,6 +33,13 @@
   const canSubmit = $derived(selectedOptionId !== null && !showResult);
   const selectedOption = $derived(question.options.find(o => o.id === selectedOptionId));
   const correctOption = $derived(question.options.find(o => o.id === question.correctOptionId));
+
+  $effect(() => {
+    if (showResult) {
+      if (isCorrect) sfx.correct();
+      else sfx.incorrect();
+    }
+  });
 </script>
 
 <div class="flex flex-col h-full">

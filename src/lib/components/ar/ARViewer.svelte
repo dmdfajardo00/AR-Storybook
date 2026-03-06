@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { arStore } from '$lib/stores/ar.svelte';
   import { getStoryPages } from '$lib/utils/content';
+  import { sfx } from '$lib/utils';
   import type { StoryPage } from '$lib/types';
   import Icon from '@iconify/svelte';
 
@@ -82,6 +83,7 @@
 
         anchor.onTargetFound = () => {
           arStore.onTargetFound(i);
+          sfx.arDetect();
           if (pages[i] && onPageDetected) {
             onPageDetected(pages[i]);
           }
