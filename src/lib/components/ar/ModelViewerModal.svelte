@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { sfx } from '$lib/utils';
+
 	interface Props {
 		isOpen: boolean;
 		modelUrl: string;
@@ -11,12 +13,14 @@
 
 	function handleBackdropClick(event: MouseEvent) {
 		if (event.target === event.currentTarget) {
+			sfx.modalClose();
 			onClose();
 		}
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape') {
+			sfx.modalClose();
 			onClose();
 		}
 	}
@@ -30,6 +34,10 @@
 		if (modelUrl) {
 			isLoading = true;
 		}
+	});
+
+	$effect(() => {
+		if (isOpen) sfx.modalOpen();
 	});
 </script>
 
@@ -50,7 +58,7 @@
 		<!-- Modal Content -->
 		<div
 			class="relative w-full max-w-lg bg-white rounded-[20px] shadow-xl overflow-hidden"
-			style="max-height: 85vh;"
+			style="max-height: 85dvh;"
 		>
 			<!-- Header -->
 			<div class="flex items-center justify-between px-5 py-4 border-b border-[#E8F0EC]">
@@ -61,7 +69,7 @@
 					{title}
 				</h2>
 				<button
-					onclick={onClose}
+					onclick={() => { sfx.modalClose(); onClose(); }}
 					class="flex items-center justify-center w-10 h-10 rounded-full bg-[#F0F7F4] hover:bg-[#E8F0EC] transition-colors duration-200 text-[#1A2E1F]"
 					aria-label="Close modal"
 				>
@@ -83,7 +91,7 @@
 			</div>
 
 			<!-- Model Viewer Container -->
-			<div class="relative w-full" style="height: 400px;">
+			<div class="relative w-full" style="height: min(400px, 60dvh);">
 				<!-- Loading Spinner -->
 				{#if isLoading}
 					<div class="absolute inset-0 flex flex-col items-center justify-center bg-[#F0F7F4] z-10">

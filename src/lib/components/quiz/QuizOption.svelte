@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
-  import { cn } from '$lib/utils';
+  import { cn, sfx } from '$lib/utils';
 
   interface Props {
     id: string;
@@ -55,12 +55,12 @@
   type="button"
   class={cn(baseClasses, stateClasses())}
   {disabled}
-  onclick={() => !disabled && onclick?.()}
+  onclick={() => { if (!disabled) { sfx.select(); onclick?.(); } }}
 >
   <!-- Letter badge -->
   <div
     class={cn(
-      "w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-lg shrink-0 transition-all duration-300",
+      "w-11 h-11 rounded-full flex items-center justify-center font-display font-bold text-lg shrink-0 transition-all duration-300",
       showResult && isCorrect && "bg-canopy-500 text-white",
       showResult && wasSelected && !isCorrect && "bg-coral-500 text-white",
       showResult && !isCorrect && !wasSelected && "bg-gray-200 text-gray-500",

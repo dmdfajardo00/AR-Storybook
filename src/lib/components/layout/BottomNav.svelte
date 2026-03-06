@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import Icon from '@iconify/svelte';
-  import { cn } from '$lib/utils';
+  import { cn, sfx } from '$lib/utils';
 
   interface NavItem {
     id: string;
@@ -45,10 +45,11 @@
         {@const isActive = currentPath.startsWith(item.path)}
         <a
           href={item.path}
+          onclick={() => sfx.nav()}
           class={cn(
             'flex flex-col items-center justify-center gap-0.5 min-w-[64px] min-h-[56px] px-3 py-2 transition-all duration-200 touch-manipulation active:scale-95',
             isActive
-              ? 'bg-white text-canopy-600 shadow-md scale-105'
+              ? 'bg-white/95 text-canopy-600 shadow-md rounded-xl'
               : 'text-white/80 hover:text-white hover:bg-white/10 active:bg-white/20'
           )}
           aria-current={isActive ? 'page' : undefined}

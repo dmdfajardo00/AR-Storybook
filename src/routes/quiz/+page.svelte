@@ -49,7 +49,7 @@
   <meta name="description" content="Test your climate knowledge with fun quizzes" />
 </svelte:head>
 
-<div class="min-h-screen pb-nav bg-gradient-to-br from-ocean-50 via-mist to-canopy-50">
+<div class="min-h-screen min-h-dvh pb-nav bg-gradient-to-br from-ocean-50 via-mist to-canopy-50">
   <!-- Header -->
   <div class="sticky top-0 z-20 bg-gradient-to-r from-ocean-500 to-canopy-500 text-white px-6 py-5 shadow-lg safe-top">
     <div class="max-w-lg mx-auto">
@@ -96,7 +96,7 @@
             {#each pages.filter(p => p.hasIncomplete) as page}
               <button
                 onclick={() => handleStartQuiz(page.id)}
-                class="w-full bg-gradient-to-r from-ocean-50 to-canopy-50 border-2 border-ocean-200 rounded-xl p-4 text-left transition-all duration-300 hover:shadow-md hover:border-ocean-300 active:scale-[0.99]"
+                class="w-full bg-gradient-to-r from-ocean-50 to-canopy-50 border-2 border-ocean-200 rounded-xl p-4 text-left transition-all duration-300 hover:shadow-md hover:border-ocean-300 active:scale-[0.99] touch-manipulation"
               >
                 <div class="flex items-center gap-4">
                   <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-ocean-400 to-canopy-400 flex items-center justify-center text-white font-display font-bold text-lg shadow-md">
@@ -127,7 +127,7 @@
           {#each pages as page}
             <button
               onclick={() => handleStartQuiz(page.id)}
-              class="w-full bg-white rounded-xl p-4 text-left shadow-sm border border-canopy-100 transition-all duration-300 hover:shadow-md hover:border-canopy-200 active:scale-[0.99]"
+              class="w-full bg-white rounded-xl p-4 text-left shadow-sm border border-canopy-100 transition-all duration-300 hover:shadow-md hover:border-canopy-200 active:scale-[0.99] touch-manipulation"
             >
               <div class="flex items-center gap-4">
                 <!-- Page number -->

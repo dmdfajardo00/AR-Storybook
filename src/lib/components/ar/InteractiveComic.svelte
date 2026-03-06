@@ -2,6 +2,7 @@
   import Icon from '@iconify/svelte';
   import { Button } from '$lib/components/ui/button';
   import { NarrationButton } from '$lib/components/shared';
+  import { sfx } from '$lib/utils';
   import type { ComicHotspot } from '$lib/types';
 
   interface Props {
@@ -19,6 +20,7 @@
   let imageLoaded = $state(false);
 
   function handleHotspotClick(hotspot: ComicHotspot) {
+    sfx.tap();
     onHotspotClick(hotspot);
   }
 
@@ -75,7 +77,7 @@
       <img
         src={comicImageUrl}
         alt="Comic page {pageNumber}"
-        class="max-w-full max-h-[calc(100vh-80px)] w-auto h-auto object-contain transition-opacity duration-300"
+        class="max-w-full max-h-[calc(100dvh-80px)] w-auto h-auto object-contain transition-opacity duration-300"
         onload={handleImageLoad}
       />
 

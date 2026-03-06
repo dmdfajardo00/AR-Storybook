@@ -73,9 +73,3 @@
     <div class="w-10"></div>
   </div>
 </header>
-
-<style>
-  .safe-top {
-    padding-top: env(safe-area-inset-top, 0);
-  }
-</style>

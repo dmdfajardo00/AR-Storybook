@@ -4,7 +4,7 @@
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { userStore } from '$lib/stores/user.svelte';
-  import { cn } from '$lib/utils';
+  import { cn, sfx } from '$lib/utils';
 
   let nameInput = $state('');
   let isReturningUser = $derived(userStore.hasUser);
@@ -13,11 +13,13 @@
   function handleSubmit() {
     if (nameInput.trim()) {
       userStore.setName(nameInput.trim());
+      sfx.complete();
       goto('/ar');
     }
   }
 
   function handleContinue() {
+    sfx.tap();
     goto('/ar');
   }
 
@@ -31,7 +33,7 @@
   <title>Welcome - ClimaTales AR</title>
 </svelte:head>
 
-<div class="min-h-screen flex flex-col bg-gradient-to-b from-canopy-50 via-mist to-ocean-50 overflow-hidden relative">
+<div class="min-h-screen min-h-dvh flex flex-col bg-gradient-to-b from-canopy-50 via-mist to-ocean-50 overflow-hidden relative">
   <!-- Decorative background elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="absolute -top-20 -right-20 w-64 h-64 bg-canopy-200 rounded-full opacity-40 blur-3xl"></div>
@@ -107,7 +109,7 @@
         {#if showNameInput}
           <button
             onclick={() => { showNameInput = false; }}
-            class="w-full text-center text-canopy-600 font-body text-sm hover:text-canopy-800 transition-colors"
+            class="w-full text-center text-canopy-600 font-body text-sm hover:text-canopy-800 transition-colors touch-manipulation"
           >
             Cancel
           </button>

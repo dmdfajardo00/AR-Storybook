@@ -98,7 +98,7 @@
   <meta name="description" content="Watch educational videos about climate change and the environment" />
 </svelte:head>
 
-<div class="min-h-screen pb-nav bg-gradient-to-br from-coral-50 via-mist to-ocean-50">
+<div class="min-h-screen min-h-dvh pb-nav bg-gradient-to-br from-coral-50 via-mist to-ocean-50">
   <!-- Header with gradient mesh background -->
   <div class="relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-coral-400 via-ocean-400 to-canopy-500"></div>

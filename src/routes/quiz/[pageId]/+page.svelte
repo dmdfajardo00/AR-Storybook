@@ -120,7 +120,7 @@
   <title>{storyPage?.title ?? 'Quiz'} - ClimaTales AR</title>
 </svelte:head>
 
-<div class="min-h-screen pb-nav bg-gradient-to-br from-canopy-50 via-mist to-ocean-50 flex flex-col">
+<div class="min-h-screen min-h-dvh pb-nav bg-gradient-to-br from-canopy-50 via-mist to-ocean-50 flex flex-col">
   {#if isLoading}
     <div class="flex-1 flex items-center justify-center">
       <div class="text-center">
@@ -171,7 +171,7 @@
           </Button>
           <button
             onclick={handleBack}
-            class="w-full text-center text-canopy-500 font-body text-sm hover:text-canopy-700 transition-colors py-2"
+            class="w-full text-center text-canopy-500 font-body text-sm hover:text-canopy-700 transition-colors py-2 touch-manipulation"
           >
             Back to All Quizzes
           </button>
@@ -193,7 +193,7 @@
       <div class="px-4 py-3 flex items-center gap-3">
         <button
           onclick={handleBack}
-          class="w-10 h-10 rounded-full bg-canopy-100 hover:bg-canopy-200 flex items-center justify-center transition-colors"
+          class="w-10 h-10 rounded-full bg-canopy-100 hover:bg-canopy-200 flex items-center justify-center transition-colors touch-manipulation"
         >
           <Icon icon="solar:alt-arrow-left-linear" class="w-5 h-5 text-canopy-700" />
         </button>
