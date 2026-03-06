@@ -96,7 +96,8 @@ AR-Storybook/
 
 #### Utilities
 - **utils/storage.ts**: LocalStorage abstraction
-- **utils/audio.ts**: Audio playback utilities
+- **utils/audio.ts**: Audio playback utilities (narration)
+- **utils/sfx.ts**: Procedural sound effects (Web Audio API, zero files)
 - **utils/content.ts**: Content loading from manifest.json
 - **utils/helpers.ts**: General helper functions
 
@@ -318,6 +319,71 @@ const allTakes = $state<QuizTake[]>([]);
 const state = $state<ARState>({ ... });
 ```
 
+## Mobile-First Design Policy (MANDATORY)
+
+This app is **Android-first, PWA-friendly**. All UI work MUST follow these rules.
+
+### Viewport & Units
+- Always use `min-h-dvh` alongside `min-h-screen` (never `min-h-screen` alone) — mobile browsers collapse address bars
+- Use `dvh` units for any viewport-relative height calculations (modals, full-screen views, image containers)
+- The viewport meta in `app.html` is locked: `width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover` — do not change it
+
+### Touch Targets & Interaction
+- **44px minimum** touch target on ALL interactive elements (buttons, links, options, icons)
+- Add `touch-manipulation` to all clickable elements (globally applied in `app.css` but verify on custom elements)
+- Never use `scale` transforms on active navigation states — they cause layout jumps on mobile
+- Use `active:scale-95` or `active:scale-[0.98]` only for press feedback (not for state indication)
+- `-webkit-tap-highlight-color: transparent` is set globally — do not override
+
+### Safe Areas & Android
+- `env(safe-area-inset-*)` does NOT work in Android WebView
+- The `.native-app` class (added by `+layout.svelte` on Capacitor) provides fixed padding via `max()` fallback in `app.css`
+- Never duplicate safe-area styles in component `<style>` blocks — use the global `.safe-top` and `.safe-bottom` classes
+- `overscroll-behavior: none` is set globally to prevent pull-to-refresh interference
+
+### Responsive Breakpoints
+- Design for **320px-480px first** (small Android phones)
+- Use `md:` breakpoints only for progressive enhancement on larger screens
+- Test all layouts at 320px width minimum
+- Use `max-w-lg mx-auto` for content containers to prevent ultra-wide layouts on tablets
+
+### Layout Rules
+- BottomNav is 72px tall + safe area padding — always use `.pb-nav` class on scrollable content
+- Sticky headers must use `safe-top` class for native app status bar clearance
+- Use `fixed inset-0` for full-screen views (AR, modals), not `min-h-screen`
+
+## Sound Effects System
+
+### Architecture
+- **`src/lib/utils/sfx.ts`** — Procedural Web Audio API sound effects (zero audio files)
+- Import via `import { sfx } from '$lib/utils';`
+- All sounds are generated from oscillators and noise buffers — no files to cache or download
+- Respects `prefers-reduced-motion` automatically
+- Mute preference persisted to `localStorage` key `climatales_sfx_muted`
+
+### Available Sounds
+- `sfx.tap()` — Button press click
+- `sfx.select()` — Quiz option selection pop
+- `sfx.correct()` — Right answer chime (C-E-G arpeggio)
+- `sfx.incorrect()` — Wrong answer gentle descend
+- `sfx.celebrate()` — Quiz completion sparkle
+- `sfx.nav()` — Navigation tab switch whoosh
+- `sfx.pageTurn()` — Paper swish for page transitions
+- `sfx.arDetect()` — AR target found shimmer
+- `sfx.modalOpen()` — Modal open rising tone
+- `sfx.modalClose()` — Modal close falling tone
+- `sfx.complete()` — Action completion ping
+
+### Mute Controls
+- `sfx.mute()`, `sfx.unmute()`, `sfx.toggleMute()`, `sfx.isMuted()`
+- Mute toggle button is in `+layout.svelte` (bottom-right floating button)
+
+### When Adding New UI Interactions
+- Every new interactive element should have an appropriate SFX trigger
+- Keep volumes subtle (0.06-0.25 gain range) — these are UI feedback, not music
+- Wrap all SFX calls in component event handlers, never in render logic
+- Use `$effect` for reactive sound triggers (e.g., quiz result reveal)
+
 ## Development Guidelines
 
 ### Component Structure
@@ -334,7 +400,7 @@ const state = $state<ARState>({ ... });
 
 ### Accessibility
 - Minimum contrast: 4.5:1 for normal text
-- Touch targets: 44px × 44px minimum
+- Touch targets: 44px x 44px minimum (enforced — see Mobile-First Design Policy)
 - Keyboard navigation support
 - Focus indicators: 3px solid accent with 2px offset
 - Respect `prefers-reduced-motion`
@@ -361,6 +427,9 @@ const state = $state<ARState>({ ... });
 - When asked to commit, ensure the message omits any `Co-authored-by: Claude` trailer.
 - When asked to open a PR, do not auto-merge into main and exclude any `Co-authored-by: Claude` trailers.
 - When explicitly told to "Commit all", review the staged history and create a sequence of focused commits that group related changes, rather than one omnibus commit, matching the batches observed in git log.
+
+### Test Screenshots
+- All test screenshots must be saved to `test-screenshots/` (gitignored). Never place them elsewhere in the project.
 
 ### Documentation
 - Never create new .md documents unless explicitly instructed to do so.
@@ -421,7 +490,7 @@ Naming convention: `MM-DD-YYYY-HHMMSS-APK.png`
 
 ### Notes
 - APK size is ~291MB due to static assets (models + videos). Fine for sideloading, exceeds Play Store 150MB limit.
-- `env(safe-area-inset-*)` doesn't work in Android WebView. The `.native-app` CSS class (added by +layout.svelte on Capacitor) provides fixed padding instead.
+- `env(safe-area-inset-*)` doesn't work in Android WebView. The `.native-app` CSS class (added by +layout.svelte on Capacitor) provides `max()` fallback padding in `app.css`.
 - YouTube links use `@capacitor/browser` on native to open in system browser instead of WebView.
 
 ## Common Tasks
@@ -499,5 +568,5 @@ Terra is the friendly guide character who appears throughout the app:
 
 ---
 
-**Last Updated**: 2026-01-21
-**Version**: 0.0.1
+**Last Updated**: 2026-03-06
+**Version**: 0.0.2
