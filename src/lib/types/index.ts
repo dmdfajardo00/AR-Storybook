@@ -10,7 +10,7 @@ export interface StoryPage {
   title: string;
   description: string;
   explanation: string;
-  audioUrl?: string;
+  audioUrls?: string[];
   modelUrls?: string[];
   imageUrl?: string;
   targetIndex: number;
@@ -60,6 +60,7 @@ export interface Video {
   thumbnailUrl?: string;
   localVideoUrl?: string;
   category: VideoCategoryType;
+  pageId?: number;
 }
 
 export type VideoCategoryType = 'carbon-cycle' | 'human-actions' | 'climate-change' | 'solutions';
@@ -107,6 +108,7 @@ export const STORAGE_KEYS = {
   USER: 'climatales_user',
   QUIZ_TAKES: 'climatales_quiz_takes',
   AR_PREFERENCES: 'climatales_ar_preferences',
+  PROGRESSION: 'climatales_progression',
 } as const;
 
 // Navigation Items

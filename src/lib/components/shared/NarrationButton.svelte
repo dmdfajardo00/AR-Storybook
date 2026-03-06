@@ -1,10 +1,10 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
   import { cn } from '$lib/utils';
-  import { playAudio, stopAudio } from '$lib/utils/audio';
+  import { playAudio, playAudioSequence, stopAudio } from '$lib/utils/audio';
 
   interface Props {
-    src: string;
+    src: string | string[];
     label?: string;
     class?: string;
   }
@@ -20,7 +20,11 @@
     } else {
       isPlaying = true;
       try {
-        await playAudio(src);
+        if (Array.isArray(src)) {
+          await playAudioSequence(src);
+        } else {
+          await playAudio(src);
+        }
       } catch (error) {
         console.error('Failed to play narration:', error);
       } finally {

@@ -5,16 +5,22 @@
       "title": "The Carbon Cycle",
       "description": "Learn about how carbon moves through our planet in a continuous cycle.",
       "explanation": "Hey there, Grade 7 students! We've officially landed on Planet Earth, and I'm so excited you're here with me! Now that we're on the ground, our mission is to explore one of Earth's most important cycles — <strong>the carbon cycle</strong>. We will discover how carbon moves through air, water, land, and living things to keep our planet in balance. We'll also discover how people can disrupt this cycle, and why that matters for plants, animals, and humans too. We will also discover ways to minimize these disruptions. So… are you ready to begin our Earth adventure? Let's start exploring!",
-      "audioUrl": "/audio/page-1-narration.mp3",
+      "audioUrls": [
+        "/audio/page-1-narration.mp3"
+      ],
       "imageUrl": "/images/pages/carbon-cycle.png",
-      "modelUrls": ["/models/page-1/alien.glb"]
+      "modelUrls": [
+        "/models/page-1/alien.glb"
+      ]
     },
     {
       "id": 2,
       "title": "What is Carbon Cycle?",
       "description": "Discover how carbon moves through Earth's systems and connects all living things.",
       "explanation": "<strong>Carbon dioxide</strong> is one of the main greenhouse gases — gases that <strong>trap heat in the atmosphere</strong>. Plants absorb carbon dioxide from the air and, using energy from sunlight, convert it into <strong>glucose</strong> through <strong>photosynthesis</strong>. Animals get carbon by eating plants or other animals, transferring carbon through the <strong>food web</strong> to build tissues and support growth. Plant food — mainly <strong>sugar or starch</strong> — is passed on to consumers whose bodies break it down into forms they can <strong>readily absorb</strong>.",
-      "audioUrl": "/audio/page-2-narration.mp3",
+      "audioUrls": [
+        "/audio/page-2-narration.mp3"
+      ],
       "imageUrl": "/images/pages/carbon-cycle-detail.png",
       "modelUrls": [
         "/models/page-2/CO2 Model.glb",
@@ -28,7 +34,9 @@
       "title": "Oceans and Carbon",
       "description": "Explore how our oceans help absorb carbon from the atmosphere.",
       "explanation": "Animals take in oxygen and release carbon dioxide during <strong>respiration</strong>, which happens day and night. Plants release oxygen during photosynthesis in the daytime, but at night they respire like animals — taking in oxygen and releasing carbon dioxide. When plants and animals die, <strong>decomposers</strong> like bacteria and fungi break them down. During <strong>decomposition</strong>, carbon is released back into the soil and the air — keeping the cycle going continuously.",
-      "audioUrl": "/audio/page-3-narration.mp3",
+      "audioUrls": [
+        "/audio/page-3-narration.mp3"
+      ],
       "imageUrl": "/images/pages/ocean-carbon.png",
       "modelUrls": [
         "/models/page-3/animal-respiration.glb",
@@ -42,7 +50,9 @@
       "title": "Forests: Earth's Lungs",
       "description": "Learn why forests are so important for fighting climate change.",
       "explanation": "<strong>Deforestation:</strong> When large areas of trees are cut down, carbon dioxide builds up in the atmosphere and contributes to the <strong>greenhouse effect</strong>. <strong>Fossil fuel combustion:</strong> Fossil fuels form from buried photosynthetic organisms over millions of years, storing carbon underground. Burning them releases this carbon back as CO₂ far faster than natural processes can absorb it. <strong>Mining:</strong> The extraction, processing, and transportation of minerals contribute to greenhouse gas emissions. Surface mining releases stored CO₂, while underground mining uses high energy and can emit methane.",
-      "audioUrl": "/audio/page-4-narration.mp3",
+      "audioUrls": [
+        "/audio/page-4-narration.mp3"
+      ],
       "imageUrl": "/images/pages/forests.png",
       "modelUrls": [
         "/models/page-4/deforestation.glb",
@@ -55,7 +65,9 @@
       "title": "The Greenhouse Effect",
       "description": "Understand how certain gases trap heat in our atmosphere.",
       "explanation": "<strong>Agricultural practices:</strong> Carbon is lost from soils when tillage equipment disturbs or turns over the soil, exposing it to a sudden supply of oxygen. <strong>Land use changes:</strong> Clearing forests for agriculture or urban development releases stored carbon as CO₂. Converting grasslands or wetlands to farmland can also oxidize soil carbon, adding more CO₂ to the atmosphere. <strong>Waste management:</strong> As waste decomposes in landfills, it releases <strong>methane (CH₄)</strong> and <strong>carbon dioxide (CO₂)</strong>, both potent greenhouse gases. Incineration also releases large amounts of carbon dioxide.",
-      "audioUrl": "/audio/page-5-narration.mp3",
+      "audioUrls": [
+        "/audio/page-5-narration.mp3"
+      ],
       "imageUrl": "/images/pages/greenhouse-effect.png",
       "modelUrls": [
         "/models/page-5/agricultural-practices.glb",
@@ -69,7 +81,9 @@
       "title": "Melting Ice",
       "description": "See how rising temperatures are affecting polar regions.",
       "explanation": "<strong>Global warming</strong> refers to an increase in average global temperatures, caused primarily by greenhouse gases like carbon dioxide trapping heat in the atmosphere. <strong>Ocean acidification</strong> occurs as the ocean absorbs more CO₂ — when CO₂ dissolves into seawater, the <strong>pH decreases</strong> and the water becomes <strong>more acidic</strong>, making it harder for corals, shells, and plankton to survive.",
-      "audioUrl": "/audio/page-6-narration.mp3",
+      "audioUrls": [
+        "/audio/page-6-narration.mp3"
+      ],
       "imageUrl": "/images/pages/melting-ice.png",
       "modelUrls": [
         "/models/page-6/global-warming.glb",
@@ -81,7 +95,9 @@
       "title": "Extreme Weather",
       "description": "Learn how climate change is making weather more unpredictable.",
       "explanation": "<strong>Terrestrial ecosystems:</strong> Tropical plant diversity is highly vulnerable to climate change — shifts in temperature affect plant growth and pollinators, while warm-tolerant invasive species may spread and threaten native plants. Some species may <strong>decline or become extinct</strong> if they cannot adapt. <strong>Marine ecosystems:</strong> Ocean acidification eats away at the minerals used by oysters, clams, lobsters, and coral reefs to build their shells and skeletons. <strong>Polar regions:</strong> Global warming is melting ice caps and glaciers faster, reducing habitats for polar bears and penguins, while thawing permafrost releases more greenhouse gases.",
-      "audioUrl": "/audio/page-7-narration.mp3",
+      "audioUrls": [
+        "/audio/page-7-narration.mp3"
+      ],
       "imageUrl": "/images/pages/extreme-weather.png",
       "modelUrls": [
         "/models/page-7/bleached-coral.glb",
@@ -95,7 +111,9 @@
       "title": "Renewable Energy",
       "description": "Discover clean energy sources that can help save our planet.",
       "explanation": "<strong>Forest conservation:</strong> Through photosynthesis, trees remove carbon dioxide from the atmosphere and release oxygen. By protecting and planting trees, forests lock carbon in wood, roots, and soil — <strong>reducing heat-trapping gases and regulating Earth's temperature</strong>. <strong>Eco-friendly transport:</strong> Any transportation that reduces negative environmental impacts — walking, biking, electric vehicles — <strong>helps cut reliance on oil and coal</strong> and lowers carbon emissions.",
-      "audioUrl": "/audio/page-8-narration.mp3",
+      "audioUrls": [
+        "/audio/page-8-narration.mp3"
+      ],
       "imageUrl": "/images/pages/renewable-energy.png",
       "modelUrls": [
         "/models/page-8/eco-friendly-transport.glb",
@@ -107,7 +125,9 @@
       "title": "What You Can Do",
       "description": "Simple actions that make a big difference for our planet.",
       "explanation": "<strong>Renewable energy</strong> is sustainable because fossil fuels will eventually run out, and renewables produce <strong>little to no CO₂ or harmful pollutants</strong> once in use. <strong>Recycling</strong> reduces the energy needed to produce new products, lowering greenhouse gas emissions — even recycled paper helps by saving trees that absorb carbon. <strong>Composting</strong> diverts food scraps from landfills, preventing the release of <strong>methane</strong>, a powerful greenhouse gas produced when food decomposes without oxygen.",
-      "audioUrl": "/audio/page-9-narration.mp3",
+      "audioUrls": [
+        "/audio/page-9-narration.mp3"
+      ],
       "imageUrl": "/images/pages/take-action.png",
       "modelUrls": [
         "/models/page-9/compost-pit.glb",
@@ -120,7 +140,9 @@
       "title": "Our Future",
       "description": "Imagine a world where we live in harmony with nature.",
       "explanation": "<strong>Sustainable agriculture</strong> reduces carbon emissions by improving soil health. Healthy soils are more fertile and act as important <strong>carbon sinks</strong>. Practices like no-till farming, cover cropping, and crop rotation increase carbon-rich organic matter in the soil. <strong>Environmental education</strong> is vital to winning the fight against climate change — without it, tomorrow's leaders will be ill-equipped for environmental challenges. Parents and teachers help students become <strong>environmental stewards</strong> by encouraging outdoor learning and student environmental activism.",
-      "audioUrl": "/audio/page-10-narration.mp3",
+      "audioUrls": [
+        "/audio/page-10-narration.mp3"
+      ],
       "imageUrl": "/images/pages/future.png",
       "modelUrls": [
         "/models/page-10/cover-crops.glb",
@@ -131,10 +153,15 @@
       "id": 11,
       "title": "Goodbye Lumi",
       "description": "Say farewell to Lumi as our climate adventure comes to an end.",
-      "explanation": "Thank you for joining our Earth adventure! Keep being curious and keep protecting Earth. <strong>Woohoo — mission complete!</strong> We've explored the carbon cycle, seen how human activities disrupt it, and discovered ways to restore balance. Keep using your knowledge to make smart, planet-friendly choices. <strong>Bye for now, Earth heroes!</strong>",
-      "audioUrl": "/audio/page-11-narration.mp3",
+      "explanation": "<strong>Professor:</strong> Thank you for joining our Earth adventure. I hope you learned a lot and had fun discovering how our planet works. Keep being curious and keep protecting Earth. Goodbye, Grade 7 learners!<br><br><strong>Lumi:</strong> Woohoo! Mission complete! I hope you learned a lot on our journey, especially how the carbon cycle helps life on Earth. Keep using your knowledge to make smart, planet-friendly choices. Bye for now, Earth heroes!",
+      "audioUrls": [
+        "/audio/page-11-professor-narration.mp3",
+        "/audio/page-11-luimi-narration.mp3"
+      ],
       "imageUrl": "/images/pages/goodbye-lumi.png",
-      "modelUrls": ["/models/page-11/goodbye-lumi.glb"]
+      "modelUrls": [
+        "/models/page-11/goodbye-lumi.glb"
+      ]
     }
   ],
   "videos": [

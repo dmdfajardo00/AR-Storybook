@@ -31,6 +31,13 @@ export function playAudio(src: string): Promise<void> {
   });
 }
 
+// Play multiple audio files in sequence
+export async function playAudioSequence(srcs: string[]): Promise<void> {
+  for (const src of srcs) {
+    await playAudio(src);
+  }
+}
+
 // Pause the currently playing audio
 export function pauseAudio(): void {
   if (currentAudio && !currentAudio.paused) {

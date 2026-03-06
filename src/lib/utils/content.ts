@@ -295,6 +295,43 @@ function parseVideoMarkdown(content: string): ParsedVideoCategory {
 // CONTENT LOADING FUNCTIONS
 // ============================================
 
+// ============================================
+// VIDEO-TO-PAGE MAPPING
+// ============================================
+
+// Maps YouTube video IDs to their corresponding story page
+const VIDEO_PAGE_MAP: Record<string, number> = {
+  // Page 2 - What is Carbon Cycle?
+  'rCBb0U74K8Q': 2, // Chemistry for Kids - The Element Carbon
+  'mN4IorWygwk': 2, // What is Carbon Dioxide?
+  // Page 3 - Oceans and Carbon
+  'p3R-dB9K4ss': 3, // The Carbon Cycle for Kids
+  // Page 4 - Forests: Earth's Lungs
+  'GsZClyoBrSo': 4, // Carbon Emissions From Deforestation
+  'Yksmlt88Ds0': 4, // Environmental Impact of Fossil Fuels
+  'oe4N7tu-VMQ': 4, // Open Pit vs Underground Mining
+  // Page 5 - The Greenhouse Effect
+  'glo6VnAHFvg': 5, // How Human Activity Affects the Carbon Cycle
+  'OIr3BF6qMRs': 5, // Landfill Methane and Climate Change
+  // Page 6 - Melting Ice
+  'YJrKgBUDGYc': 6, // What is Global Warming?
+  'DLg2NMjzh2o': 6, // Ocean Acidification
+  // Page 7 - Extreme Weather
+  'ztWHqUFJRTs': 7, // Climate Change: Earth's Giant Game of Tetris
+  'ccYvlbcBlTY': 7, // How Does Ocean Acidification Affect Coral Reefs?
+  'C8BhxvhUyiw': 7, // Glaciers in Peril
+  // Page 8 - Renewable Energy
+  'Dzvi2tgaEs4': 8, // Forest Conservation - Time for Action
+  'T9j42-V5cr0': 8, // Sustainable Transport
+  // Page 9 - What You Can Do
+  'T4xKThjcKaE': 9, // Renewable Energy 101
+  'xpAnLXc_bIU': 9, // Importance of Recycling for Kids
+  'oFlsjRXbnSk': 9, // Why is Composting Good?
+  // Page 10 - Our Future
+  'iloAQmroRK0': 10, // What is Sustainable Agriculture?
+  'ydrqnAqAusQ': 10, // Why is Environmental Education Important?
+};
+
 // Cache for loaded content
 let quizCache: Map<number, QuizQuestion[]> = new Map();
 let quizIndexCache: { id: number; folder: string }[] | null = null;
@@ -414,11 +451,16 @@ export async function getVideos(): Promise<{ category: string; name: string; des
       const content = await response.text();
       const parsed = parseVideoMarkdown(content);
 
-      // Attach local video URLs where available
+      // Attach local video URLs and page IDs where available
       for (const video of parsed.videos) {
         const ytId = extractYouTubeId(video.youtubeUrl);
-        if (ytId && localVideoMap.has(ytId)) {
-          video.localVideoUrl = localVideoMap.get(ytId);
+        if (ytId) {
+          if (localVideoMap.has(ytId)) {
+            video.localVideoUrl = localVideoMap.get(ytId);
+          }
+          if (VIDEO_PAGE_MAP[ytId]) {
+            video.pageId = VIDEO_PAGE_MAP[ytId];
+          }
         }
       }
 
@@ -432,6 +474,15 @@ export async function getVideos(): Promise<{ category: string; name: string; des
   videoCache = categories;
 
   return categories;
+}
+
+/**
+ * Get videos associated with a specific story page
+ */
+export async function getVideosForPage(pageId: number): Promise<Video[]> {
+  const categories = await getVideos();
+  const allVideos = categories.flatMap(cat => cat.videos);
+  return allVideos.filter(v => v.pageId === pageId);
 }
 
 /**
@@ -456,7 +507,7 @@ export async function getStoryPages(): Promise<StoryPage[]> {
       title: page.title,
       description: page.description,
       explanation: page.explanation,
-      audioUrl: page.audioUrl,
+      audioUrls: page.audioUrls,
       modelUrls: page.modelUrls,
       imageUrl: page.imageUrl,
       targetIndex: index,

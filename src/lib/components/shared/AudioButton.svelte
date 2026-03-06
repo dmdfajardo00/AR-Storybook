@@ -1,10 +1,10 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
   import { cn } from '$lib/utils';
-  import { playAudio, stopAudio, isPlaying as checkIsPlaying } from '$lib/utils/audio';
+  import { playAudio, playAudioSequence, stopAudio, isPlaying as checkIsPlaying } from '$lib/utils/audio';
 
   interface Props {
-    src: string;
+    src: string | string[];
     size?: 'sm' | 'md' | 'lg';
     class?: string;
   }
@@ -34,7 +34,11 @@
       isLoading = true;
       try {
         isPlaying = true;
-        await playAudio(src);
+        if (Array.isArray(src)) {
+          await playAudioSequence(src);
+        } else {
+          await playAudio(src);
+        }
       } catch (error) {
         console.error('Failed to play audio:', error);
       } finally {
