@@ -24,10 +24,21 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-		<!-- MindAR.js for AR functionality -->
-		<script type="module" src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"></script>
-		<!-- Google Model Viewer for 3D models -->
-		<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+		<!-- es-module-shims polyfill for import map support in older Android WebViews -->
+		<script async src="/lib/es-module-shims/es-module-shims.js"></script>
+		<!-- Import map for MindAR's ES module dependencies (Three.js) — self-hosted for offline/Capacitor support -->
+		<script type="importmap">
+		{
+			"imports": {
+				"three": "/lib/three/three.module.js",
+				"three/addons/": "/lib/three/addons/"
+			}
+		}
+		</script>
+		<!-- MindAR.js for AR functionality (self-hosted for offline PWA support) -->
+		<script type="module" src="/lib/mindar/mindar-image-three.prod.js"></script>
+		<!-- Google Model Viewer for 3D models (self-hosted for offline/Capacitor support) -->
+		<script type="module" src="/lib/model-viewer/model-viewer.min.js"></script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

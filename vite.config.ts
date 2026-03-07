@@ -2,12 +2,24 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import basicSsl from '@vitejs/plugin-basic-ssl';
+
+// HTTPS is opt-in: use `HTTPS=true npm run dev` or `npm run dev:https`
+// Plain HTTP works for:
+//   - localhost (camera works without HTTPS on localhost)
+//   - Android phone via Chrome DevTools port forwarding (phone sees localhost)
+// HTTPS needed for:
+//   - Direct network access from phone (e.g. https://192.168.x.x:6175)
+//   - Phone must accept the self-signed cert warning on first visit
+const useHttps = process.env.HTTPS?.trim() === 'true';
 
 export default defineConfig({
   server: {
-    port: 6175
+    port: 6175,
+    host: true
   },
   plugins: [
+    ...(useHttps ? [basicSsl()] : []),
     tailwindcss(),
     sveltekit(),
     SvelteKitPWA({
@@ -121,6 +133,20 @@ export default defineConfig({
             handler: 'CacheFirst',
             options: {
               cacheName: 'jsdelivr-cache',
+              expiration: {
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/unpkg\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'unpkg-cache',
               expiration: {
                 maxEntries: 20,
                 maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days

@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
+  import { env } from '$env/dynamic/public';
   import { arStore } from '$lib/stores/ar.svelte';
   import { getStoryPages } from '$lib/utils/content';
   import { sfx } from '$lib/utils';
   import type { StoryPage } from '$lib/types';
   import Icon from '@iconify/svelte';
+
+  const forceDemo = env.PUBLIC_AR_DEMO_MODE === 'true';
 
   interface Props {
     targetSrc?: string;
@@ -44,15 +47,24 @@
     }
   }
 
+  async function waitForMindAR(maxWait = 10000): Promise<any> {
+    const start = Date.now();
+    while (Date.now() - start < maxWait) {
+      const MindARThree = (window as any).MINDAR?.IMAGE?.MindARThree;
+      if (MindARThree) return MindARThree;
+      await new Promise(r => setTimeout(r, 200));
+    }
+    return null;
+  }
+
   async function initializeAR() {
     loadingMessage = 'Loading AR engine...';
 
-    // Check if MindAR is available (loaded from CDN in app.html)
-    const MindARThree = (window as any).MINDAR?.IMAGE?.MindARThree;
+    // Wait for MindAR CDN module to finish loading
+    const MindARThree = await waitForMindAR();
 
     if (!MindARThree) {
-      // MindAR not loaded - enable demo mode
-      console.warn('MindAR not loaded, enabling demo mode');
+      console.warn('MindAR not loaded after timeout, enabling demo mode');
       demoMode = true;
       isLoading = false;
       arStore.setInitialized(true);
@@ -131,6 +143,15 @@
     // Load pages first
     pages = await getStoryPages();
 
+    // Check demo mode flag
+    if (forceDemo) {
+      console.log('AR demo mode enabled via PUBLIC_AR_DEMO_MODE');
+      demoMode = true;
+      isLoading = false;
+      arStore.setInitialized(true);
+      return;
+    }
+
     // Check camera permission
     loadingMessage = 'Checking camera access...';
     const hasPermission = await checkCameraPermission();
@@ -162,9 +183,9 @@
   });
 </script>
 
-<div class="relative w-full h-full bg-gradient-to-br from-canopy-900 via-ocean-900 to-canopy-950">
-  <!-- AR Container -->
-  <div bind:this={container} class="w-full h-full"></div>
+<div class="relative w-full h-full bg-black overflow-hidden">
+  <!-- AR Container (MindAR injects video + canvas here) -->
+  <div bind:this={container} class="ar-container absolute inset-0 w-full h-full z-10 overflow-hidden"></div>
 
   <!-- Loading State -->
   {#if isLoading}
@@ -320,6 +341,12 @@
 </div>
 
 <style>
+  /* Let MindAR manage its own video/canvas sizing.
+     MindAR's resize() sets specific pixel values for top/left/width/height
+     on the video element and renderer canvas to achieve a "cover" effect.
+     The video sits at z-index:-2, the transparent WebGL canvas on top.
+     Do NOT override these with !important — it breaks the camera feed display. */
+
   @keyframes scan {
     0% {
       top: 0%;
