@@ -454,16 +454,21 @@ cd android && JAVA_HOME="/c/Program Files/Android/Android Studio/jbr" ANDROID_HO
 ```
 Output: `android/app/build/outputs/apk/debug/app-debug.apk`
 
+### Versioning Policy (MANDATORY)
+- **NEVER delete, overwrite, or replace existing GitHub releases.** Always create a new version.
+- **NEVER delete or overwrite existing QR code images.** Always generate a new file alongside existing ones.
+- Version numbers follow semver: `vMAJOR.MINOR.PATCH` (e.g., v0.2.0 → v0.2.1 → v0.3.0)
+- APK naming: `ClimaTales-AR-vX.Y.Z.apk` (include version in filename)
+- QR code naming: `MM-DD-YYYY-vX.Y.Z-APK.png` (include version in filename)
+- Check `gh release list` before creating a release to determine the next version number.
+
 ### Create GitHub Release
 ```bash
-# Copy and rename APK
-cp android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/ClimaTales-AR.apk
+# Copy and rename APK with version
+cp android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/ClimaTales-AR-vX.Y.Z.apk
 
-# Delete old release if exists
-gh release delete vX.Y.Z --yes --cleanup-tag
-
-# Create new release
-gh release create vX.Y.Z android/app/build/outputs/apk/debug/ClimaTales-AR.apk --title "ClimaTales AR vX.Y.Z" --notes "Release notes here"
+# Create NEW release (never delete old ones)
+gh release create vX.Y.Z android/app/build/outputs/apk/debug/ClimaTales-AR-vX.Y.Z.apk --title "ClimaTales AR vX.Y.Z" --notes "Release notes here"
 ```
 
 ### Generate QR Code for APK Download
@@ -471,12 +476,12 @@ gh release create vX.Y.Z android/app/build/outputs/apk/debug/ClimaTales-AR.apk -
 npm install --no-save qrcode  # if not already installed
 node -e "
 const QRCode = require('qrcode');
-QRCode.toFile('static/download-qr-codes/MM-DD-YYYY-HHMMSS-APK.png',
-  'https://github.com/dmdfajardo00/AR-Storybook/releases/download/vX.Y.Z/ClimaTales-AR.apk',
+QRCode.toFile('static/download-qr-codes/MM-DD-YYYY-vX.Y.Z-APK.png',
+  'https://github.com/dmdfajardo00/AR-Storybook/releases/download/vX.Y.Z/ClimaTales-AR-vX.Y.Z.apk',
   { width: 400, margin: 2, errorCorrectionLevel: 'M' }, (err) => { if (err) throw err; });
 "
 ```
-Naming convention: `MM-DD-YYYY-HHMMSS-APK.png`
+Naming convention: `MM-DD-YYYY-vX.Y.Z-APK.png` (never overwrite existing QR codes)
 
 ### Convenience Scripts
 - `npm run cap:build` — build web + sync to Android

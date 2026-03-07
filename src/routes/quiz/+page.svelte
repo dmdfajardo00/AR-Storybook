@@ -15,6 +15,7 @@
     bestScore: number | null;
     hasIncomplete: boolean;
     isLocked: boolean;
+    needsAR: boolean;
   }
 
   let pages = $state<PageWithQuizInfo[]>([]);
@@ -35,6 +36,7 @@
         bestScore: questions.length > 0 && bestScore > 0 ? bestScore : null,
         hasIncomplete: incompleteTake !== undefined,
         isLocked: !progressionStore.isPageUnlocked(page.id),
+        needsAR: !progressionStore.hasViewedPage(page.id),
       });
     }
 
@@ -94,14 +96,14 @@
       </div>
     {:else}
       <!-- Incomplete quizzes section -->
-      {#if pages.some(p => p.hasIncomplete && !p.isLocked)}
+      {#if pages.some(p => p.hasIncomplete && !p.isLocked && !p.needsAR)}
         <div class="mb-6">
           <h2 class="font-accent font-semibold text-canopy-700 mb-3 flex items-center gap-2">
             <Icon icon="solar:play-circle-bold" class="w-5 h-5 text-ocean-500" />
             Continue Where You Left Off
           </h2>
           <div class="space-y-3">
-            {#each pages.filter(p => p.hasIncomplete && !p.isLocked) as page}
+            {#each pages.filter(p => p.hasIncomplete && !p.isLocked && !p.needsAR) as page}
               <button
                 onclick={() => handleStartQuiz(page.id)}
                 class="w-full bg-gradient-to-r from-ocean-50 to-canopy-50 border-2 border-ocean-200 rounded-xl p-4 text-left transition-all duration-300 hover:shadow-md hover:border-ocean-300 active:scale-[0.99] touch-manipulation"
@@ -133,7 +135,25 @@
         </h2>
         <div class="space-y-3">
           {#each pages as page}
-            {#if page.isLocked}
+            {#if page.needsAR}
+              <!-- Needs AR viewing first -->
+              <div
+                class="w-full bg-ocean-50 rounded-xl p-4 text-left border border-ocean-200 opacity-85"
+              >
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-ocean-100 flex items-center justify-center text-ocean-400 font-display font-bold text-lg">
+                    <Icon icon="solar:camera-bold" class="w-6 h-6" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-accent font-semibold text-ocean-700 truncate mb-1">{page.title}</h3>
+                    <p class="font-body text-sm text-ocean-500">
+                      Scan in AR Mode first
+                    </p>
+                  </div>
+                  <Icon icon="solar:camera-bold" class="w-5 h-5 text-ocean-300 shrink-0" />
+                </div>
+              </div>
+            {:else if page.isLocked}
               <!-- Locked page -->
               <div
                 class="w-full bg-gray-50 rounded-xl p-4 text-left border border-gray-200 opacity-75"

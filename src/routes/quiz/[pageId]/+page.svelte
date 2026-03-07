@@ -42,6 +42,12 @@
       return;
     }
 
+    // Block access if page hasn't been viewed in AR
+    if (!progressionStore.hasViewedPage(pageId)) {
+      goto('/quiz');
+      return;
+    }
+
     // Block access to locked pages
     if (!progressionStore.isPageUnlocked(pageId)) {
       goto('/quiz');

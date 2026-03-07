@@ -2,6 +2,7 @@
   import { onDestroy } from 'svelte';
   import { ARViewer, AROverlay, InteractiveComic, ModelViewerModal } from '$lib/components/ar';
   import { arStore } from '$lib/stores/ar.svelte';
+  import { progressionStore } from '$lib/stores/progression.svelte';
   import type { StoryPage, ComicHotspot } from '$lib/types';
 
   // State
@@ -98,6 +99,9 @@
   function handlePageDetected(page: StoryPage) {
     detectedPage = page;
     selectedPageNumber = page.id;
+
+    // Mark this page as viewed so its quiz becomes unlocked
+    progressionStore.markPageViewed(page.id);
 
     // For pages with hotspots, show interactive comic
     const hotspots = getHotspotsForPage(page.id);

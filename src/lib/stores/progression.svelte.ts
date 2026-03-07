@@ -3,6 +3,7 @@ import { env } from '$env/dynamic/public';
 
 interface ProgressionData {
   unlockedPages: number[];
+  viewedPages: number[];
 }
 
 const PASSING_SCORE = 3;
@@ -18,6 +19,7 @@ function isTestingMode(): boolean {
 
 function createProgressionStore() {
   let unlockedPages = $state<number[]>([1, 2]); // Page 1 always open, page 1->2 has no gate
+  let viewedPages = $state<number[]>([1]); // Page 1 always counts as viewed (intro page)
   let isLoaded = $state(false);
 
   function load() {
@@ -29,6 +31,9 @@ function createProgressionStore() {
         // Always ensure pages 1 and 2 are unlocked
         const pages = new Set([1, 2, ...data.unlockedPages]);
         unlockedPages = [...pages].sort((a, b) => a - b);
+        // Always ensure page 1 is viewed (intro page)
+        const viewed = new Set([1, ...(data.viewedPages || [])]);
+        viewedPages = [...viewed].sort((a, b) => a - b);
       }
     } catch {
       // Use defaults
@@ -39,7 +44,7 @@ function createProgressionStore() {
   function save() {
     if (typeof window === 'undefined') return;
     try {
-      const data: ProgressionData = { unlockedPages };
+      const data: ProgressionData = { unlockedPages, viewedPages };
       localStorage.setItem(STORAGE_KEYS.PROGRESSION, JSON.stringify(data));
     } catch {
       // Storage full or unavailable
@@ -74,17 +79,32 @@ function createProgressionStore() {
     return nextPageId;
   }
 
+  function markPageViewed(pageId: number) {
+    if (viewedPages.includes(pageId)) return;
+    viewedPages = [...viewedPages, pageId].sort((a, b) => a - b);
+    save();
+  }
+
+  function hasViewedPage(pageId: number): boolean {
+    if (isTestingMode()) return true;
+    return viewedPages.includes(pageId);
+  }
+
   function reset() {
     unlockedPages = [1, 2];
+    viewedPages = [1];
     save();
   }
 
   return {
     get unlockedPages() { return unlockedPages; },
+    get viewedPages() { return viewedPages; },
     get isLoaded() { return isLoaded; },
     get passingScore() { return PASSING_SCORE; },
     load,
     isPageUnlocked,
+    markPageViewed,
+    hasViewedPage,
     tryUnlockNext,
     getNextLockedPage,
     reset,
