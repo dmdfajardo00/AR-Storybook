@@ -128,7 +128,7 @@
 								aria-controls="thought-bubble-content"
 							>
 								<Icon icon="solar:chat-round-dots-bold" class="w-5 h-5 text-canopy-500 shrink-0" />
-								<span class="font-accent text-sm font-semibold text-canopy-700">What's this about?</span>
+								<span class="font-accent text-sm font-semibold text-canopy-700">Narration</span>
 								<Icon icon={isExplanationExpanded ? 'solar:alt-arrow-up-bold' : 'solar:alt-arrow-down-bold'} class="w-4 h-4 text-canopy-400 ml-auto shrink-0" />
 							</button>
 
