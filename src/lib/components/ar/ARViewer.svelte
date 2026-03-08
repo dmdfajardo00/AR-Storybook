@@ -4,7 +4,7 @@
   import { arStore } from '$lib/stores/ar.svelte';
   import { getStoryPages } from '$lib/utils/content';
   import { sfx } from '$lib/utils';
-  import type { StoryPage } from '$lib/types';
+  import type { StoryPage, ComicHotspot } from '$lib/types';
   import Icon from '@iconify/svelte';
 
   const forceDemo = env.PUBLIC_AR_DEMO_MODE === 'true';
@@ -12,9 +12,10 @@
   interface Props {
     targetSrc?: string;
     onPageDetected?: (page: StoryPage) => void;
+    hotspotsMap?: Record<number, ComicHotspot[]>;
   }
 
-  let { targetSrc = '/targets/storybook.mind', onPageDetected }: Props = $props();
+  let { targetSrc = '/targets/storybook.mind', onPageDetected, hotspotsMap }: Props = $props();
 
   let container: HTMLDivElement;
   let isLoading = $state(true);
@@ -26,6 +27,83 @@
   // Demo mode for testing without actual targets
   let demoMode = $state(false);
   let demoPageIndex = $state(0);
+
+  // 3D model overlay tracking
+  const loadedModels = new Map<number, any[]>(); // pageId -> THREE.Group[]
+  let threeModule: any = null; // cached THREE namespace
+  let dracoLoaderRef: any = null; // cached for cleanup
+
+  async function loadModelsForAnchor(loader: any, anchor: any, hotspots: ComicHotspot[], pageId: number) {
+    if (!threeModule) return;
+
+    if (loadedModels.has(pageId)) {
+      // Re-show cached models
+      const cached = loadedModels.get(pageId)!;
+      cached.forEach((m: any) => {
+        m.visible = true;
+        anchor.group.add(m);
+      });
+      return;
+    }
+
+    const models: any[] = [];
+    for (const hotspot of hotspots) {
+      try {
+        const gltf: any = await new Promise((resolve, reject) => {
+          loader.load(hotspot.modelUrl, resolve, undefined, reject);
+        });
+        const model = gltf.scene;
+
+        // Position at hotspot location in MindAR coordinate space
+        // MindAR image target width = 1.0 unit
+        // Page images are 848x1200 (aspect ratio ~1.415)
+        const x = (hotspot.x / 100 - 0.5);
+        const y = -(hotspot.y / 100 - 0.5) * 1.415;
+        model.position.set(x, y, 0.1);
+
+        // Scale model to fit panel (normalize based on bounding box)
+        const box = new threeModule.Box3().setFromObject(model);
+        const size = new threeModule.Vector3();
+        box.getSize(size);
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const targetScale = hotspot.arScale ?? 0.15;
+        const scale = maxDim > 0 ? targetScale / maxDim : targetScale;
+        model.scale.setScalar(scale);
+
+        anchor.group.add(model);
+        models.push(model);
+      } catch (err) {
+        console.warn(`Failed to load model ${hotspot.modelUrl}:`, err);
+      }
+    }
+    loadedModels.set(pageId, models);
+  }
+
+  function clearAnchorModels(anchor: any) {
+    while (anchor.group.children.length > 0) {
+      anchor.group.remove(anchor.group.children[0]);
+    }
+  }
+
+  function disposeLoadedModels() {
+    loadedModels.forEach((models) => {
+      models.forEach((model: any) => {
+        model.traverse((child: any) => {
+          if (child.geometry) {
+            child.geometry.dispose();
+          }
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((mat: any) => mat.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        });
+      });
+    });
+    loadedModels.clear();
+  }
 
   async function checkCameraPermission(): Promise<boolean> {
     try {
@@ -89,6 +167,26 @@
 
       const { renderer, scene, camera } = mindarInstance;
 
+      // Add lighting to the scene for 3D models
+      // Runtime-only imports: Three.js + loaders resolve via importmap, not bundled by Vite
+      // Using variables prevents Rollup from trying to resolve these at build time
+      const runtimeImport = (p: string) => new Function('p', 'return import(p)')(p);
+      threeModule = await runtimeImport('three');
+      const ambientLight = new threeModule.AmbientLight(0xffffff, 1.0);
+      scene.add(ambientLight);
+      const directionalLight = new threeModule.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(0.5, 1, 0.5);
+      scene.add(directionalLight);
+
+      // GLTFLoader + DRACOLoader for 3D model loading (all models use Draco compression)
+      const { GLTFLoader } = await runtimeImport('/lib/three/addons/loaders/GLTFLoader.js');
+      const { DRACOLoader } = await runtimeImport('/lib/three/addons/loaders/DRACOLoader.js');
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath('/lib/three/addons/libs/draco/gltf/');
+      dracoLoaderRef = dracoLoader;
+      const loader = new GLTFLoader();
+      loader.setDRACOLoader(dracoLoader);
+
       // Create anchors for each page
       for (let i = 0; i < pages.length; i++) {
         const anchor = mindarInstance.addAnchor(i);
@@ -99,10 +197,21 @@
           if (pages[i] && onPageDetected) {
             onPageDetected(pages[i]);
           }
+
+          // Load 3D models for this page
+          const pageId = pages[i]?.id;
+          if (pageId != null) {
+            const hotspots = hotspotsMap?.[pageId] || [];
+            if (hotspots.length > 0) {
+              loadModelsForAnchor(loader, anchor, hotspots, pageId);
+            }
+          }
         };
 
         anchor.onTargetLost = () => {
           arStore.onTargetLost();
+          // Remove models when target lost (they'll be re-added from cache on next find)
+          clearAnchorModels(anchor);
         };
       }
 
@@ -179,6 +288,9 @@
         // Ignore cleanup errors
       }
     }
+    // Dispose all loaded 3D model geometries and materials
+    disposeLoadedModels();
+    if (dracoLoaderRef) dracoLoaderRef.dispose();
     arStore.reset();
   });
 </script>

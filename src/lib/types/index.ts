@@ -92,6 +92,7 @@ export interface ComicHotspot {
   y: number;
   width: number;
   height: number;
+  arScale?: number;
 }
 
 // App State Types
