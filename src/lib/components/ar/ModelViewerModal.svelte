@@ -18,6 +18,7 @@
 
 	let { isOpen, modelUrl, title, explanation, audioUrls, pageId, hasNext = false, onClose, onNext }: Props = $props();
 	let isLoading = $state(true);
+	let isExplanationExpanded = $state(true);
 
 	function handleBackdropClick(event: MouseEvent) {
 		if (event.target === event.currentTarget) {
@@ -45,6 +46,7 @@
 	$effect(() => {
 		if (modelUrl) {
 			isLoading = true;
+			isExplanationExpanded = true;
 		}
 	});
 
@@ -107,14 +109,36 @@
 				></model-viewer>
 			</div>
 
-			<!-- Scrollable content area — scrolls under the sticky action bar -->
+			<!-- Thought Bubble Explanation — collapsible per-panel text -->
 			{#if explanation}
 				<div class="flex-1 overflow-y-auto overscroll-contain min-h-0 pb-16">
 					<div class="px-4 py-3">
-						<div class="bg-gradient-to-br from-canopy-500 to-canopy-600 rounded-2xl p-4 shadow-md">
-							<p class="font-body text-white text-sm leading-relaxed">
-								{@html explanation}
-							</p>
+						<!-- Thought bubble tail circles -->
+						<div class="flex items-center gap-1 ml-6 mb-1">
+							<div class="w-1.5 h-1.5 rounded-full bg-canopy-300"></div>
+							<div class="w-2.5 h-2.5 rounded-full bg-canopy-200"></div>
+						</div>
+
+						<!-- Thought bubble -->
+						<div class="thought-bubble relative bg-canopy-50 rounded-2xl border-2 border-canopy-200 shadow-sm overflow-hidden">
+							<button
+								onclick={() => { isExplanationExpanded = !isExplanationExpanded; }}
+								class="flex items-center gap-2 w-full px-4 py-3 touch-manipulation"
+								aria-expanded={isExplanationExpanded}
+								aria-controls="thought-bubble-content"
+							>
+								<Icon icon="solar:chat-round-dots-bold" class="w-5 h-5 text-canopy-500 shrink-0" />
+								<span class="font-accent text-sm font-semibold text-canopy-700">What's this about?</span>
+								<Icon icon={isExplanationExpanded ? 'solar:alt-arrow-up-bold' : 'solar:alt-arrow-down-bold'} class="w-4 h-4 text-canopy-400 ml-auto shrink-0" />
+							</button>
+
+							{#if isExplanationExpanded}
+								<div id="thought-bubble-content" class="px-4 pb-4 -mt-1">
+									<p class="font-body text-canopy-800 text-sm leading-relaxed">
+										{@html explanation}
+									</p>
+								</div>
+							{/if}
 						</div>
 					</div>
 				</div>
@@ -178,5 +202,22 @@
 
 	.animate-slideUp {
 		animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.thought-bubble {
+		position: relative;
+	}
+
+	.thought-bubble::before {
+		content: '';
+		position: absolute;
+		top: -6px;
+		left: 24px;
+		width: 12px;
+		height: 12px;
+		background: #F0F7F4;
+		border-left: 2px solid #A7D5B8;
+		border-top: 2px solid #A7D5B8;
+		transform: rotate(45deg);
 	}
 </style>

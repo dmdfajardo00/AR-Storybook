@@ -93,6 +93,10 @@ export interface ComicHotspot {
   width: number;
   height: number;
   arScale?: number;
+  /** Per-hotspot explanation shown in thought bubble (HTML allowed) */
+  explanation?: string;
+  /** Per-hotspot narration audio URL */
+  audioUrl?: string;
 }
 
 // App State Types
