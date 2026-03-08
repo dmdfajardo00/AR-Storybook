@@ -58,7 +58,7 @@
 {#if isOpen}
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
-		class="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+		class="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 backdrop-blur-sm p-4 pb-nav"
 		onclick={handleBackdropClick}
 		onkeydown={(e) => e.key === 'Escape' && onClose()}
 		role="dialog"
@@ -68,7 +68,7 @@
 	>
 		<div
 			class="relative w-full max-w-lg bg-white rounded-[20px] shadow-xl overflow-hidden flex flex-col animate-slideUp"
-			style="max-height: min(85dvh, calc(100dvh - 2rem));"
+			style="max-height: min(82dvh, calc(100dvh - 6rem));"
 		>
 			<!-- Header -->
 			<div class="flex items-center justify-between px-4 py-3 border-b border-canopy-100 shrink-0">
@@ -88,7 +88,7 @@
 			</div>
 
 			<!-- 3D Model Viewer -->
-			<div class="relative w-full shrink-0" style="height: min(280px, 40dvh);">
+			<div class="relative w-full shrink-0" style="height: min(260px, 38dvh);">
 				{#if isLoading}
 					<div class="absolute inset-0 flex flex-col items-center justify-center bg-canopy-50 z-10">
 						<div class="w-12 h-12 border-4 border-canopy-100 border-t-canopy-500 rounded-full animate-spin"></div>
@@ -105,13 +105,12 @@
 					style="width: 100%; height: 100%; background-color: #F0F7F4;"
 					onload={handleModelLoad}
 				></model-viewer>
+			</div>
 
-				</div>
-
-			<!-- Explanation Card -->
+			<!-- Scrollable content area — scrolls under the sticky action bar -->
 			{#if explanation}
-				<div class="flex-1 overflow-y-auto overscroll-contain min-h-0">
-					<div class="px-4 py-4">
+				<div class="flex-1 overflow-y-auto overscroll-contain min-h-0 pb-16">
+					<div class="px-4 py-3">
 						<div class="bg-gradient-to-br from-canopy-500 to-canopy-600 rounded-2xl p-4 shadow-md">
 							<p class="font-body text-white text-sm leading-relaxed">
 								{@html explanation}
@@ -121,8 +120,8 @@
 				</div>
 			{/if}
 
-			<!-- Bottom Action Bar -->
-			<div class="px-4 py-3 border-t border-canopy-100 flex items-center gap-3 shrink-0">
+			<!-- Sticky Action Bar — floats over scroll content at card bottom -->
+			<div class="sticky bottom-0 px-4 py-3 bg-white/95 backdrop-blur-sm border-t border-canopy-100 shadow-[0_-2px_8px_rgba(0,0,0,0.08)] flex items-center gap-3 shrink-0">
 				{#if audioUrls?.length}
 					<NarrationButton src={audioUrls} label="Listen" />
 				{/if}
