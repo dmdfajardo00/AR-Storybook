@@ -12,9 +12,11 @@
     audioUrls?: string[];
     onHotspotClick: (hotspot: ComicHotspot) => void;
     onBack: () => void;
+    hasNextPage?: boolean;
+    onNextPage?: () => void;
   }
 
-  let { pageNumber, comicImageUrl, hotspots, audioUrls, onHotspotClick, onBack }: Props = $props();
+  let { pageNumber, comicImageUrl, hotspots, audioUrls, onHotspotClick, onBack, hasNextPage = false, onNextPage }: Props = $props();
 
   let hoveredHotspot = $state<string | null>(null);
   let imageLoaded = $state(false);
@@ -59,8 +61,19 @@
       {/if}
     </div>
 
-    <!-- Spacer for symmetry -->
-    <div class="w-20"></div>
+    {#if hasNextPage}
+      <Button
+        variant="ghost"
+        size="sm"
+        onclick={() => { sfx.pageTurn(); onNextPage?.(); }}
+        class="text-white hover:bg-white/10 gap-1"
+      >
+        <span class="font-accent">Next</span>
+        <Icon icon="solar:arrow-right-linear" class="w-5 h-5" />
+      </Button>
+    {:else}
+      <div class="w-20"></div>
+    {/if}
   </header>
 
   <!-- Comic image container -->

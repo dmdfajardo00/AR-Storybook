@@ -1,14 +1,20 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { ARViewer, AROverlay, InteractiveComic, ModelViewerModal } from '$lib/components/ar';
   import { arStore } from '$lib/stores/ar.svelte';
   import { progressionStore } from '$lib/stores/progression.svelte';
+  import { getStoryPages } from '$lib/utils/content';
   import type { StoryPage, ComicHotspot } from '$lib/types';
 
   // State
   let detectedPage = $state<StoryPage | null>(null);
   let showInteractiveComic = $state(false);
   let selectedPageNumber = $state<number | null>(null);
+  let allPages = $state<StoryPage[]>([]);
+
+  onMount(async () => {
+    allPages = await getStoryPages();
+  });
 
   // Model viewer modal state
   let isModelViewerOpen = $state(false);
@@ -140,6 +146,19 @@
     currentPageHotspots = [];
   }
 
+  function handleNextPage() {
+    if (selectedPageNumber === null) return;
+    const nextPage = selectedPageNumber + 1;
+    if (!hotspotsMap[nextPage]) return;
+
+    selectedPageNumber = nextPage;
+    progressionStore.markPageViewed(nextPage);
+
+    // Load full page data for audio/explanation
+    const pageData = allPages.find(p => p.id === nextPage);
+    if (pageData) detectedPage = pageData;
+  }
+
   function handleBackToGrid() {
     showInteractiveComic = false;
     selectedPageNumber = null;
@@ -173,6 +192,8 @@
       audioUrls={detectedPage?.audioUrls}
       onHotspotClick={handleHotspotClick}
       onBack={handleBackToGrid}
+      hasNextPage={!!hotspotsMap[selectedPageNumber + 1]}
+      onNextPage={handleNextPage}
     />
   {/if}
 
