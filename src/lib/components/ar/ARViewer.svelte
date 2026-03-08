@@ -32,6 +32,7 @@
   const loadedModels = new Map<number, any[]>(); // pageId -> THREE.Group[]
   let threeModule: any = null; // cached THREE namespace
   let dracoLoaderRef: any = null; // cached for cleanup
+  let lastDetectedIndex: number | null = null; // prevent repeated SFX for same page
 
   async function loadModelsForAnchor(loader: any, anchor: any, hotspots: ComicHotspot[], pageId: number) {
     if (!threeModule) return;
@@ -193,7 +194,11 @@
 
         anchor.onTargetFound = () => {
           arStore.onTargetFound(i);
-          sfx.arDetect();
+          // Only play SFX and notify when detecting a different page
+          if (i !== lastDetectedIndex) {
+            lastDetectedIndex = i;
+            sfx.arDetect();
+          }
           if (pages[i] && onPageDetected) {
             onPageDetected(pages[i]);
           }
@@ -210,6 +215,7 @@
 
         anchor.onTargetLost = () => {
           arStore.onTargetLost();
+          lastDetectedIndex = null;
           // Remove models when target lost (they'll be re-added from cache on next find)
           clearAnchorModels(anchor);
         };
