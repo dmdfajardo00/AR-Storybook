@@ -498,6 +498,41 @@ Naming convention: `MM-DD-YYYY-vX.Y.Z-APK.png` (never overwrite existing QR code
 - `env(safe-area-inset-*)` doesn't work in Android WebView. The `.native-app` CSS class (added by +layout.svelte on Capacitor) provides `max()` fallback padding in `app.css`.
 - YouTube links use `@capacitor/browser` on native to open in system browser instead of WebView.
 
+### Mobile Device Testing via USB
+
+#### ADB Port Forwarding (recommended)
+Forwards the dev server from PC to a USB-connected Android device so the phone sees `localhost`. Camera works without HTTPS on localhost.
+
+```bash
+# Start dev server
+npm run dev
+
+# In another terminal, forward port to phone via ADB
+adb reverse tcp:6175 tcp:6175
+```
+
+Then open `http://localhost:6175` in Chrome on the phone.
+
+#### Prerequisites
+- USB Debugging enabled on phone: Settings > Developer Options > USB Debugging
+- If Developer Options not visible: Settings > About Phone > tap Build Number 7 times
+- Accept the "Allow USB debugging" prompt on phone when connecting
+- ADB available at: `C:\Users\dmfaj\AppData\Local\Android\Sdk\platform-tools\adb`
+
+#### Chrome DevTools Port Forwarding (alternative)
+1. Connect phone via USB with USB Debugging enabled
+2. On desktop Chrome, go to `chrome://inspect/#devices`
+3. Check "Discover USB devices"
+4. Click "Port forwarding..." > add rule: `6175` → `localhost:6175`
+5. Check "Enable port forwarding" > Done
+6. On phone Chrome, navigate to `http://localhost:6175`
+
+#### Troubleshooting
+- `unauthorized` in `adb devices`: Accept USB debugging prompt on phone
+- `ERR_CONNECTION_REFUSED` on phone: Ensure dev server is running AND port forwarding is active
+- Port 6175 in use: Kill zombie Vite processes with `netstat -ano | grep :6175` then `taskkill /PID <pid> /F`
+- Dev server on wrong port: Use `npx vite dev --port 6175` to force port
+
 ## Common Tasks
 
 ### Adding a New Story Page
