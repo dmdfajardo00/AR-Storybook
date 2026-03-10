@@ -53,20 +53,31 @@
       try {
         const storedVersion = localStorage.getItem('climatales_sw_version');
         if (storedVersion !== SW_VERSION) {
-          console.log(`[SW] Version bump ${storedVersion} → ${SW_VERSION}, purging caches…`);
-          // Unregister all existing service workers
-          const registrations = await navigator.serviceWorker.getRegistrations();
-          for (const reg of registrations) await reg.unregister();
-          // Delete all caches (precache + runtime)
-          if ('caches' in window) {
-            const names = await caches.keys();
-            for (const name of names) await caches.delete(name);
+          // Guard: only attempt purge ONCE per browser session to prevent infinite
+          // reload loops (sessionStorage survives reloads but clears on tab close)
+          try {
+            if (sessionStorage.getItem('climatales_sw_purging')) {
+              // Already tried this session — force-store version and move on
+              try { localStorage.setItem('climatales_sw_version', SW_VERSION); } catch {}
+              console.warn('[SW] Skipping duplicate cache purge (already attempted this session)');
+            } else {
+              sessionStorage.setItem('climatales_sw_purging', '1');
+              console.log(`[SW] Version bump ${storedVersion} → ${SW_VERSION}, purging caches…`);
+              // Unregister all existing service workers
+              const registrations = await navigator.serviceWorker.getRegistrations();
+              for (const reg of registrations) await reg.unregister();
+              // Delete all caches (precache + runtime)
+              if ('caches' in window) {
+                const names = await caches.keys();
+                for (const name of names) await caches.delete(name);
+              }
+              try { localStorage.setItem('climatales_sw_version', SW_VERSION); } catch {}
+              window.location.reload();
+              return;
+            }
+          } catch {
+            // sessionStorage unavailable — skip purge to avoid infinite loop
           }
-          // Persist BEFORE reload to prevent infinite loop
-          // (wrapped in try — iOS private browsing throws on setItem)
-          try { localStorage.setItem('climatales_sw_version', SW_VERSION); } catch {}
-          window.location.reload();
-          return;
         }
       } catch {
         // localStorage unavailable (iOS private browsing) — skip version check
