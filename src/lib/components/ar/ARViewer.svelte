@@ -22,6 +22,7 @@
   let loadingMessage = $state('Initializing camera...');
   let pages = $state<StoryPage[]>([]);
   let mindarInstance: any = null;
+  let rendererRef: any = null; // stored for WebGL context cleanup
   let animationFrameId: number | null = null;
 
   // Demo mode for testing without actual targets
@@ -167,6 +168,7 @@
       });
 
       const { renderer, scene, camera } = mindarInstance;
+      rendererRef = renderer; // keep ref for WebGL cleanup in onDestroy
 
       // Add lighting to the scene for 3D models
       // Runtime-only imports: Three.js + loaders resolve via importmap, not bundled by Vite
@@ -297,6 +299,17 @@
     // Dispose all loaded 3D model geometries and materials
     disposeLoadedModels();
     if (dracoLoaderRef) dracoLoaderRef.dispose();
+    // Release the WebGL context so iOS doesn't accumulate leaked contexts
+    // (iOS WebKit limits ~8 active contexts; exceeding this kills the WKWebView process)
+    if (rendererRef) {
+      try {
+        rendererRef.dispose();
+        rendererRef.forceContextLoss();
+      } catch (e) {
+        // Ignore — renderer may already be disposed
+      }
+      rendererRef = null;
+    }
     arStore.reset();
   });
 </script>

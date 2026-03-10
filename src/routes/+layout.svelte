@@ -48,23 +48,28 @@
 
     // Force-clean stale service workers on version bump (runs once per version)
     // Increment SW_VERSION to force all clients to purge old caches on next visit
-    const SW_VERSION = '3';
+    const SW_VERSION = '4';
     if (browser && 'serviceWorker' in navigator) {
-      const storedVersion = localStorage.getItem('climatales_sw_version');
-      if (storedVersion !== SW_VERSION) {
-        console.log(`[SW] Version bump ${storedVersion} → ${SW_VERSION}, purging caches…`);
-        // Unregister all existing service workers
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        for (const reg of registrations) await reg.unregister();
-        // Delete all caches (precache + runtime)
-        if ('caches' in window) {
-          const names = await caches.keys();
-          for (const name of names) await caches.delete(name);
+      try {
+        const storedVersion = localStorage.getItem('climatales_sw_version');
+        if (storedVersion !== SW_VERSION) {
+          console.log(`[SW] Version bump ${storedVersion} → ${SW_VERSION}, purging caches…`);
+          // Unregister all existing service workers
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (const reg of registrations) await reg.unregister();
+          // Delete all caches (precache + runtime)
+          if ('caches' in window) {
+            const names = await caches.keys();
+            for (const name of names) await caches.delete(name);
+          }
+          // Persist BEFORE reload to prevent infinite loop
+          // (wrapped in try — iOS private browsing throws on setItem)
+          try { localStorage.setItem('climatales_sw_version', SW_VERSION); } catch {}
+          window.location.reload();
+          return;
         }
-        localStorage.setItem('climatales_sw_version', SW_VERSION);
-        // Reload once to start fresh without any old SW interference
-        window.location.reload();
-        return;
+      } catch {
+        // localStorage unavailable (iOS private browsing) — skip version check
       }
     }
 
