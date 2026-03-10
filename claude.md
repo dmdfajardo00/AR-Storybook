@@ -384,6 +384,62 @@ This app is **Android-first, PWA-friendly**. All UI work MUST follow these rules
 - Wrap all SFX calls in component event handlers, never in render logic
 - Use `$effect` for reactive sound triggers (e.g., quiz result reveal)
 
+## PWA Service Worker Management (CRITICAL)
+
+### Architecture
+- **Strategy**: `generateSW` (Workbox auto-generates the SW)
+- **Register type**: `prompt` — user sees an "Update Available" toast and chooses when to reload
+- **Config**: `vite.config.ts` → `SvelteKitPWA({ ... })` workbox options
+- **Registration**: `src/routes/+layout.svelte` → `onMount` → `registerSW()`
+
+### Golden Rules — Do NOT Break These
+1. **NEVER add `skipWaiting: true` or `clientsClaim: true` to the workbox config.** These bypass `registerType: 'prompt'` and cause automatic page reloads on every deploy — including mid-session while the user is interacting with the app (e.g., viewing a 3D model). The `controllerchange` event fires immediately and vite-plugin-pwa's registration code calls `window.location.reload()` before the toast can even appear.
+2. **`registerType` must be `'prompt'`**, not `'autoUpdate'`. With `autoUpdate`, the registration code auto-sends `SKIP_WAITING` to the new SW and reloads on `controllerchange`. With `prompt`, it waits for `updateSW()` to be called (user clicks "Update" button).
+3. **The "Update Available" toast in `+layout.svelte` is the ONLY mechanism for applying SW updates.** The `onNeedRefresh` callback sets `needRefresh = true` → toast appears → user clicks "Update" → `updateServiceWorker()` triggers the SW swap and reload.
+
+### Force Cache Purge Technique (for non-technical clients)
+When you need ALL clients to get a clean slate (e.g., after fixing a broken SW config, changing caching strategies, or recovering from a bad deploy):
+
+1. **Bump `SW_VERSION`** in `src/routes/+layout.svelte` (e.g., `'3'` → `'4'`)
+2. The version check runs in `onMount` BEFORE SW registration:
+   ```javascript
+   const SW_VERSION = '4'; // ← increment this
+   const storedVersion = localStorage.getItem('climatales_sw_version');
+   if (storedVersion !== SW_VERSION) {
+     // Unregister all service workers
+     // Delete all caches (precache + runtime)
+     // Store new version
+     // window.location.reload() — single reload, then clean
+     return; // Skip SW registration on this load
+   }
+   ```
+3. On the client's next visit: old SW serves old cached page → old page's registration code detects new SW → page reloads → new page runs version check → nukes all caches + unregisters old SWs → reloads once more → clean slate with fresh SW
+4. After that, `climatales_sw_version` matches and the purge never runs again
+5. **localStorage.setItem runs BEFORE reload()** — this prevents infinite reload loops
+
+### Why `skipWaiting` + `clientsClaim` Are Dangerous
+- `skipWaiting: true` injects `self.skipWaiting()` into the SW's `install` event → new SW activates immediately
+- `clientsClaim: true` injects `self.clients.claim()` into the SW's `activate` event → new SW hijacks all open tabs
+- Combined, these fire the `controllerchange` event on `navigator.serviceWorker`
+- vite-plugin-pwa's registration code (even in `prompt` mode) listens for `controlling` event and calls `window.location.reload()` if `event.isUpdate` is true
+- Result: **every deploy causes an automatic mid-session page reload**, which is catastrophic for an AR app where the user is mid-scan/mid-model-view
+- The hourly `registration.update()` interval makes this worse — tabs reload within 1 hour of any deploy
+
+### Web Component Event Handling in Svelte 5
+- **NEVER use `onload={handler}` on custom elements** like `<model-viewer>`. Svelte 5 sets `element.onload = handler` as a DOM property, which is unreliable for custom element events.
+- **Use `addEventListener` via `$effect` + `bind:this`**:
+  ```svelte
+  let el = $state<HTMLElement | null>(null);
+  $effect(() => {
+    if (!el) return;
+    const handler = () => { /* ... */ };
+    el.addEventListener('load', handler);
+    return () => el.removeEventListener('load', handler);
+  });
+  <model-viewer bind:this={el} ...></model-viewer>
+  ```
+- **Guard against stale events**: When changing `src` on `<model-viewer>`, the old model's `load` event can fire after the new URL is set. Track `expectedModelUrl` and ignore mismatches.
+
 ## Development Guidelines
 
 ### Component Structure
@@ -608,5 +664,5 @@ Terra is the friendly guide character who appears throughout the app:
 
 ---
 
-**Last Updated**: 2026-03-06
-**Version**: 0.0.2
+**Last Updated**: 2026-03-11
+**Version**: 0.0.3
