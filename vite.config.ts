@@ -26,7 +26,7 @@ export default defineConfig({
       srcDir: './src',
       mode: 'production',
       strategies: 'generateSW',
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       manifest: {
         name: 'ClimaTales AR',
         short_name: 'ClimaTales',
@@ -97,8 +97,6 @@ export default defineConfig({
         navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api/],
         cleanupOutdatedCaches: true,
-        skipWaiting: true,
-        clientsClaim: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
