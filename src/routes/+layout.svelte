@@ -48,7 +48,7 @@
 
     // Force-clean stale service workers on version bump (runs once per version)
     // Increment SW_VERSION to force all clients to purge old caches on next visit
-    const SW_VERSION = '2';
+    const SW_VERSION = '3';
     if (browser && 'serviceWorker' in navigator) {
       const storedVersion = localStorage.getItem('climatales_sw_version');
       if (storedVersion !== SW_VERSION) {

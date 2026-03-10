@@ -19,6 +19,9 @@
 	let { isOpen, modelUrl, title, explanation, audioUrls, pageId, hasNext = false, onClose, onNext }: Props = $props();
 	let isLoading = $state(true);
 	let isExplanationExpanded = $state(true);
+	let modelViewerEl = $state<HTMLElement | null>(null);
+	// Track which URL we expect so stale load events from a previous model are ignored
+	let expectedModelUrl = $state('');
 
 	function handleBackdropClick(event: MouseEvent) {
 		if (event.target === event.currentTarget) {
@@ -28,14 +31,10 @@
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
+		if (event.key === 'Escape' && isOpen) {
 			sfx.modalClose();
 			onClose();
 		}
-	}
-
-	function handleModelLoad() {
-		isLoading = false;
 	}
 
 	function handleNext() {
@@ -43,11 +42,28 @@
 		onNext?.();
 	}
 
+	// When modelUrl changes, mark loading and track expected URL
 	$effect(() => {
 		if (modelUrl) {
 			isLoading = true;
 			isExplanationExpanded = true;
+			expectedModelUrl = modelUrl;
 		}
+	});
+
+	// Attach load listener via addEventListener (reliable for custom elements)
+	$effect(() => {
+		const el = modelViewerEl;
+		if (!el) return;
+		const url = expectedModelUrl;
+		function onLoad() {
+			// Only clear loading if the model-viewer's current src matches what we expect
+			if (url === expectedModelUrl) {
+				isLoading = false;
+			}
+		}
+		el.addEventListener('load', onLoad);
+		return () => el.removeEventListener('load', onLoad);
 	});
 
 	$effect(() => {
@@ -98,14 +114,13 @@
 					</div>
 				{/if}
 
-				<model-viewer
+				<model-viewer bind:this={modelViewerEl}
 					src={modelUrl}
 					alt={title}
 					camera-controls
 					auto-rotate
 					shadow-intensity="1"
 					style="width: 100%; height: 100%; background-color: #F0F7F4;"
-					onload={handleModelLoad}
 				></model-viewer>
 			</div>
 
